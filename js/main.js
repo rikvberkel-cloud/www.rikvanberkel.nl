@@ -13,30 +13,68 @@
 
   // Wisselende koppen. Elke [data-wissel] bevat twee of meer .wissel-item.
   // De eerste staat in de HTML al op is-actief, dus zonder JavaScript blijft
-  // die staan. Het script loopt de varianten één keer langs en blijft op de
-  // laatste staan: bij drie varianten duurt dat 2 x 2,4 = 4,8 seconden. Onder
-  // de vijf seconden vraagt WCAG 2.2.2 geen pauzeknop. Terug naar de eerste
-  // zou een derde stap kosten en boven de vijf seconden uitkomen.
+  // die staan. De koppen draaien door, elke 2,4 seconden een stap. Beweging
+  // die langer duurt dan vijf seconden moet volgens WCAG 2.2.2 te stoppen
+  // zijn, daarom staat onder elke kop een pauzeknop (.wissel-pauze).
   var INTERVAL = 2400;
 
-  // Met "beweging beperken" aan wisselt de tekst ook, maar springt hij om
-  // zonder vervaging (zie de CSS). Omspringende tekst is geen animatie.
+  // Met "beweging beperken" aan loopt de kop één keer rond en blijft hij weer
+  // op de eerste staan, zonder vervaging (zie de CSS). Dat duurt 7,2 seconden
+  // bij drie varianten, dus ook dan is er een pauzeknop.
+  var minderBeweging = window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  function rondje(wissel) {
+  function knopBij(wissel) {
+    var kop = wissel.closest("h1, h2");
+    var knop = kop && kop.nextElementSibling;
+    return knop && knop.classList.contains("wissel-pauze") ? knop : null;
+  }
+
+  function draai(wissel) {
     var items = wissel.querySelectorAll(".wissel-item");
     if (items.length < 2) {
       return;
     }
+    var knop = knopBij(wissel);
     var i = 0;
+    var timer = null;
+
+    function stop() {
+      window.clearInterval(timer);
+      timer = null;
+    }
+
     function volgende() {
       items[i].classList.remove("is-actief");
-      i = i + 1;
+      i = (i + 1) % items.length;
       items[i].classList.add("is-actief");
-      if (i < items.length - 1) {
-        window.setTimeout(volgende, INTERVAL);
+      if (minderBeweging && i === 0) {
+        stop();
+        if (knop) {
+          knop.hidden = true;
+        }
       }
     }
-    window.setTimeout(volgende, INTERVAL);
+
+    function start() {
+      if (!timer) {
+        timer = window.setInterval(volgende, INTERVAL);
+      }
+    }
+
+    if (knop) {
+      knop.hidden = false;
+      knop.addEventListener("click", function () {
+        if (timer) {
+          stop();
+          knop.textContent = "Afspelen";
+        } else {
+          start();
+          knop.textContent = "Pauzeer";
+        }
+      });
+    }
+    start();
   }
 
   document.querySelectorAll("[data-wissel]").forEach(function (wissel) {
@@ -45,12 +83,12 @@
       var kijker = new IntersectionObserver(function (items) {
         if (items[0].isIntersecting) {
           kijker.disconnect();
-          rondje(wissel);
+          draai(wissel);
         }
       }, { threshold: 0.6 });
       kijker.observe(wissel);
     } else {
-      rondje(wissel);
+      draai(wissel);
     }
   });
 })();
