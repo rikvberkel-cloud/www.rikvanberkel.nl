@@ -1,7 +1,8 @@
-/* Huisstijl Rik van Berkel, 5b affiche.
-   Zwart draagt, blauw markeert. Violet en buff vullen vlakken.
-   Tokens komen uit brand-5b.css. Vijf kleuren, drie letters, rechte hoeken,
-   geen schaduw en geen verloop. Er komt niets bij.
+/* Huisstijl Rik van Berkel, versie 3.
+   Licht draagt, blauw markeert, zwart sluit af. Papier is de basis, wit de
+   leesvlakken, en zwart alleen voor het slotblok met contact. Twee letters:
+   Archivo voor koppen, Instrument Sans voor al het andere. Rechte hoeken,
+   geen schaduw en geen verloop.
 
    Vier afwijkingen van 5b, allemaal omdat 5b daar WCAG AA niet haalt.
    Ze staan gemarkeerd met "afwijking" en in docs/huisstijl-5b.md. */
@@ -30,33 +31,21 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: "Space Mono";
-  src: url("../fonts/space-mono-latin-400.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Space Mono";
-  src: url("../fonts/space-mono-latin-700.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   --zwart: #121214;
   --wit: #ffffff;
+  --papier: #f4f1ea;
   --blauw: #1b4e85;
   --blauw-hover: #163f6c;
   --violet: #8b6f97;
+  /* Violet op licht. Het gewone violet haalt op papier geen 4,5 : 1, dit wel
+     (ongeveer 6 : 1). Alleen voor het accentwoord in een kop. */
+  --violet-donker: #6b5277;
   --buff: #d3a24c;
 
   --font-display: Archivo, "Helvetica Neue", system-ui, sans-serif;
   --font-body: "Instrument Sans", system-ui, -apple-system, sans-serif;
-  --font-label: "Space Mono", ui-monospace, monospace;
+  --font-label: var(--font-body);
 
   --weight-display: 700;
   --weight-display-sub: 600;
@@ -80,10 +69,11 @@
 
   --tracking-display: -0.025em;
   --tracking-heading: -0.02em;
-  --tracking-label: 0.14em;
+  --tracking-label: 0.08em;
 
-  --rule-hairline: 1px solid rgba(255, 255, 255, 0.22);
+  --rule-hairline: 1px solid rgba(18, 18, 20, 0.22);
   --rule-hairline-zwart: 1px solid rgba(18, 18, 20, 0.22);
+  --rule-hairline-wit: 1px solid rgba(255, 255, 255, 0.22);
   --rule-heavy: 2px solid #121214;
 
   --pad-section: clamp(40px, 6vw, 80px) clamp(20px, 4vw, 56px);
@@ -105,8 +95,8 @@ html {
 
 body {
   margin: 0;
-  background: var(--zwart);
-  color: var(--wit);
+  background: var(--papier);
+  color: var(--zwart);
   font-family: var(--font-body);
   font-weight: var(--weight-body);
   font-size: var(--size-body);
@@ -172,25 +162,20 @@ strong {
 }
 
 a {
-  color: var(--wit);
+  color: var(--blauw);
   text-decoration: none;
   transition: color var(--transition);
 }
 
 a:hover {
-  color: var(--buff);
+  color: var(--zwart);
 }
 
-/* Focus. Afwijking: 5b noemt buff, maar buff haalt op wit 2,32 : 1 tegen een
-   norm van 3 : 1. Op zwart blijft buff, op wit wordt het blauw. */
+/* Focus in blauw. Buff haalt op licht 2,32 : 1 tegen een norm van 3 : 1, dus
+   buff alleen in het zwarte slotblok. */
 :focus-visible {
-  outline: 2px solid var(--buff);
+  outline: 2px solid var(--blauw);
   outline-offset: 3px;
-}
-
-.sectie-wit :focus-visible,
-.site-footer :focus-visible {
-  outline-color: var(--blauw);
 }
 
 .visueel-verborgen {
@@ -222,14 +207,13 @@ a:hover {
   top: 16px;
 }
 
-/* Label, de mono-signatuur. Kapitaal, nooit groter dan 12 px.
-   Afwijking: 5b zet labels op zwart in violet, maar violet op zwart haalt
-   4,29 : 1 en labels zijn kleine tekst. Op zwart zijn labels wit of buff.
-   Violet blijft over voor grote letters: het accentwoord en nummer 01. */
+/* Label. Klein, vet en kapitaal in de tekstletter. Tot versie 3 stond dit in
+   Space Mono; die derde letter maakte de pagina onrustig. Labels zijn zwart,
+   in het slotblok wit of buff. */
 .label {
   display: inline-block;
   font-family: var(--font-label);
-  font-weight: 400;
+  font-weight: var(--weight-body-strong);
   font-size: var(--size-label);
   letter-spacing: var(--tracking-label);
   line-height: 1.4;
@@ -237,16 +221,8 @@ a:hover {
   margin: 0;
 }
 
-.label-buff {
-  color: var(--buff);
-}
-
-.sectie-wit .label {
-  color: var(--zwart);
-}
-
 .accent {
-  color: var(--violet);
+  color: var(--violet-donker);
 }
 
 /* Knop. Blauw is uitsluitend de actie, nooit decoratie. */
@@ -277,14 +253,13 @@ a:hover {
   padding: 18px 28px;
 }
 
-/* Tweede actie, geen tweede knop. Onderstreping in buff. */
+/* Tweede actie, geen tweede knop: een onderstreepte link. */
 .knop-tekst {
   display: inline-block;
-  font-family: var(--font-label);
-  font-size: var(--size-label);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  border-bottom: 1px solid var(--buff);
+  font-family: var(--font-body);
+  font-weight: var(--weight-body-strong);
+  font-size: var(--size-body);
+  border-bottom: 1px solid currentColor;
   padding: 3px 0;
 }
 
@@ -295,7 +270,8 @@ a:hover {
   gap: 20px 24px;
 }
 
-/* Secties. Zwart is de standaard, wit hoogstens twee keer per pagina. */
+/* Secties. Papier is de standaard, wit voor de leesvlakken, zwart alleen voor
+   het slotblok met contact. */
 
 .sectie {
   padding: var(--pad-section);
@@ -303,17 +279,38 @@ a:hover {
 
 .sectie-wit {
   background: var(--wit);
-  color: var(--zwart);
 }
 
-.sectie-wit a {
-  color: var(--blauw);
+/* Het zwarte slotblok. Hier gelden de oude regels van 5b: witte tekst, buff
+   voor labels en focus, gewoon violet voor het accentwoord (grote letters,
+   4,29 : 1 tegen een norm van 3 : 1). */
+.sectie-zwart {
+  background: var(--zwart);
+  color: var(--wit);
 }
 
-/* Afwijking: 5b laat links op wit naar violet hoveren, maar dat is 4,36 : 1.
-   Hover gaat naar zwart. */
-.sectie-wit a:hover {
-  color: var(--zwart);
+.sectie-zwart a {
+  color: var(--wit);
+}
+
+.sectie-zwart a:hover {
+  color: var(--buff);
+}
+
+.sectie-zwart :focus-visible {
+  outline-color: var(--buff);
+}
+
+.sectie-zwart .label-buff {
+  color: var(--buff);
+}
+
+.sectie-zwart .accent {
+  color: var(--violet);
+}
+
+.sectie-zwart .regel-haar {
+  border-top: var(--rule-hairline-wit);
 }
 
 .binnen {
@@ -351,11 +348,7 @@ a:hover {
   margin-bottom: var(--gap-section);
 }
 
-.sectie-wit .regel-haar {
-  border-top: var(--rule-hairline-zwart);
-}
-
-/* Header, op zwart. Geen sticky, geen hamburger. */
+/* Header, op papier. Geen sticky, geen hamburger. */
 
 .site-header {
   padding: 24px clamp(20px, 4vw, 56px);
@@ -384,12 +377,12 @@ a:hover {
   font-size: 24px;
   letter-spacing: -0.01em;
   line-height: 1;
-  color: var(--wit);
+  color: var(--zwart);
   padding: 3px 0;
 }
 
 .logo:hover {
-  color: var(--buff);
+  color: var(--blauw);
 }
 
 .header-rechts {
@@ -423,12 +416,17 @@ a:hover {
   display: inline-block;
   font-family: var(--font-body);
   font-size: var(--size-body);
+  color: var(--zwart);
   padding: 6px 0;
   border-bottom: 2px solid transparent;
 }
 
+.site-nav a:hover {
+  color: var(--blauw);
+}
+
 .site-nav a[aria-current="page"] {
-  border-bottom-color: var(--buff);
+  border-bottom-color: var(--zwart);
 }
 
 /* Punt 2 uit de ronde van 21 september: op een telefoon kostte de kop 225 van
@@ -476,7 +474,7 @@ a:hover {
 .hero-portret {
   margin: 0;
   max-width: min(340px, 100%);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  border: var(--rule-hairline);
 }
 
 @media (min-width: 800px) {
@@ -543,9 +541,6 @@ a:hover {
   margin-bottom: 16px;
 }
 
-/* De drie nummers hebben dezelfde kleur. Eerder was 01 violet, maar violet
-   is alleen voor grote tekst op zwart, en de diensten staan op wit. */
-
 /* Drie kolommen naast elkaar: nummer, titel en tekst delen dezelfde rijen
    via subgrid. Breekt een titel over twee regels, dan schuift
    de rij in alle drie de kolommen mee en blijft alles op één lijn. */
@@ -577,6 +572,7 @@ a:hover {
 
 .dienst-meta {
   font-family: var(--font-label);
+  font-weight: var(--weight-body-strong);
   font-size: var(--size-label-sm);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
@@ -585,7 +581,7 @@ a:hover {
   margin: 0;
 }
 
-.sectie:not(.sectie-wit) .dienst-meta {
+.sectie-zwart .dienst-meta {
   border-bottom-color: rgba(255, 255, 255, 0.22);
 }
 
@@ -682,8 +678,7 @@ h2 + .contact-lijst {
 }
 
 .contact-gegevens {
-  font-family: var(--font-label);
-  font-size: var(--size-body-sm);
+  font-size: var(--size-body);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -696,11 +691,11 @@ h2 + .contact-lijst {
   text-decoration-thickness: 1px;
 }
 
-/* Voet, op wit. */
+/* Voet, op papier, met een regel erboven. */
 
 .site-footer {
-  background: var(--wit);
   color: var(--zwart);
+  border-top: var(--rule-hairline);
   padding: 28px clamp(20px, 4vw, 56px);
 }
 
@@ -723,9 +718,7 @@ h2 + .contact-lijst {
 }
 
 .footer-meta {
-  font-family: var(--font-label);
-  font-size: var(--size-label-sm);
-  letter-spacing: 0.08em;
+  font-size: var(--size-body-sm);
   margin: 0;
 }
 
@@ -733,10 +726,7 @@ h2 + .contact-lijst {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 20px;
-  font-family: var(--font-label);
-  font-size: var(--size-label-sm);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: var(--size-body-sm);
 }
 
 .site-footer a {
@@ -795,7 +785,7 @@ h2 + .contact-lijst {
   padding-top: 16px;
 }
 
-.sectie:not(.sectie-wit) .case {
+.sectie-zwart .case {
   border-top: 2px solid var(--wit);
 }
 
@@ -809,6 +799,7 @@ h2 + .contact-lijst {
 
 .resultaat {
   font-family: var(--font-label);
+  font-weight: var(--weight-body-strong);
   font-size: var(--size-label-sm);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
@@ -837,6 +828,7 @@ h2 + .contact-lijst {
 .tijdlijn .periode {
   display: block;
   font-family: var(--font-label);
+  font-weight: var(--weight-body-strong);
   font-size: var(--size-label);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
@@ -872,6 +864,7 @@ h2 + .contact-lijst {
   background: var(--zwart);
   color: var(--wit);
   font-family: var(--font-label);
+  font-weight: var(--weight-body-strong);
   font-size: var(--size-label);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
@@ -958,8 +951,8 @@ dd a:not([class]) {
   padding-top: 0;
 }
 
-.sectie-wit .dienst-lang {
-  border-top: var(--rule-hairline-zwart);
+.sectie-zwart .dienst-lang {
+  border-top: var(--rule-hairline-wit);
 }
 
 .meta-lijst {
@@ -970,6 +963,7 @@ dd a:not([class]) {
   margin: 16px 0 0;
   padding: 0;
   font-family: var(--font-label);
+  font-weight: var(--weight-body-strong);
   font-size: var(--size-label-sm);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
