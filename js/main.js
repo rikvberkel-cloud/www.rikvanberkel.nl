@@ -13,10 +13,11 @@
 
   // Wisselende koppen. Elke [data-wissel] bevat twee of meer .wissel-item.
   // De eerste staat in de HTML al op is-actief, dus zonder JavaScript blijft
-  // die staan. Het script loopt één keer rond en stopt weer op de eerste:
-  // bij drie varianten duurt dat 3 x 1,6 = 4,8 seconden. Onder de vijf
-  // seconden vraagt WCAG 2.2.2 geen pauzeknop.
-  var INTERVAL = 1600;
+  // die staan. Het script loopt de varianten één keer langs en blijft op de
+  // laatste staan: bij drie varianten duurt dat 2 x 2,4 = 4,8 seconden. Onder
+  // de vijf seconden vraagt WCAG 2.2.2 geen pauzeknop. Terug naar de eerste
+  // zou een derde stap kosten en boven de vijf seconden uitkomen.
+  var INTERVAL = 2400;
 
   // Met "beweging beperken" aan wisselt de tekst ook, maar springt hij om
   // zonder vervaging (zie de CSS). Omspringende tekst is geen animatie.
@@ -29,9 +30,9 @@
     var i = 0;
     function volgende() {
       items[i].classList.remove("is-actief");
-      i = (i + 1) % items.length;
+      i = i + 1;
       items[i].classList.add("is-actief");
-      if (i !== 0) {
+      if (i < items.length - 1) {
         window.setTimeout(volgende, INTERVAL);
       }
     }
