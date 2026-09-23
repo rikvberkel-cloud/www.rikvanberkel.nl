@@ -1,0 +1,1142 @@
+/* Huisstijl Rik van Berkel, 5b affiche.
+   Zwart draagt, blauw markeert. Violet en buff vullen vlakken.
+   Tokens komen uit brand-5b.css. Vijf kleuren, drie letters, rechte hoeken,
+   geen schaduw en geen verloop. Er komt niets bij.
+
+   Vier afwijkingen van 5b, allemaal omdat 5b daar WCAG AA niet haalt.
+   Ze staan gemarkeerd met "afwijking" en in docs/huisstijl-5b.md. */
+
+@font-face {
+  font-family: Archivo;
+  src: url("../fonts/archivo-latin.woff2") format("woff2");
+  font-weight: 600 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Instrument Sans";
+  src: url("../fonts/instrument-sans-latin.woff2") format("woff2");
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Instrument Sans";
+  src: url("../fonts/instrument-sans-latin-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Mono";
+  src: url("../fonts/space-mono-latin-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Mono";
+  src: url("../fonts/space-mono-latin-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --zwart: #121214;
+  --wit: #ffffff;
+  --blauw: #1b4e85;
+  --blauw-hover: #163f6c;
+  --violet: #8b6f97;
+  --buff: #d3a24c;
+
+  --font-display: Archivo, "Helvetica Neue", system-ui, sans-serif;
+  --font-body: "Instrument Sans", system-ui, -apple-system, sans-serif;
+  --font-label: "Space Mono", ui-monospace, monospace;
+
+  --weight-display: 700;
+  --weight-display-sub: 600;
+  --weight-body: 400;
+  --weight-body-strong: 600;
+
+  --size-display-1: clamp(46px, 9vw, 108px);
+  --size-display-2: clamp(30px, 4.2vw, 52px);
+  --size-display-3: 22px;
+  --size-number: clamp(48px, 5vw, 68px);
+
+  --size-lead: clamp(15px, 1.3vw, 18px);
+  --size-body: 15px;
+  --size-body-sm: 14px;
+  --size-label: 12px;
+  --size-label-sm: 11px;
+
+  --leading-display: 0.9;
+  --leading-heading: 0.95;
+  --leading-body: 1.6;
+
+  --tracking-display: -0.025em;
+  --tracking-heading: -0.02em;
+  --tracking-label: 0.14em;
+
+  --rule-hairline: 1px solid rgba(255, 255, 255, 0.22);
+  --rule-hairline-zwart: 1px solid rgba(18, 18, 20, 0.22);
+  --rule-heavy: 2px solid #121214;
+
+  --pad-section: clamp(40px, 6vw, 80px) clamp(20px, 4vw, 56px);
+  --gap-section: clamp(24px, 3vw, 40px);
+  --content-max: 1240px;
+  --transition: 120ms linear;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border-radius: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--zwart);
+  color: var(--wit);
+  font-family: var(--font-body);
+  font-weight: var(--weight-body);
+  font-size: var(--size-body);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-display);
+  margin: 0;
+  text-wrap: balance;
+  /* Nederlandse samenstellingen als programmamanagement passen op een telefoon
+     niet op één regel. Zonder dit loopt de kop het scherm uit. */
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+h1 {
+  font-size: var(--size-display-1);
+}
+
+h2 {
+  font-size: var(--size-display-2);
+  letter-spacing: var(--tracking-heading);
+  line-height: var(--leading-heading);
+}
+
+h3 {
+  font-size: var(--size-display-3);
+  font-weight: var(--weight-display-sub);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+p {
+  margin: 0 0 var(--size-body);
+  text-wrap: pretty;
+}
+
+ul,
+ol {
+  margin: 0 0 var(--size-body);
+  padding-left: 20px;
+}
+
+li + li {
+  margin-top: 8px;
+}
+
+strong {
+  font-weight: var(--weight-body-strong);
+}
+
+a {
+  color: var(--wit);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--buff);
+}
+
+/* Focus. Afwijking: 5b noemt buff, maar buff haalt op wit 2,32 : 1 tegen een
+   norm van 3 : 1. Op zwart blijft buff, op wit wordt het blauw. */
+:focus-visible {
+  outline: 2px solid var(--buff);
+  outline-offset: 3px;
+}
+
+.sectie-wit :focus-visible,
+.site-footer :focus-visible {
+  outline-color: var(--blauw);
+}
+
+.visueel-verborgen {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 1000;
+  padding: 12px 16px;
+  background: var(--blauw);
+  color: var(--wit);
+  font-family: var(--font-display);
+  font-weight: var(--weight-display-sub);
+}
+
+.skip-link:focus {
+  left: 16px;
+  top: 16px;
+}
+
+/* Label, de mono-signatuur. Kapitaal, nooit groter dan 12 px.
+   Afwijking: 5b zet labels op zwart in violet, maar violet op zwart haalt
+   4,29 : 1 en labels zijn kleine tekst. Op zwart zijn labels wit of buff.
+   Violet blijft over voor grote letters: het accentwoord en nummer 01. */
+.label {
+  display: inline-block;
+  font-family: var(--font-label);
+  font-weight: 400;
+  font-size: var(--size-label);
+  letter-spacing: var(--tracking-label);
+  line-height: 1.4;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.label-buff {
+  color: var(--buff);
+}
+
+.sectie-wit .label {
+  color: var(--zwart);
+}
+
+.accent {
+  color: var(--violet);
+}
+
+/* Knop. Blauw is uitsluitend de actie, nooit decoratie. */
+.knop {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 15px 26px;
+  background: var(--blauw);
+  color: var(--wit);
+  font-family: var(--font-display);
+  font-weight: var(--weight-display-sub);
+  font-size: 16px;
+  line-height: 1;
+  border: 0;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.knop:hover {
+  background: var(--blauw-hover);
+  color: var(--wit);
+}
+
+.knop-groot {
+  font-size: 17px;
+  padding: 18px 28px;
+}
+
+/* Tweede actie, geen tweede knop. Onderstreping in buff. */
+.knop-tekst {
+  display: inline-block;
+  font-family: var(--font-label);
+  font-size: var(--size-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--buff);
+  padding: 3px 0;
+}
+
+.actie-rij {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px 24px;
+}
+
+/* Secties. Zwart is de standaard, wit hoogstens twee keer per pagina. */
+
+.sectie {
+  padding: var(--pad-section);
+}
+
+.sectie-wit {
+  background: var(--wit);
+  color: var(--zwart);
+}
+
+.sectie-wit a {
+  color: var(--blauw);
+}
+
+/* Afwijking: 5b laat links op wit naar violet hoveren, maar dat is 4,36 : 1.
+   Hover gaat naar zwart. */
+.sectie-wit a:hover {
+  color: var(--zwart);
+}
+
+.binnen {
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+/* Sectiekop: kop links, mono-rubriek rechts, regel eronder. */
+.sectie-kop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px 32px;
+  margin-bottom: 20px;
+}
+
+.sectie-kop h2 {
+  flex: 1 1 260px;
+  max-width: min(18ch, 100%);
+  min-width: 0;
+}
+
+.sectie-kop .label {
+  flex: 0 0 auto;
+}
+
+.regel-zwaar {
+  border-top: var(--rule-heavy);
+  margin-bottom: var(--gap-section);
+}
+
+.regel-haar {
+  border-top: var(--rule-hairline);
+  margin-bottom: var(--gap-section);
+}
+
+.sectie-wit .regel-haar {
+  border-top: var(--rule-hairline-zwart);
+}
+
+/* Header, op zwart. Geen sticky, geen hamburger. */
+
+.site-header {
+  padding: 24px clamp(20px, 4vw, 56px);
+  border-bottom: var(--rule-hairline);
+}
+
+.header-inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 32px;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  /* 5b noemt 19 px voor het woordmerk. Met Syne 800 was dat te laag: die
+     letter is 11,13 em breed voor deze naam tegen een kaphoogte van 0,650 em.
+     Archivo 700 is 6,79 em bij 0,686 em, dus de verhouding is bijna gehalveerd
+     en 19 px zou weer kunnen. 24 px blijft staan omdat de naam dan naast de
+     navigatie standhoudt. 5b zet de naam op de LinkedIn-vellen zelf op 26 en
+     34 px. */
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  color: var(--wit);
+  padding: 3px 0;
+}
+
+.logo:hover {
+  color: var(--buff);
+}
+
+.header-rechts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+}
+
+.site-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav li + li {
+  margin-top: 0;
+}
+
+/* Afwijking van 5b: de navigatie staat in de tekstletter, niet in mono
+   kapitaal. Vijf mono-woorden met letterafstand maakten de kop de drukste
+   plek van de pagina, en ze pasten op een telefoon niet op een regel.
+   De onderstreping kwam van de regel voor links in lopende tekst, die ook de
+   nav raakte. Die is hier uitgezet: in een menu is kleur genoeg, want de eis
+   van 3 : 1 onderscheid geldt voor een link midden in een tekstblok. */
+.site-nav a {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--size-body);
+  padding: 6px 0;
+  border-bottom: 2px solid transparent;
+}
+
+.site-nav a[aria-current="page"] {
+  border-bottom-color: var(--buff);
+}
+
+/* Punt 2 uit de ronde van 21 september: op een telefoon kostte de kop 225 van
+   de 844 px, met twee keer dezelfde knop in het eerste scherm. De knop in de
+   kop verdwijnt daar; de knop in de intro blijft staan. */
+@media (max-width: 699px) {
+  .header-rechts > .knop {
+    display: none;
+  }
+}
+
+/* Hero, de affichekop. */
+
+.hero {
+  padding: clamp(40px, 7vw, 86px) clamp(20px, 4vw, 56px) clamp(36px, 5vw, 60px);
+}
+
+.hero-labels {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-bottom: clamp(24px, 4vw, 48px);
+}
+
+.hero h1 {
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 48px);
+  align-items: start;
+}
+
+.hero-tekst .lead {
+  max-width: min(52ch, 100%);
+}
+
+.hero-tekst .actie-rij {
+  margin-top: 28px;
+}
+
+.hero-portret {
+  margin: 0;
+  max-width: min(340px, 100%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+@media (min-width: 800px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 340px);
+  }
+
+  .hero-portret {
+    justify-self: end;
+  }
+}
+
+/* Wisselende kop. Alle varianten staan in dezelfde rastercel, dus de kop is
+   altijd zo hoog als de langste variant en er schuift niets als de tekst
+   wisselt. Zonder JavaScript, of met prefers-reduced-motion, blijft de eerste
+   variant staan. js/main.js wisselt één keer rond en stopt binnen vijf
+   seconden: WCAG 2.2.2 vraagt geen pauzeknop voor beweging die korter duurt. */
+.wissel {
+  display: grid;
+}
+
+.wissel > .wissel-item {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transition: opacity 240ms linear;
+}
+
+.wissel > .wissel-item.is-actief {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wissel > .wissel-item {
+    transition: none;
+  }
+}
+
+.lead {
+  font-size: var(--size-lead);
+  margin: 0;
+}
+
+.lead + .lead {
+  margin-top: var(--size-body);
+}
+
+/* Genummerde diensten. Nummers vervangen iconen. */
+
+.nummer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: clamp(20px, 3vw, 40px);
+}
+
+.nummer {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: var(--size-number);
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+
+.nummer-01 {
+  color: var(--violet);
+}
+
+/* Open punt uit 5b, op 22 september gesloten met optie B. 5b vroeg een keuze
+   tussen 02 in blauw of in zwart. Zwart wint, want 5b zegt zelf dat elke
+   blauwe plek een knop of een link is, en een nummer is geen van beide. */
+.nummer-02 {
+  color: var(--zwart);
+}
+
+/* Afwijking: 5b zet nummer 03 op buff, maar buff op wit haalt 2,32 : 1 tegen
+   een norm van 3 : 1. Op wit wordt 03 zwart, op zwart blijft het buff. */
+.nummer-03 {
+  color: var(--zwart);
+}
+
+.sectie:not(.sectie-wit) .nummer-02 {
+  color: var(--wit);
+}
+
+.sectie:not(.sectie-wit) .nummer-03 {
+  color: var(--buff);
+}
+
+/* Drie kolommen naast elkaar: nummer, titel en tekst delen dezelfde rijen
+   via subgrid. Breekt een titel over twee regels, dan schuift
+   de rij in alle drie de kolommen mee en blijft alles op één lijn. */
+@media (min-width: 900px) {
+  .nummer-grid {
+    grid-template-rows: auto auto auto;
+    row-gap: 0;
+  }
+
+  .nummer-grid > .dienst {
+    display: grid;
+    grid-row: span 3;
+    grid-template-rows: subgrid;
+    align-content: start;
+  }
+}
+
+.bewijs-rij {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 20px clamp(20px, 3vw, 40px);
+  list-style: none;
+  margin: clamp(40px, 6vw, 64px) 0 0;
+  padding: 24px 0 0;
+  border-top: var(--rule-hairline-zwart);
+}
+
+.bewijs-rij > li {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: var(--size-body-sm);
+}
+
+.bewijs-cijfer {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: clamp(28px, 3vw, 36px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.dienst-tekst p:last-child {
+  margin-bottom: 0;
+}
+
+/* De dienstenlijst in de sectiekop is lang. Op een breed scherm staat hij
+   rechts in een smalle kolom, op een telefoon gewoon onder de kop. */
+.sectie-kop .label-lijst {
+  flex: 0 1 34em;
+}
+
+@media (min-width: 800px) {
+  .sectie-kop .label-lijst {
+    text-align: right;
+  }
+}
+
+.dienst h3 {
+  margin-bottom: 16px;
+}
+
+.dienst p {
+  margin-bottom: 20px;
+}
+
+.dienst-meta {
+  font-family: var(--font-label);
+  font-size: var(--size-label-sm);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--zwart);
+  margin: 0;
+}
+
+.sectie:not(.sectie-wit) .dienst-meta {
+  border-bottom-color: rgba(255, 255, 255, 0.22);
+}
+
+/* Chips. Afwijking: een violet vlak met zwarte tekst haalt 4,29 : 1, dus de
+   violette chip is omlijnd. Buff gevuld haalt 8,06 : 1 en blijft vol. */
+
+.chip-rij {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chip-rij li + li {
+  margin-top: 0;
+}
+
+.chip {
+  display: inline-block;
+  font-family: var(--font-label);
+  font-size: var(--size-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border: 2px solid transparent;
+  color: var(--zwart);
+}
+
+.chip-violet {
+  border-color: var(--violet);
+}
+
+.chip-buff {
+  background: var(--buff);
+  border-color: var(--buff);
+}
+
+.chip-lijn {
+  border-color: var(--zwart);
+  border-width: 1px;
+  padding: 9px 15px;
+}
+
+/* Over Rik, twee kolommen met portret. */
+
+.over-tekst h2 {
+  margin: clamp(36px, 5vw, 56px) 0 16px;
+}
+
+.over-tekst .eerste-kop {
+  margin-top: 0;
+}
+
+.contact-lijst {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: min(52ch, 100%);
+}
+
+.contact-lijst > li {
+  display: grid;
+  grid-template-columns: 7.5em minmax(0, 1fr);
+  gap: 4px 16px;
+  align-items: baseline;
+  padding: 12px 0;
+  border-top: var(--rule-hairline-zwart);
+  margin: 0;
+}
+
+.contact-lijst > li:last-child {
+  border-bottom: var(--rule-hairline-zwart);
+}
+
+.contact-lijst a {
+  display: inline-block;
+  padding: 3px 0;
+  overflow-wrap: anywhere;
+}
+
+.wist-je-dat li + li {
+  margin-top: 10px;
+}
+
+.over-tekst .chip-rij {
+  margin-top: 28px;
+}
+
+/* Een kop direct boven een lijst met lijnen plakte op de eerste lijn. */
+h2 + .tijdlijn,
+h2 + .contact-lijst {
+  margin-top: 24px;
+}
+
+/* Slotblok met kop, lead en knop: zonder deze ruimte stonden ze op elkaar. */
+.binnen > h2 + .lead {
+  margin-top: 16px;
+}
+
+.binnen > .lead + .actie-rij {
+  margin-top: 28px;
+}
+
+.over-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: clamp(24px, 4vw, 56px);
+  align-items: start;
+}
+
+.portret {
+  max-width: min(420px, 100%);
+  border: 1px solid var(--zwart);
+}
+
+.onderschrift {
+  font-style: italic;
+  font-size: 13px;
+  margin: 12px 0 0;
+}
+
+/* Contact. */
+
+.sectie-actie {
+  margin-top: 32px;
+}
+
+.contact-kop {
+  max-width: min(30ch, 100%);
+  margin: 20px 0 28px;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: clamp(20px, 3vw, 40px);
+  align-items: end;
+}
+
+.contact-gegevens {
+  font-family: var(--font-label);
+  font-size: var(--size-body-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-gegevens a {
+  padding: 3px 0;
+}
+
+/* Voet, op wit. */
+
+.site-footer {
+  background: var(--wit);
+  color: var(--zwart);
+  padding: 28px clamp(20px, 4vw, 56px);
+}
+
+.footer-inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px 32px;
+}
+
+.footer-merk {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.footer-meta {
+  font-family: var(--font-label);
+  font-size: var(--size-label-sm);
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-family: var(--font-label);
+  font-size: var(--size-label-sm);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.site-footer a {
+  display: inline-block;
+  padding: 4px 0;
+  color: var(--blauw);
+}
+
+.site-footer a:hover {
+  color: var(--zwart);
+}
+
+/* Subpagina's: intro en lopende tekst. */
+
+.pagina-intro {
+  padding: clamp(40px, 6vw, 72px) clamp(20px, 4vw, 56px) clamp(24px, 3vw, 40px);
+}
+
+.pagina-intro h1 {
+  font-size: var(--size-display-2);
+  margin-bottom: 20px;
+}
+
+.pagina-intro .label {
+  margin-bottom: 16px;
+}
+
+.tekst {
+  max-width: min(62ch, 100%);
+}
+
+.tekst h2 {
+  font-size: clamp(24px, 3vw, 34px);
+  margin: clamp(32px, 4vw, 52px) 0 16px;
+}
+
+.tekst h3 {
+  margin: 28px 0 12px;
+}
+
+.tekst p,
+.tekst li {
+  font-size: var(--size-body);
+}
+
+/* Cases. */
+
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: clamp(20px, 3vw, 40px);
+}
+
+.case {
+  border-top: var(--rule-heavy);
+  padding-top: 16px;
+}
+
+.sectie:not(.sectie-wit) .case {
+  border-top: 2px solid var(--wit);
+}
+
+.case h2 {
+  font-size: var(--size-display-3);
+  font-weight: var(--weight-display-sub);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 12px 0;
+}
+
+.resultaat {
+  font-family: var(--font-label);
+  font-size: var(--size-label-sm);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  padding-top: 10px;
+  border-top: 1px solid currentColor;
+  margin: 20px 0 0;
+}
+
+/* Tijdlijn op Over mij. */
+
+.tijdlijn {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tijdlijn li {
+  border-top: var(--rule-hairline-zwart);
+  padding: 20px 0;
+}
+
+.tijdlijn li + li {
+  margin-top: 0;
+}
+
+.tijdlijn .periode {
+  display: block;
+  font-family: var(--font-label);
+  font-size: var(--size-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.tijdlijn h3 {
+  margin-bottom: 8px;
+}
+
+.tijdlijn p {
+  margin: 0;
+  font-size: var(--size-body-sm);
+}
+
+/* Tabel op de privacypagina. De tabel schuift horizontaal, dus het vak krijgt
+   in de html een `tabindex="0"` en een naam. Anders is hij niet met het
+   toetsenbord te bereiken. WCAG 2.1.1. De algemene focusregel doet de rand. */
+
+.tabel-scroll {
+  overflow-x: auto;
+  max-width: min(62ch, 100%);
+  margin-bottom: 24px;
+}
+
+.data-tabel {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--size-body-sm);
+}
+
+.data-tabel th {
+  background: var(--zwart);
+  color: var(--wit);
+  font-family: var(--font-label);
+  font-size: var(--size-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-align: left;
+  padding: 12px 14px;
+}
+
+.data-tabel td {
+  padding: 12px 14px;
+  border-bottom: var(--rule-hairline-zwart);
+  vertical-align: top;
+}
+
+/* Losse links die geen knop zijn, minstens 24 px hoog. */
+
+.linklijst {
+  list-style: none;
+  padding: 0;
+}
+
+.linklijst a {
+  display: inline-block;
+  padding: 2px 0;
+}
+
+/* Een link midden in een zin mag niet alleen aan kleur te herkennen zijn:
+   blauw tegen zwart is 2,2 : 1 en de norm is 3 : 1. Onderstreping lost dat op. */
+p a:not([class]),
+li a:not([class]),
+dd a:not([class]) {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+/* De regel hierboven raakt ook de navigatie, want die staat in een <ul>. In
+   een menu is de onderstreping overbodig: de eis van 3 : 1 onderscheid geldt
+   voor een link midden in een tekstblok, niet voor een rij met alleen links.
+   Deze override staat hier en niet bij `.site-nav a`, omdat de specificiteit
+   gelijk is en de laatste regel dan wint. */
+.site-nav li a {
+  text-decoration: none;
+}
+
+.dienst-lang {
+  border-top: var(--rule-hairline);
+  padding: clamp(28px, 4vw, 44px) 0 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* Vanaf 640 px staat het nummer naast de kop in plaats van erboven. Dat
+   scheelt een regel per dienst en je ziet nummer en dienst in een oogopslag. */
+@media (min-width: 640px) {
+  .dienst-lang {
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: clamp(20px, 3vw, 40px);
+    align-items: start;
+  }
+
+  .dienst-lang > .nummer {
+    margin-bottom: 0;
+  }
+}
+
+.dienst-lang h2 {
+  font-size: clamp(26px, 3vw, 38px);
+  margin-bottom: 20px;
+}
+
+.dienst-lang p,
+.dienst-lang ul {
+  max-width: min(62ch, 100%);
+}
+
+/* De voorwaardenregel is kort en in mono, dus die mag breder dan de leesmaat.
+   Op 62ch brak hij in drie regels. */
+.dienst-lang .meta-lijst {
+  max-width: min(860px, 100%);
+}
+
+.dienst-lang:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.sectie-wit .dienst-lang {
+  border-top: var(--rule-hairline-zwart);
+}
+
+.meta-lijst {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  font-family: var(--font-label);
+  font-size: var(--size-label-sm);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.meta-lijst li + li {
+  margin-top: 0;
+}
+
+.portret-vak {
+  border: 1px solid currentColor;
+  max-width: min(420px, 100%);
+}
+
+.terugblik {
+  border: 2px solid currentColor;
+  padding: clamp(20px, 3vw, 28px);
+  margin-top: clamp(32px, 4vw, 52px);
+  max-width: min(62ch, 100%);
+}
+
+.terugblik h2 {
+  font-size: var(--size-display-3);
+  font-weight: var(--weight-display-sub);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 12px 0;
+}
+
+/* De lopende opdracht in de tijdlijn krijgt een zwaardere regel in plaats van
+   een kleur, want buff en violet halen op wit geen AA op 12 px. */
+.tijdlijn .is-huidig {
+  border-top-width: 2px;
+}
+
+@media print {
+  .site-header,
+  .actie-rij,
+  .knop,
+  .skip-link,
+  .portret,
+  .footer-links {
+    display: none !important;
+  }
+
+  body,
+  .sectie,
+  .hero,
+  .pagina-intro,
+  .site-footer {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  a {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+
+  a[href^="http"]::after,
+  a[href^="mailto"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+  }
+
+  .tekst {
+    max-width: none;
+  }
+}
