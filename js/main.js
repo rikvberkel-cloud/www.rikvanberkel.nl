@@ -18,11 +18,8 @@
   // seconden vraagt WCAG 2.2.2 geen pauzeknop.
   var INTERVAL = 1600;
 
-  var minderBeweging = window.matchMedia &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (minderBeweging) {
-    return;
-  }
+  // Met "beweging beperken" aan wisselt de tekst ook, maar springt hij om
+  // zonder vervaging (zie de CSS). Omspringende tekst is geen animatie.
 
   function rondje(wissel) {
     var items = wissel.querySelectorAll(".wissel-item");

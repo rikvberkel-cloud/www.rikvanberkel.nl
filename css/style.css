@@ -491,8 +491,8 @@ a:hover {
 
 /* Wisselende kop. Alle varianten staan in dezelfde rastercel, dus de kop is
    altijd zo hoog als de langste variant en er schuift niets als de tekst
-   wisselt. Zonder JavaScript, of met prefers-reduced-motion, blijft de eerste
-   variant staan. js/main.js wisselt één keer rond en stopt binnen vijf
+   wisselt. Zonder JavaScript blijft de eerste variant staan. Met
+   prefers-reduced-motion springt de tekst om zonder vervaging. js/main.js wisselt één keer rond en stopt binnen vijf
    seconden: WCAG 2.2.2 vraagt geen pauzeknop voor beweging die korter duurt. */
 .wissel {
   display: grid;
