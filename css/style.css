@@ -491,9 +491,11 @@ a:hover {
 
 /* Wisselende kop. Alle varianten staan in dezelfde rastercel, dus de kop is
    altijd zo hoog als de langste variant en er schuift niets als de tekst
-   wisselt. Zonder JavaScript, of met prefers-reduced-motion, blijft de eerste
-   variant staan. js/main.js wisselt één keer rond en stopt binnen vijf
-   seconden: WCAG 2.2.2 vraagt geen pauzeknop voor beweging die korter duurt. */
+   wisselt. Zonder JavaScript blijft de eerste variant staan. Met
+   prefers-reduced-motion springt de tekst om zonder vervaging. js/main.js
+   loopt de varianten één keer langs en blijft op de laatste staan, binnen
+   vijf seconden: WCAG 2.2.2 vraagt geen pauzeknop voor beweging die korter
+   duurt. */
 .wissel {
   display: grid;
 }
@@ -541,30 +543,8 @@ a:hover {
   margin-bottom: 16px;
 }
 
-.nummer-01 {
-  color: var(--violet);
-}
-
-/* Open punt uit 5b, op 22 september gesloten met optie B. 5b vroeg een keuze
-   tussen 02 in blauw of in zwart. Zwart wint, want 5b zegt zelf dat elke
-   blauwe plek een knop of een link is, en een nummer is geen van beide. */
-.nummer-02 {
-  color: var(--zwart);
-}
-
-/* Afwijking: 5b zet nummer 03 op buff, maar buff op wit haalt 2,32 : 1 tegen
-   een norm van 3 : 1. Op wit wordt 03 zwart, op zwart blijft het buff. */
-.nummer-03 {
-  color: var(--zwart);
-}
-
-.sectie:not(.sectie-wit) .nummer-02 {
-  color: var(--wit);
-}
-
-.sectie:not(.sectie-wit) .nummer-03 {
-  color: var(--buff);
-}
+/* De drie nummers hebben dezelfde kleur. Eerder was 01 violet, maar violet
+   is alleen voor grote tekst op zwart, en de diensten staan op wit. */
 
 /* Drie kolommen naast elkaar: nummer, titel en tekst delen dezelfde rijen
    via subgrid. Breekt een titel over twee regels, dan schuift
@@ -583,46 +563,8 @@ a:hover {
   }
 }
 
-.bewijs-rij {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-  gap: 20px clamp(20px, 3vw, 40px);
-  list-style: none;
-  margin: clamp(40px, 6vw, 64px) 0 0;
-  padding: 24px 0 0;
-  border-top: var(--rule-hairline-zwart);
-}
-
-.bewijs-rij > li {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: var(--size-body-sm);
-}
-
-.bewijs-cijfer {
-  font-family: var(--font-display);
-  font-weight: var(--weight-display);
-  font-size: clamp(28px, 3vw, 36px);
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-
 .dienst-tekst p:last-child {
   margin-bottom: 0;
-}
-
-/* De dienstenlijst in de sectiekop is lang. Op een breed scherm staat hij
-   rechts in een smalle kolom, op een telefoon gewoon onder de kop. */
-.sectie-kop .label-lijst {
-  flex: 0 1 34em;
-}
-
-@media (min-width: 800px) {
-  .sectie-kop .label-lijst {
-    text-align: right;
-  }
 }
 
 .dienst h3 {
@@ -645,48 +587,6 @@ a:hover {
 
 .sectie:not(.sectie-wit) .dienst-meta {
   border-bottom-color: rgba(255, 255, 255, 0.22);
-}
-
-/* Chips. Afwijking: een violet vlak met zwarte tekst haalt 4,29 : 1, dus de
-   violette chip is omlijnd. Buff gevuld haalt 8,06 : 1 en blijft vol. */
-
-.chip-rij {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.chip-rij li + li {
-  margin-top: 0;
-}
-
-.chip {
-  display: inline-block;
-  font-family: var(--font-label);
-  font-size: var(--size-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  padding: 8px 14px;
-  border: 2px solid transparent;
-  color: var(--zwart);
-}
-
-.chip-violet {
-  border-color: var(--violet);
-}
-
-.chip-buff {
-  background: var(--buff);
-  border-color: var(--buff);
-}
-
-.chip-lijn {
-  border-color: var(--zwart);
-  border-width: 1px;
-  padding: 9px 15px;
 }
 
 /* Over Rik, twee kolommen met portret. */
@@ -728,10 +628,6 @@ a:hover {
 
 .wist-je-dat li + li {
   margin-top: 10px;
-}
-
-.over-tekst .chip-rij {
-  margin-top: 28px;
 }
 
 /* Een kop direct boven een lijst met lijnen plakte op de eerste lijn. */
@@ -795,6 +691,9 @@ h2 + .contact-lijst {
 
 .contact-gegevens a {
   padding: 3px 0;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
 }
 
 /* Voet, op wit. */
