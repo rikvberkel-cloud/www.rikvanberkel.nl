@@ -583,46 +583,8 @@ a:hover {
   }
 }
 
-.bewijs-rij {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-  gap: 20px clamp(20px, 3vw, 40px);
-  list-style: none;
-  margin: clamp(40px, 6vw, 64px) 0 0;
-  padding: 24px 0 0;
-  border-top: var(--rule-hairline-zwart);
-}
-
-.bewijs-rij > li {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: var(--size-body-sm);
-}
-
-.bewijs-cijfer {
-  font-family: var(--font-display);
-  font-weight: var(--weight-display);
-  font-size: clamp(28px, 3vw, 36px);
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-
 .dienst-tekst p:last-child {
   margin-bottom: 0;
-}
-
-/* De dienstenlijst in de sectiekop is lang. Op een breed scherm staat hij
-   rechts in een smalle kolom, op een telefoon gewoon onder de kop. */
-.sectie-kop .label-lijst {
-  flex: 0 1 34em;
-}
-
-@media (min-width: 800px) {
-  .sectie-kop .label-lijst {
-    text-align: right;
-  }
 }
 
 .dienst h3 {
