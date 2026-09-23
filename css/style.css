@@ -429,39 +429,14 @@ a:hover {
   border-bottom-color: var(--zwart);
 }
 
-/* Punt 2 uit de ronde van 21 september: op een telefoon kostte de kop 225 van
-   de 844 px, met twee keer dezelfde knop in het eerste scherm. De knop in de
-   kop verdwijnt daar; de knop in de intro blijft staan. */
-@media (max-width: 699px) {
-  .header-rechts > .knop {
-    display: none;
-  }
-}
-
 /* Hero, de affichekop. */
 
 .hero {
   padding: clamp(40px, 7vw, 86px) clamp(20px, 4vw, 56px) clamp(36px, 5vw, 60px);
 }
 
-.hero-labels {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 8px 24px;
-  margin-bottom: clamp(24px, 4vw, 48px);
-}
-
 .hero h1 {
-  margin-bottom: clamp(28px, 4vw, 48px);
-}
-
-.hero-tekst .lead {
-  max-width: min(52ch, 100%);
-}
-
-.hero-tekst .actie-rij {
-  margin-top: 28px;
+  margin-bottom: 16px;
 }
 
 /* Wisselende kop. Alle varianten staan in dezelfde rastercel, dus de kop is
@@ -489,6 +464,30 @@ a:hover {
   .wissel > .wissel-item {
     transition: none;
   }
+}
+
+/* Pauzeknop onder een wisselende kop. De koppen draaien door, en beweging die
+   langer duurt dan vijf seconden moet volgens WCAG 2.2.2 te stoppen zijn.
+   Zonder JavaScript draait er niets en blijft de knop verborgen. */
+.wissel-pauze {
+  display: inline-block;
+  min-height: 24px;
+  margin: 0 0 clamp(20px, 3vw, 32px);
+  padding: 4px 0;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: none;
+  color: inherit;
+  font-family: var(--font-label);
+  font-weight: var(--weight-body-strong);
+  font-size: var(--size-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.wissel-pauze[hidden] {
+  display: none;
 }
 
 .lead {
@@ -572,6 +571,10 @@ a:hover {
   margin-top: 0;
 }
 
+.over-tekst h1 {
+  font-size: var(--size-display-2);
+}
+
 .contact-lijst {
   list-style: none;
   margin: 0;
@@ -599,12 +602,9 @@ a:hover {
   overflow-wrap: anywhere;
 }
 
-.wist-je-dat li + li {
-  margin-top: 10px;
-}
-
 /* Een kop direct boven een lijst met lijnen plakte op de eerste lijn. */
 h2 + .tijdlijn,
+h1 + .contact-lijst,
 h2 + .contact-lijst {
   margin-top: 24px;
 }
@@ -644,7 +644,7 @@ h2 + .contact-lijst {
 
 .contact-kop {
   max-width: min(30ch, 100%);
-  margin: 20px 0 28px;
+  margin: 20px 0 12px;
 }
 
 .contact-grid {
