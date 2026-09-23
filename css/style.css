@@ -456,35 +456,12 @@ a:hover {
   margin-bottom: clamp(28px, 4vw, 48px);
 }
 
-.hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: clamp(24px, 4vw, 48px);
-  align-items: start;
-}
-
 .hero-tekst .lead {
   max-width: min(52ch, 100%);
 }
 
 .hero-tekst .actie-rij {
   margin-top: 28px;
-}
-
-.hero-portret {
-  margin: 0;
-  max-width: min(340px, 100%);
-  border: var(--rule-hairline);
-}
-
-@media (min-width: 800px) {
-  .hero-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 340px);
-  }
-
-  .hero-portret {
-    justify-self: end;
-  }
 }
 
 /* Wisselende kop. Alle varianten staan in dezelfde rastercel, dus de kop is
