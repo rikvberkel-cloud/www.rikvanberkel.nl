@@ -467,6 +467,14 @@ a:hover {
   margin-bottom: 16px;
 }
 
+/* Vaste regel onder de wisselende kop: wat en waar. */
+.hero-sub {
+  max-width: 40ch;
+  margin: 0 0 16px;
+  font-size: var(--size-lead);
+  font-weight: var(--weight-body-strong);
+}
+
 /* Kop links, foto rechts. Op een smal scherm staat de foto onder de kop. */
 .hero-grid {
   display: grid;
