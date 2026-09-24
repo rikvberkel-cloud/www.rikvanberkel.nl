@@ -74,7 +74,7 @@
   --rule-hairline: 1px solid rgba(18, 18, 20, 0.22);
   --rule-hairline-zwart: 1px solid rgba(18, 18, 20, 0.22);
   --rule-hairline-wit: 1px solid rgba(255, 255, 255, 0.22);
-  --rule-heavy: 2px solid #121214;
+  --rule-heavy: 4px solid #121214;
 
   --pad-section: clamp(40px, 6vw, 80px) clamp(20px, 4vw, 56px);
   --gap-section: clamp(24px, 3vw, 40px);
@@ -207,9 +207,10 @@ a:hover {
   top: 16px;
 }
 
-/* Label. Klein, vet en kapitaal in de tekstletter. Tot versie 3 stond dit in
-   Space Mono; die derde letter maakte de pagina onrustig. Labels zijn zwart,
-   in het slotblok wit of buff. */
+/* Label. Klein, vet en kapitaal in de tekstletter, als zwart blokje met
+   witte letters. Die blokjes geven de lichte pagina houvast. In het zwarte
+   slotblok is het blokje buff met zwarte letters (8,06 : 1). In de
+   contactlijst staat het label zonder blokje, anders wordt de lijst druk. */
 .label {
   display: inline-block;
   font-family: var(--font-label);
@@ -219,6 +220,15 @@ a:hover {
   line-height: 1.4;
   text-transform: uppercase;
   margin: 0;
+  padding: 4px 8px;
+  background: var(--zwart);
+  color: var(--wit);
+}
+
+.contact-lijst .label {
+  padding: 0;
+  background: none;
+  color: inherit;
 }
 
 .accent {
@@ -302,7 +312,8 @@ a:hover {
 }
 
 .sectie-zwart .label-buff {
-  color: var(--buff);
+  background: var(--buff);
+  color: var(--zwart);
 }
 
 .sectie-zwart .accent {
@@ -348,11 +359,17 @@ a:hover {
   margin-bottom: var(--gap-section);
 }
 
-/* Header, op papier. Geen sticky, geen hamburger. */
+/* Header, als zwarte balk. Samen met het zwarte slotblok onderaan omlijst
+   hij de lichte pagina. Geen sticky, geen hamburger. */
 
 .site-header {
   padding: 24px clamp(20px, 4vw, 56px);
-  border-bottom: var(--rule-hairline);
+  background: var(--zwart);
+  color: var(--wit);
+}
+
+.site-header :focus-visible {
+  outline-color: var(--buff);
 }
 
 .header-inner {
@@ -377,12 +394,12 @@ a:hover {
   font-size: 24px;
   letter-spacing: -0.01em;
   line-height: 1;
-  color: var(--zwart);
+  color: var(--wit);
   padding: 3px 0;
 }
 
 .logo:hover {
-  color: var(--blauw);
+  color: var(--buff);
 }
 
 .header-rechts {
@@ -416,17 +433,17 @@ a:hover {
   display: inline-block;
   font-family: var(--font-body);
   font-size: var(--size-body);
-  color: var(--zwart);
+  color: var(--wit);
   padding: 6px 0;
   border-bottom: 2px solid transparent;
 }
 
 .site-nav a:hover {
-  color: var(--blauw);
+  color: var(--buff);
 }
 
 .site-nav a[aria-current="page"] {
-  border-bottom-color: var(--zwart);
+  border-bottom-color: var(--buff);
 }
 
 /* Hero, de affichekop. */
@@ -437,6 +454,32 @@ a:hover {
 
 .hero h1 {
   margin-bottom: 16px;
+}
+
+/* Kop links, foto rechts. Op een smal scherm staat de foto onder de kop. */
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 48px);
+  align-items: end;
+}
+
+.hero-portret {
+  margin: 0;
+  max-width: min(340px, 100%);
+  border: var(--rule-hairline);
+}
+
+@media (min-width: 900px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 340px);
+  }
+
+  /* Naast de foto is de kolom smaller. Op de volle maat liep de kop over vier
+     regels; hier blijft hij op twee of drie. */
+  .hero h1 {
+    font-size: clamp(52px, 6.4vw, 88px);
+  }
 }
 
 /* Wisselende kop. Alle varianten staan in dezelfde rastercel, dus de kop is
