@@ -834,17 +834,45 @@ h2 + .contact-lijst {
   margin: 20px 0 0;
 }
 
-/* Tijdlijn op Over mij. */
+/* Tijdlijn op Over mij: een verticale lijn met een vierkantje per stap.
+   Vierkant, want de huisstijl heeft geen ronde vormen. De huidige stap is
+   gevuld, de rest open. */
 
 .tijdlijn {
+  position: relative;
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 0 0 32px;
+}
+
+.tijdlijn::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: var(--zwart);
 }
 
 .tijdlijn li {
-  border-top: var(--rule-hairline-zwart);
-  padding: 20px 0;
+  position: relative;
+  padding: 0 0 32px;
+}
+
+.tijdlijn li:last-child {
+  padding-bottom: 0;
+}
+
+.tijdlijn li::before {
+  content: "";
+  position: absolute;
+  left: -32px;
+  top: 2px;
+  width: 14px;
+  height: 14px;
+  background: var(--wit);
+  border: 2px solid var(--zwart);
 }
 
 .tijdlijn li + li {
@@ -999,6 +1027,40 @@ dd a:not([class]) {
   margin-top: 0;
 }
 
+/* Kaart op Contact: Nederland met een markering bij Schiebroek. Omtrek uit
+   Natural Earth (publiek domein), geen externe kaartdienst. */
+.locatie-kaart {
+  margin: 0;
+  max-width: min(420px, 100%);
+}
+
+.locatie-kaart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.kaart-land {
+  fill: var(--wit);
+  stroke: var(--zwart);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+.kaart-ring {
+  fill: none;
+  stroke: var(--zwart);
+  stroke-width: 2;
+}
+
+.kaart-punt {
+  fill: var(--zwart);
+}
+
+.locatie-kaart figcaption {
+  margin-top: 12px;
+}
+
 .portret-vak {
   border: 1px solid currentColor;
   max-width: min(420px, 100%);
@@ -1019,10 +1081,8 @@ dd a:not([class]) {
   margin: 12px 0;
 }
 
-/* De lopende opdracht in de tijdlijn krijgt een zwaardere regel in plaats van
-   een kleur, want buff en violet halen op wit geen AA op 12 px. */
-.tijdlijn .is-huidig {
-  border-top-width: 2px;
+.tijdlijn .is-huidig::before {
+  background: var(--zwart);
 }
 
 @media print {
