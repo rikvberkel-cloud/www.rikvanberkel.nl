@@ -25,9 +25,9 @@
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function knopBij(wissel) {
+    // De knop staat in hetzelfde blok als de kop, eventueel na een subregel.
     var kop = wissel.closest("h1, h2");
-    var knop = kop && kop.nextElementSibling;
-    return knop && knop.classList.contains("wissel-pauze") ? knop : null;
+    return kop ? kop.parentElement.querySelector(":scope > .wissel-pauze") : null;
   }
 
   function draai(wissel) {
