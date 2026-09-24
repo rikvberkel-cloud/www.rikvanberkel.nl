@@ -629,6 +629,12 @@ a:hover {
   font-size: var(--size-display-2);
 }
 
+/* Zin tussen kop en contactlijst op Contact. */
+.over-tekst h1 + p {
+  max-width: min(52ch, 100%);
+  margin: 16px 0 24px;
+}
+
 .contact-lijst {
   list-style: none;
   margin: 0;
