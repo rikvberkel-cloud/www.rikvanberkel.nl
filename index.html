@@ -86,16 +86,25 @@
 
   <main id="main">
     <section class="hero">
-      <div class="binnen">
-        <h1>
-          <span class="visueel-verborgen">Van losse ideeën naar winnende aanbieding. Van plan naar oplevering. Van stilstand naar nieuwe energie.</span>
-          <span class="wissel" aria-hidden="true" data-wissel>
-            <span class="wissel-item is-actief">Van losse ideeën <span class="accent">naar</span> winnende aanbieding</span>
-            <span class="wissel-item">Van plan <span class="accent">naar</span> oplevering</span>
-            <span class="wissel-item">Van stilstand <span class="accent">naar</span> nieuwe energie</span>
-          </span>
-        </h1>
-        <button class="wissel-pauze" type="button" hidden>Pauzeer</button>
+      <div class="binnen hero-grid">
+        <div class="hero-kop">
+          <h1>
+            <span class="visueel-verborgen">Van losse ideeën naar winnende aanbieding. Van plan naar oplevering. Van stilstand naar nieuwe energie.</span>
+            <span class="wissel" aria-hidden="true" data-wissel>
+              <span class="wissel-item is-actief">Van losse ideeën <span class="accent">naar</span> winnende aanbieding</span>
+              <span class="wissel-item">Van plan <span class="accent">naar</span> oplevering</span>
+              <span class="wissel-item">Van stilstand <span class="accent">naar</span> nieuwe energie</span>
+            </span>
+          </h1>
+          <button class="wissel-pauze" type="button" hidden>Pauzeer</button>
+        </div>
+        <figure class="hero-portret">
+          <picture>
+            <source type="image/avif" srcset="img/rik-uitzicht-640.avif 640w, img/rik-uitzicht-1000.avif 1000w" sizes="(min-width: 400px) 340px, 100vw">
+            <source type="image/webp" srcset="img/rik-uitzicht-640.webp 640w, img/rik-uitzicht-1000.webp 1000w" sizes="(min-width: 400px) 340px, 100vw">
+            <img src="img/rik-uitzicht-640.jpg" srcset="img/rik-uitzicht-640.jpg 640w, img/rik-uitzicht-1000.jpg 1000w" sizes="(min-width: 400px) 340px, 100vw" alt="Rik van Berkel op een rots, met uitzicht over een heuvellandschap" width="1200" height="1600" decoding="async">
+          </picture>
+        </figure>
       </div>
     </section>
 
