@@ -694,7 +694,13 @@ h2 + .contact-lijst {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
   gap: clamp(20px, 3vw, 40px);
-  align-items: end;
+  /* Tekst, links en knop beginnen op dezelfde hoogte. Met "end" zakten de
+     links en de knop weg naast de langere tekst. */
+  align-items: start;
+}
+
+.contact-grid > p {
+  margin: 0;
 }
 
 .contact-gegevens {
@@ -705,7 +711,7 @@ h2 + .contact-lijst {
 }
 
 .contact-gegevens a {
-  padding: 3px 0;
+  padding: 0 0 3px;
   text-decoration: underline;
   text-underline-offset: 0.2em;
   text-decoration-thickness: 1px;
