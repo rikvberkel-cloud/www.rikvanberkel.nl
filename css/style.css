@@ -324,6 +324,17 @@ a:hover {
   border-top: var(--rule-hairline-wit);
 }
 
+/* Twee witte secties achter elkaar: de tweede krijgt geen eigen
+   bovenruimte, anders stapelt de witruimte op. */
+.sectie-wit + .sectie-wit {
+  padding-top: 0;
+}
+
+/* Een label direct boven een kop plakte er tegenaan. */
+.label + h2:not([class]) {
+  margin-top: 12px;
+}
+
 .binnen {
   max-width: var(--content-max);
   margin: 0 auto;
@@ -1105,8 +1116,9 @@ dd a:not([class]) {
   font-size: 28px;
 }
 
+/* Het label staat boven de kaart, net als boven een kop. */
 .locatie-kaart figcaption {
-  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 .portret-vak {
