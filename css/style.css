@@ -1027,8 +1027,9 @@ dd a:not([class]) {
   margin-top: 0;
 }
 
-/* Kaart op Contact: Nederland met een markering bij Schiebroek. Omtrek uit
-   Natural Earth (publiek domein), geen externe kaartdienst. */
+/* Kaart op Contact: Rotterdam en omgeving, met Schiebroek uitgelicht. Kust
+   uit Natural Earth (publiek domein), plaatsen op hun coördinaten, geen
+   externe kaartdienst. */
 .locatie-kaart {
   margin: 0;
   max-width: min(420px, 100%);
@@ -1040,11 +1041,22 @@ dd a:not([class]) {
   height: auto;
 }
 
-.kaart-land {
+/* Land in papier, zee in wit, zodat de kust leesbaar is op de witte sectie. */
+.kaart-zee {
   fill: var(--wit);
+}
+
+.kaart-land {
+  fill: var(--papier);
+  stroke: var(--zwart);
+  stroke-width: 1;
+  stroke-linejoin: round;
+}
+
+.kaart-kader {
+  fill: none;
   stroke: var(--zwart);
   stroke-width: 1.5;
-  stroke-linejoin: round;
 }
 
 .kaart-ring {
@@ -1055,6 +1067,31 @@ dd a:not([class]) {
 
 .kaart-punt {
   fill: var(--zwart);
+}
+
+.kaart-plaats {
+  fill: var(--zwart);
+}
+
+.kaart-tekst {
+  font-family: var(--font-body);
+  font-size: 12px;
+  fill: var(--zwart);
+}
+
+.kaart-tekst-uitgelicht {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: 16px;
+}
+
+.kaart-tekst-klein {
+  font-size: 10px;
+}
+
+.kaart-schaal {
+  stroke: var(--zwart);
+  stroke-width: 2;
 }
 
 .locatie-kaart figcaption {
