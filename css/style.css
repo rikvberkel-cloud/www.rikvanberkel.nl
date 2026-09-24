@@ -811,6 +811,32 @@ h2 + .contact-lijst {
   padding-top: 16px;
 }
 
+/* Vier cases staan vanaf 800 px als twee bij twee, zodat de vierde niet
+   alleen op een rij staat. */
+@media (min-width: 800px) {
+  .case-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: clamp(32px, 4vw, 56px);
+  }
+}
+
+/* De vierde tegel op Cases is een uitnodiging: zwart vlak, witte tekst,
+   buff label, blauwe knop. */
+.case-open {
+  background: var(--zwart);
+  color: var(--wit);
+  padding: 16px 20px 24px;
+}
+
+.case-open .label-buff {
+  background: var(--buff);
+  color: var(--zwart);
+}
+
+.case-open p:last-child {
+  margin: 20px 0 0;
+}
+
 .sectie-zwart .case {
   border-top: 2px solid var(--wit);
 }
@@ -1027,12 +1053,13 @@ dd a:not([class]) {
   margin-top: 0;
 }
 
-/* Kaart op Contact: Rotterdam en omgeving, met Schiebroek uitgelicht. Kust
-   uit Natural Earth (publiek domein), plaatsen op hun coördinaten, geen
-   externe kaartdienst. */
+/* Kaart op Contact: wijkkaart van Rotterdam met Schiebroek uitgelicht. De
+   omgeving in papier, de wijken van Rotterdam in zwart op lage dekking,
+   Schiebroek in vol zwart. De witte naden tussen de vlakken zijn de grenzen.
+   Inline SVG, geen externe kaartdienst. */
 .locatie-kaart {
   margin: 0;
-  max-width: min(420px, 100%);
+  max-width: min(480px, 100%);
 }
 
 .locatie-kaart svg {
@@ -1041,57 +1068,41 @@ dd a:not([class]) {
   height: auto;
 }
 
-/* Land in papier, zee in wit, zodat de kust leesbaar is op de witte sectie. */
 .kaart-zee {
   fill: var(--wit);
 }
 
-.kaart-land {
+.kaart-omgeving {
   fill: var(--papier);
-  stroke: var(--zwart);
-  stroke-width: 1;
-  stroke-linejoin: round;
+}
+
+.kaart-wijk {
+  fill: var(--zwart);
+  fill-opacity: 0.18;
+}
+
+.kaart-uitgelicht {
+  fill: var(--zwart);
 }
 
 .kaart-kader {
   fill: none;
   stroke: var(--zwart);
-  stroke-width: 1.5;
-}
-
-.kaart-ring {
-  fill: none;
-  stroke: var(--zwart);
-  stroke-width: 2;
-}
-
-.kaart-punt {
-  fill: var(--zwart);
-}
-
-.kaart-plaats {
-  fill: var(--zwart);
+  stroke-width: 3;
 }
 
 .kaart-tekst {
-  font-family: var(--font-body);
-  font-size: 12px;
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
   fill: var(--zwart);
 }
 
 .kaart-tekst-uitgelicht {
-  font-family: var(--font-display);
-  font-weight: var(--weight-display);
-  font-size: 16px;
+  font-size: 34px;
 }
 
-.kaart-tekst-klein {
-  font-size: 10px;
-}
-
-.kaart-schaal {
-  stroke: var(--zwart);
-  stroke-width: 2;
+.kaart-tekst-plaats {
+  font-size: 28px;
 }
 
 .locatie-kaart figcaption {
