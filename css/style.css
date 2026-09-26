@@ -1135,6 +1135,11 @@ dd a:not([class]) {
   margin-bottom: 12px;
 }
 
+.kaart-bron {
+  margin: 8px 0 0;
+  font-size: var(--size-label);
+}
+
 .portret-vak {
   border: 1px solid currentColor;
   max-width: min(420px, 100%);
