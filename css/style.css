@@ -1179,44 +1179,21 @@ dd a:not([class]) {
   max-width: min(420px, 100%);
 }
 
-/* Veelgestelde vragen op Contact, in het tekstblok onder de contactgegevens.
-   De kop is klein, zodat Contact de hoofdkop blijft. */
-.over-tekst .faq h2 {
-  font-size: var(--size-display-3);
-  font-weight: var(--weight-display-sub);
-  letter-spacing: -0.01em;
-  line-height: 1.15;
-}
-
-.faq-lijst {
-  margin: 0;
-}
-
-.faq-lijst dt {
-  font-weight: var(--weight-body-strong);
-}
-
-.faq-lijst dd {
-  margin: 4px 0 0;
-}
-
-.faq-item + .faq-item {
-  margin-top: 16px;
-}
-
-.terugblik {
+/* Kader onder de twee bakjes op Home: wat je overhoudt na een opdracht.
+   Over de volle breedte, de tekst op leesmaat. */
+.kader {
   border: 2px solid currentColor;
   padding: clamp(20px, 3vw, 28px);
-  margin-top: clamp(32px, 4vw, 52px);
-  max-width: min(62ch, 100%);
+  margin-top: clamp(40px, 5vw, 64px);
 }
 
-.terugblik h2 {
-  font-size: var(--size-display-3);
-  font-weight: var(--weight-display-sub);
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-  margin: 12px 0;
+.kader h3 {
+  margin-bottom: 12px;
+}
+
+.kader p {
+  max-width: min(62ch, 100%);
+  margin-bottom: 0;
 }
 
 .tijdlijn .is-huidig::before {
