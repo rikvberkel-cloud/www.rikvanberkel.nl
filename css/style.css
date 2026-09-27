@@ -467,7 +467,25 @@ a:hover {
   margin-bottom: 16px;
 }
 
-/* Vaste regel onder de wisselende kop: wat en waar. */
+/* Kernboodschap op Home: vier vaste regels, "naar" in violet. De kolom is een
+   container, zodat de letter meegroeit met de kolom en de langste regel,
+   "naar winnende aanbieding", altijd op één regel past. Zonder ondersteuning
+   voor containereenheden geldt de maat in vw en breekt een regel netjes af. */
+.hero-kop {
+  container-type: inline-size;
+}
+
+.hero h1.kernboodschap {
+  font-size: clamp(22px, 6.4vw, 64px);
+  font-size: clamp(22px, 8cqi, 72px);
+  line-height: 1;
+}
+
+.kernboodschap > span {
+  display: block;
+}
+
+/* Vaste regel onder de kernboodschap: wat en waar. */
 .hero-sub {
   max-width: 40ch;
   margin: 0 0 16px;
@@ -501,7 +519,9 @@ a:hover {
   }
 }
 
-/* Wisselende kop. Alle varianten staan in dezelfde rastercel, dus de kop is
+/* Wisselende kop. Sinds 27 september 2026 gebruikt geen pagina dit meer; de
+   code staat klaar voor als er weer een kop moet wisselen. Alle varianten
+   staan in dezelfde rastercel, dus de kop is
    altijd zo hoog als de langste variant en er schuift niets als de tekst
    wisselt. Zonder JavaScript blijft de eerste variant staan. Met
    prefers-reduced-motion springt de tekst om zonder vervaging. js/main.js
@@ -736,9 +756,10 @@ h2 + .contact-lijst {
   margin-top: 32px;
 }
 
+/* Zonder pauzeknop onder de kop kreeg de tekst te weinig lucht. */
 .contact-kop {
   max-width: min(30ch, 100%);
-  margin: 20px 0 12px;
+  margin: 20px 0 clamp(20px, 3vw, 32px);
 }
 
 .contact-grid {
