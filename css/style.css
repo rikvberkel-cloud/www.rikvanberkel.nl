@@ -569,6 +569,14 @@ a:hover {
   gap: clamp(20px, 3vw, 40px);
 }
 
+/* Op een telefoon staan de bakjes onder elkaar. Zonder extra ruimte plakte
+   het nummer 02 tegen de laatste regel van bakje 01. */
+@media (max-width: 639px) {
+  .nummer-grid {
+    row-gap: 48px;
+  }
+}
+
 .nummer {
   display: block;
   font-family: var(--font-display);
@@ -579,25 +587,23 @@ a:hover {
   margin-bottom: 16px;
 }
 
-/* Drie kolommen naast elkaar: nummer, titel en tekst delen dezelfde rijen
-   via subgrid. Breekt een titel over twee regels, dan schuift
-   de rij in alle drie de kolommen mee en blijft alles op één lijn. */
-@media (min-width: 900px) {
+/* Twee kolommen naast elkaar: nummer, naam, toelichting, probleem, oplossing
+   en velden delen dezelfde rijen via subgrid. Is een blok in de ene kolom
+   langer, dan schuift de rij in beide kolommen mee en begint Oplossing links
+   en rechts op dezelfde hoogte. Vanaf 640 px staan de twee bakjes naast
+   elkaar. */
+@media (min-width: 640px) {
   .nummer-grid {
-    grid-template-rows: auto auto auto;
+    grid-template-rows: repeat(6, auto);
     row-gap: 0;
   }
 
   .nummer-grid > .dienst {
     display: grid;
-    grid-row: span 3;
+    grid-row: span 6;
     grid-template-rows: subgrid;
     align-content: start;
   }
-}
-
-.dienst-tekst p:last-child {
-  margin-bottom: 0;
 }
 
 .dienst h3 {
@@ -606,6 +612,36 @@ a:hover {
 
 .dienst p {
   margin-bottom: 20px;
+}
+
+/* De bindende zin staat tussen de kop en de zware regel, boven de bakjes. */
+.diensten-intro {
+  max-width: min(62ch, 100%);
+  margin-bottom: 24px;
+}
+
+.dienst-toelichting {
+  font-weight: var(--weight-body-strong);
+}
+
+/* Probleem en Oplossing zijn gewone labels: zwart blokje, witte letters. */
+.dienst-blok .label {
+  margin-bottom: 8px;
+}
+
+/* De velden onder een bakje: kleiner, met een haarlijn erboven. */
+.dienst-velden {
+  border-top: var(--rule-hairline);
+  padding-top: 16px;
+}
+
+.dienst-velden p {
+  font-size: var(--size-body-sm);
+  margin-bottom: 8px;
+}
+
+.dienst-velden p:last-child {
+  margin-bottom: 0;
 }
 
 .dienst-meta {
@@ -885,6 +921,14 @@ h2 + .contact-lijst {
   margin: 20px 0 0;
 }
 
+/* Een tweede regel onder het resultaat, zoals Wat bleef, hoort bij dezelfde
+   lijn en krijgt geen eigen streep. */
+.resultaat + .resultaat {
+  padding-top: 0;
+  border-top: 0;
+  margin-top: 6px;
+}
+
 /* Tijdlijn op Over mij: een verticale lijn met een vierkantje per stap.
    Vierkant, want de huisstijl heeft geen ronde vormen. De huidige stap is
    gevuld, de rest open. */
@@ -1143,6 +1187,31 @@ dd a:not([class]) {
 .portret-vak {
   border: 1px solid currentColor;
   max-width: min(420px, 100%);
+}
+
+/* Veelgestelde vragen op Contact, in het tekstblok onder de contactgegevens.
+   De kop is klein, zodat Contact de hoofdkop blijft. */
+.over-tekst .faq h2 {
+  font-size: var(--size-display-3);
+  font-weight: var(--weight-display-sub);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.faq-lijst {
+  margin: 0;
+}
+
+.faq-lijst dt {
+  font-weight: var(--weight-body-strong);
+}
+
+.faq-lijst dd {
+  margin: 4px 0 0;
+}
+
+.faq-item + .faq-item {
+  margin-top: 16px;
 }
 
 .terugblik {
