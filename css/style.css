@@ -587,20 +587,20 @@ a:hover {
   margin-bottom: 16px;
 }
 
-/* Twee kolommen naast elkaar: nummer, naam, toelichting, probleem, oplossing
-   en velden delen dezelfde rijen via subgrid. Is een blok in de ene kolom
+/* Twee kolommen naast elkaar: nummer, naam, toelichting, probleem en
+   oplossing delen dezelfde rijen via subgrid. Is een blok in de ene kolom
    langer, dan schuift de rij in beide kolommen mee en begint Oplossing links
    en rechts op dezelfde hoogte. Vanaf 640 px staan de twee bakjes naast
    elkaar. */
 @media (min-width: 640px) {
   .nummer-grid {
-    grid-template-rows: repeat(6, auto);
+    grid-template-rows: repeat(5, auto);
     row-gap: 0;
   }
 
   .nummer-grid > .dienst {
     display: grid;
-    grid-row: span 6;
+    grid-row: span 5;
     grid-template-rows: subgrid;
     align-content: start;
   }
@@ -629,18 +629,8 @@ a:hover {
   margin-bottom: 8px;
 }
 
-/* De velden onder een bakje: kleiner, met een haarlijn erboven. */
-.dienst-velden {
-  border-top: var(--rule-hairline);
-  padding-top: 16px;
-}
-
-.dienst-velden p {
-  font-size: var(--size-body-sm);
-  margin-bottom: 8px;
-}
-
-.dienst-velden p:last-child {
+/* Oplossing is het laatste blok van een bakje: geen ruimte eronder. */
+.dienst-blok:last-child p:last-child {
   margin-bottom: 0;
 }
 
