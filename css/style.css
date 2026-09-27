@@ -467,10 +467,11 @@ a:hover {
   margin-bottom: 16px;
 }
 
-/* Kernboodschap op Home: vier vaste regels, "naar" in violet. De kolom is een
-   container, zodat de letter meegroeit met de kolom en de langste regel,
-   "naar winnende aanbieding", altijd op één regel past. Zonder ondersteuning
-   voor containereenheden geldt de maat in vw en breekt een regel netjes af. */
+/* Kernboodschap op Home: "van uitvraag" staat vast, daaronder wisselen de drie
+   regels met "naar", in violet. De kolom is een container, zodat de letter
+   meegroeit met de kolom en de langste regel, "naar winnende aanbieding",
+   altijd op één regel past. Zonder ondersteuning voor containereenheden
+   geldt de maat in vw en breekt een regel netjes af. */
 .hero-kop {
   container-type: inline-size;
 }
@@ -483,6 +484,10 @@ a:hover {
 
 .kernboodschap > span {
   display: block;
+}
+
+.kernboodschap > .wissel {
+  display: grid;
 }
 
 /* Vaste regel onder de kernboodschap: wat en waar. */
@@ -519,9 +524,8 @@ a:hover {
   }
 }
 
-/* Wisselende kop. Sinds 27 september 2026 gebruikt geen pagina dit meer; de
-   code staat klaar voor als er weer een kop moet wisselen. Alle varianten
-   staan in dezelfde rastercel, dus de kop is
+/* Wisselende kop, op Home in de kernboodschap en op Contact in de vraag onder
+   de kop. Alle varianten staan in dezelfde rastercel, dus de kop is
    altijd zo hoog als de langste variant en er schuift niets als de tekst
    wisselt. Zonder JavaScript blijft de eerste variant staan. Met
    prefers-reduced-motion springt de tekst om zonder vervaging. js/main.js
@@ -683,10 +687,16 @@ a:hover {
   font-size: var(--size-display-2);
 }
 
-/* Zin tussen kop en contactlijst op Contact. */
-.over-tekst h1 + p {
+/* Zin tussen kop en contactlijst op Contact. Onder de wisselende vraag geeft
+   de pauzeknop de ruimte erboven al. */
+.over-tekst h1 + p,
+.over-tekst .wissel-pauze + p {
   max-width: min(52ch, 100%);
   margin: 16px 0 24px;
+}
+
+.over-tekst .wissel-pauze + p {
+  margin-top: 0;
 }
 
 .contact-lijst {
@@ -1188,6 +1198,13 @@ dd a:not([class]) {
 /* Het label staat boven de kaart, net als boven een kop. */
 .locatie-kaart figcaption {
   margin-bottom: 12px;
+}
+
+/* Wisselende vraag onder de kop op Contact. Kleiner dan de paginakop, zodat
+   Contact de hoofdkop blijft. */
+.over-tekst .contact-vraag {
+  font-size: clamp(26px, 3vw, 36px);
+  margin: 16px 0 8px;
 }
 
 .kaart-bron {
