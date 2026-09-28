@@ -1,8 +1,8 @@
 /* Huisstijl Rik van Berkel, versie 3.
    Licht draagt, blauw markeert, zwart sluit af. Papier is de basis, wit de
-   leesvlakken, en zwart alleen voor het slotblok met contact. Twee letters:
-   Archivo voor koppen, Instrument Sans voor al het andere. Rechte hoeken,
-   geen schaduw en geen verloop.
+   leesvlakken, kaart alleen de hero op Home, en zwart alleen voor het
+   slotblok met contact. Twee letters: Archivo voor koppen, Instrument Sans
+   voor al het andere. Rechte hoeken, geen schaduw en geen verloop.
 
    Vier afwijkingen van 5b, allemaal omdat 5b daar WCAG AA niet haalt.
    Ze staan gemarkeerd met "afwijking" en in docs/huisstijl-5b.md. */
@@ -35,6 +35,11 @@
   --zwart: #121214;
   --wit: #ffffff;
   --papier: #f4f1ea;
+  /* Kaart, alleen als achtergrond van de hero op Home, zodat die loskomt van
+     de witte sectie Diensten. Op verzoek van Rik, 28 september 2026. Even
+     licht als papier en koeler van tint. Zwart haalt erop 16,5 : 1, blauw
+     7,5 : 1 en violet-donker 6,0 : 1. */
+  --kaart: #eef1f5;
   --blauw: #1b4e85;
   --blauw-hover: #163f6c;
   --violet: #8b6f97;
@@ -457,20 +462,21 @@ a:hover {
   border-bottom-color: var(--buff);
 }
 
-/* Hero, de affichekop. */
+/* Hero, de affichekop, op kaart. De rest van de pagina blijft papier en wit. */
 
 .hero {
   padding: clamp(40px, 7vw, 86px) clamp(20px, 4vw, 56px) clamp(36px, 5vw, 60px);
+  background: var(--kaart);
 }
 
 .hero h1 {
   margin-bottom: 16px;
 }
 
-/* Kernboodschap op Home: "van uitvraag" staat vast, daaronder wisselen de drie
-   regels met "naar", in violet. De kolom is een container, zodat de letter
-   meegroeit met de kolom en de langste regel, "naar winnende aanbieding",
-   altijd op één regel past. Zonder ondersteuning voor containereenheden
+/* Kernboodschap op Home: twee wisselende regels, een met "van" en een met
+   "naar", met "naar" in violet-donker. De kolom is een container, zodat de
+   letter meegroeit met de kolom en de langste regel, "naar winnende
+   aanbieding", altijd op één regel past. Zonder ondersteuning voor containereenheden
    geldt de maat in vw en breekt een regel netjes af. */
 .hero-kop {
   container-type: inline-size;
@@ -528,10 +534,9 @@ a:hover {
    de kop. Alle varianten staan in dezelfde rastercel, dus de kop is
    altijd zo hoog als de langste variant en er schuift niets als de tekst
    wisselt. Zonder JavaScript blijft de eerste variant staan. Met
-   prefers-reduced-motion springt de tekst om zonder vervaging. js/main.js
-   loopt de varianten één keer langs en blijft op de laatste staan, binnen
-   vijf seconden: WCAG 2.2.2 vraagt geen pauzeknop voor beweging die korter
-   duurt. */
+   prefers-reduced-motion springt de tekst om zonder vervaging, en js/main.js
+   laat elk blok één keer rondlopen en op de eerste variant stoppen. Anders
+   draait de kop door, met een pauzeknop eronder. */
 .wissel {
   display: grid;
 }
