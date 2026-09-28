@@ -18,9 +18,10 @@
   // zijn, daarom staat onder elke kop een pauzeknop (.wissel-pauze).
   var INTERVAL = 2400;
 
-  // Met "beweging beperken" aan loopt de kop één keer rond en blijft hij weer
-  // op de eerste staan, zonder vervaging (zie de CSS). Dat duurt 7,2 seconden
-  // bij drie varianten, dus ook dan is er een pauzeknop.
+  // Met "beweging beperken" aan loopt elk blok één keer rond en blijft het
+  // weer op de eerste variant staan, zonder vervaging (zie de CSS). Dat duurt
+  // 7,2 seconden bij drie varianten, plus een eventuele vertraging, dus ook
+  // dan is er een pauzeknop.
   var minderBeweging = window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -30,42 +31,81 @@
     return kop ? kop.parentElement.querySelector(":scope > .wissel-pauze") : null;
   }
 
-  function draai(wissel) {
-    var items = wissel.querySelectorAll(".wissel-item");
-    if (items.length < 2) {
+  // Een kop kan meer dan één wisselblok hebben, zoals de kernboodschap op
+  // Home: een blok met "van" en een blok met "naar". Die delen één pauzeknop
+  // en vormen samen een groep. Met data-wissel-vertraging, in milliseconden,
+  // begint een blok later. Het naar-blok wacht 1200 ms, een half interval,
+  // zodat van en naar nooit tegelijk verspringen.
+  function draaiGroep(wissels, knop) {
+    var blokken = [];
+    wissels.forEach(function (wissel) {
+      var items = wissel.querySelectorAll(".wissel-item");
+      if (items.length > 1) {
+        blokken.push({
+          items: items,
+          vertraging: parseInt(wissel.getAttribute("data-wissel-vertraging"), 10) || 0,
+          i: 0,
+          wachter: null,
+          timer: null,
+          klaar: false
+        });
+      }
+    });
+    if (!blokken.length) {
       return;
     }
-    var knop = knopBij(wissel);
-    var i = 0;
-    var timer = null;
+    var loopt = false;
 
-    function stop() {
-      window.clearInterval(timer);
-      timer = null;
+    function stopBlok(blok) {
+      window.clearTimeout(blok.wachter);
+      window.clearInterval(blok.timer);
+      blok.wachter = null;
+      blok.timer = null;
     }
 
-    function volgende() {
-      items[i].classList.remove("is-actief");
-      i = (i + 1) % items.length;
-      items[i].classList.add("is-actief");
-      if (minderBeweging && i === 0) {
-        stop();
-        if (knop) {
+    function volgende(blok) {
+      blok.items[blok.i].classList.remove("is-actief");
+      blok.i = (blok.i + 1) % blok.items.length;
+      blok.items[blok.i].classList.add("is-actief");
+      if (minderBeweging && blok.i === 0) {
+        stopBlok(blok);
+        blok.klaar = true;
+        // De knop verdwijnt pas als alle blokken in de kop klaar zijn.
+        var allesKlaar = blokken.every(function (b) { return b.klaar; });
+        if (allesKlaar && knop) {
           knop.hidden = true;
         }
       }
     }
 
-    function start() {
-      if (!timer) {
-        timer = window.setInterval(volgende, INTERVAL);
+    // Na starten of hervatten wacht elk blok zijn vertraging af en stapt het
+    // daarna elke 2,4 seconden. Zo blijft de verschuiving ook na een pauze.
+    function startBlok(blok) {
+      if (blok.klaar || blok.wachter || blok.timer) {
+        return;
       }
+      blok.wachter = window.setTimeout(function () {
+        blok.wachter = null;
+        blok.timer = window.setInterval(function () {
+          volgende(blok);
+        }, INTERVAL);
+      }, blok.vertraging);
+    }
+
+    function start() {
+      blokken.forEach(startBlok);
+      loopt = true;
+    }
+
+    function stop() {
+      blokken.forEach(stopBlok);
+      loopt = false;
     }
 
     if (knop) {
       knop.hidden = false;
       knop.addEventListener("click", function () {
-        if (timer) {
+        if (loopt) {
           stop();
           knop.textContent = "Afspelen";
         } else {
@@ -77,18 +117,38 @@
     start();
   }
 
+  // Blokken met dezelfde pauzeknop horen bij één groep.
+  var groepen = [];
   document.querySelectorAll("[data-wissel]").forEach(function (wissel) {
+    var knop = knopBij(wissel);
+    var groep = null;
+    for (var g = 0; g < groepen.length; g++) {
+      if (knop && groepen[g].knop === knop) {
+        groep = groepen[g];
+      }
+    }
+    if (!groep) {
+      groep = { knop: knop, wissels: [] };
+      groepen.push(groep);
+    }
+    groep.wissels.push(wissel);
+  });
+
+  groepen.forEach(function (groep) {
     // Een kop onderaan de pagina begint pas als hij in beeld komt.
-    if (wissel.hasAttribute("data-wissel-in-beeld") && "IntersectionObserver" in window) {
+    var inBeeld = groep.wissels.filter(function (wissel) {
+      return wissel.hasAttribute("data-wissel-in-beeld");
+    })[0];
+    if (inBeeld && "IntersectionObserver" in window) {
       var kijker = new IntersectionObserver(function (items) {
         if (items[0].isIntersecting) {
           kijker.disconnect();
-          draai(wissel);
+          draaiGroep(groep.wissels, groep.knop);
         }
       }, { threshold: 0.6 });
-      kijker.observe(wissel);
+      kijker.observe(inBeeld);
     } else {
-      draai(wissel);
+      draaiGroep(groep.wissels, groep.knop);
     }
   });
 })();
