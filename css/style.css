@@ -1,11 +1,11 @@
-/* Huisstijl Rik van Berkel, versie 3.
-   Licht draagt, blauw markeert, zwart sluit af. Papier is de basis, wit de
-   leesvlakken, kaart alleen de hero op Home, en zwart alleen voor het
-   slotblok met contact. Twee letters: Archivo voor koppen, Instrument Sans
-   voor al het andere. Rechte hoeken, geen schaduw en geen verloop.
-
-   Vier afwijkingen van 5b, allemaal omdat 5b daar WCAG AA niet haalt.
-   Ze staan gemarkeerd met "afwijking" en in docs/huisstijl-5b.md. */
+/* Huisstijl Rik van Berkel, versie 6, 29 september 2026. De bron is de note
+   10.1.4 - visual-identity-my-brand.md in de vault van Rik; deze CSS volgt
+   die note. Licht draagt, blauw markeert, zwart sluit af. Wit is de basis en
+   draagt het leeswerk, lichtgrijs alleen de hero op Home, zwart de kopbalk
+   en het slotblok met contact. Naast de ondergrond twee kleuren: zwart en
+   blauw. Twee letters: Archivo voor koppen, Instrument Sans voor al het
+   andere. Rechte hoeken, geen schaduw, geen verloop en geen transparantie,
+   op de haarlijn na. */
 
 @font-face {
   font-family: Archivo;
@@ -34,19 +34,11 @@
 :root {
   --zwart: #121214;
   --wit: #ffffff;
-  --papier: #f4f1ea;
-  /* Kaart, alleen als achtergrond van de hero op Home, zodat die loskomt van
-     de witte sectie Diensten. Op verzoek van Rik, 28 september 2026. Even
-     licht als papier en koeler van tint. Zwart haalt erop 16,5 : 1, blauw
-     7,5 : 1 en violet-donker 6,0 : 1. */
-  --kaart: #eef1f5;
+  /* Lichtgrijs, op de site alleen als achtergrond van de hero op Home. Zwart
+     haalt erop 16,52 : 1 en blauw 7,49 : 1. */
+  --lichtgrijs: #eef1f5;
   --blauw: #1b4e85;
   --blauw-hover: #163f6c;
-  --violet: #8b6f97;
-  /* Violet op licht. Het gewone violet haalt op papier geen 4,5 : 1, dit wel
-     (ongeveer 6 : 1). Alleen voor het accentwoord in een kop. */
-  --violet-donker: #6b5277;
-  --buff: #d3a24c;
 
   --font-display: Archivo, "Helvetica Neue", system-ui, sans-serif;
   --font-body: "Instrument Sans", system-ui, -apple-system, sans-serif;
@@ -100,7 +92,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--papier);
+  background: var(--wit);
   color: var(--zwart);
   font-family: var(--font-body);
   font-weight: var(--weight-body);
@@ -176,8 +168,8 @@ a:hover {
   color: var(--zwart);
 }
 
-/* Focus in blauw. Buff haalt op licht 2,32 : 1 tegen een norm van 3 : 1, dus
-   buff alleen in het zwarte slotblok. */
+/* Focus: een rand van 2 px, 3 px van het element. Blauw op licht, wit op
+   zwart, want blauw op zwart haalt 2,21 : 1. */
 :focus-visible {
   outline: 2px solid var(--blauw);
   outline-offset: 3px;
@@ -213,8 +205,8 @@ a:hover {
 }
 
 /* Label. Klein, vet en kapitaal in de tekstletter, als zwart blokje met
-   witte letters. Die blokjes geven de lichte pagina houvast. In het zwarte
-   slotblok is het blokje buff met zwarte letters (8,06 : 1). In de
+   witte letters. Die blokjes geven de lichte pagina houvast. Op zwart is het
+   blokje wit met zwarte letters (18,71 : 1), een voorstel uit 10.1.4. In de
    contactlijst staat het label zonder blokje, anders wordt de lijst druk. */
 .label {
   display: inline-block;
@@ -236,8 +228,10 @@ a:hover {
   color: inherit;
 }
 
+/* Accentwoord in een kop: blauw, hooguit één per kop. In de kernboodschap
+   zijn dat "van" en "naar". */
 .accent {
-  color: var(--violet-donker);
+  color: var(--blauw);
 }
 
 /* Knop. Blauw is uitsluitend de actie, nooit decoratie. */
@@ -285,8 +279,8 @@ a:hover {
   gap: 20px 24px;
 }
 
-/* Secties. Papier is de standaard, wit voor de leesvlakken, zwart alleen voor
-   het slotblok met contact. */
+/* Secties. Wit is de standaard en draagt het leeswerk, zwart alleen voor het
+   slotblok met contact. */
 
 .sectie {
   padding: var(--pad-section);
@@ -296,9 +290,9 @@ a:hover {
   background: var(--wit);
 }
 
-/* Het zwarte slotblok. Hier gelden de oude regels van 5b: witte tekst, buff
-   voor labels en focus, gewoon violet voor het accentwoord (grote letters,
-   4,29 : 1 tegen een norm van 3 : 1). */
+/* Het zwarte slotblok. Tekst, links, focusrand en labels zijn wit, en een
+   accentwoord krijgt geen kleur: blauw op zwart haalt 2,21 : 1. Hover op een
+   link is een witte onderstreping, een voorstel uit 10.1.4. */
 .sectie-zwart {
   background: var(--zwart);
   color: var(--wit);
@@ -308,21 +302,24 @@ a:hover {
   color: var(--wit);
 }
 
-.sectie-zwart a:hover {
-  color: var(--buff);
+.sectie-zwart a:not(.knop):hover {
+  color: var(--wit);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
 }
 
 .sectie-zwart :focus-visible {
-  outline-color: var(--buff);
+  outline-color: var(--wit);
 }
 
-.sectie-zwart .label-buff {
-  background: var(--buff);
+.sectie-zwart .label-wit {
+  background: var(--wit);
   color: var(--zwart);
 }
 
 .sectie-zwart .accent {
-  color: var(--violet);
+  color: inherit;
 }
 
 .sectie-zwart .regel-haar {
@@ -385,7 +382,7 @@ a:hover {
 }
 
 .site-header :focus-visible {
-  outline-color: var(--buff);
+  outline-color: var(--wit);
 }
 
 .header-inner {
@@ -414,8 +411,13 @@ a:hover {
   padding: 3px 0;
 }
 
+/* Hover op het woordmerk: een witte onderstreping, zoals een link. Een
+   voorstel uit 10.1.4. */
 .logo:hover {
-  color: var(--buff);
+  color: var(--wit);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
 }
 
 .header-rechts {
@@ -451,22 +453,23 @@ a:hover {
   font-size: var(--size-body);
   color: var(--wit);
   padding: 6px 0;
-  border-bottom: 2px solid transparent;
 }
 
-.site-nav a:hover {
-  color: var(--buff);
-}
-
+/* Actieve pagina en hover: een witte onderstreping van 1 px op 0,2em, een
+   voorstel uit 10.1.4. */
+.site-nav a:hover,
 .site-nav a[aria-current="page"] {
-  border-bottom-color: var(--buff);
+  color: var(--wit);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
 }
 
-/* Hero, de affichekop, op kaart. De rest van de pagina blijft papier en wit. */
+/* Hero, de affichekop, op lichtgrijs. De rest van de pagina is wit. */
 
 .hero {
   padding: clamp(40px, 7vw, 86px) clamp(20px, 4vw, 56px) clamp(36px, 5vw, 60px);
-  background: var(--kaart);
+  background: var(--lichtgrijs);
 }
 
 .hero h1 {
@@ -474,8 +477,9 @@ a:hover {
 }
 
 /* Kernboodschap op Home: twee wisselende regels, een met "van" en een met
-   "naar", met "naar" in violet-donker. De kolom is een container, zodat de
-   letter meegroeit met de kolom en de langste regel, "naar winnende
+   "naar", met "van" en "naar" in blauw. Ze wisselen samen, zodat een van-deel
+   en zijn naar-deel altijd samen in beeld staan. De kolom is een container,
+   zodat de letter meegroeit met de kolom en de langste regel, "naar winnende
    aanbieding", altijd op één regel past. Zonder ondersteuning voor containereenheden
    geldt de maat in vw en breekt een regel netjes af. */
 .hero-kop {
@@ -799,7 +803,7 @@ h2 + .contact-lijst {
   text-decoration-thickness: 1px;
 }
 
-/* Voet, op papier, met een regel erboven. */
+/* Voet, op wit, met een regel erboven. */
 
 .site-footer {
   color: var(--zwart);
@@ -902,17 +906,21 @@ h2 + .contact-lijst {
   }
 }
 
-/* De vierde tegel op Cases is een uitnodiging: zwart vlak, witte tekst,
-   buff label, blauwe knop. */
+/* De vierde tegel op Cases is een uitnodiging: zwart vlak, witte tekst, wit
+   label en focus in wit, blauwe knop. */
 .case-open {
   background: var(--zwart);
   color: var(--wit);
   padding: 16px 20px 24px;
 }
 
-.case-open .label-buff {
-  background: var(--buff);
+.case-open .label-wit {
+  background: var(--wit);
   color: var(--zwart);
+}
+
+.case-open :focus-visible {
+  outline-color: var(--wit);
 }
 
 .case-open p:last-child {
@@ -1143,10 +1151,10 @@ dd a:not([class]) {
   margin-top: 0;
 }
 
-/* Kaart op Contact: wijkkaart van Rotterdam met Schiebroek uitgelicht. De
-   omgeving in papier, de wijken van Rotterdam in zwart op lage dekking,
-   Schiebroek in vol zwart. De witte naden tussen de vlakken zijn de grenzen.
-   Inline SVG, geen externe kaartdienst. */
+/* Kaart op Contact: wijkkaart van Rotterdam met Schiebroek uitgelicht. Water
+   en omgeving in wit, de wijken van Rotterdam in lichtgrijs met een haarlijn
+   als grens, Schiebroek in zwart. Geen transparantie, op de haarlijn na,
+   volgens 10.1.4. Inline SVG, geen externe kaartdienst. */
 .locatie-kaart {
   margin: 0;
   max-width: min(480px, 100%);
@@ -1163,12 +1171,14 @@ dd a:not([class]) {
 }
 
 .kaart-omgeving {
-  fill: var(--papier);
+  fill: var(--wit);
 }
 
 .kaart-wijk {
-  fill: var(--zwart);
-  fill-opacity: 0.18;
+  fill: var(--lichtgrijs);
+  stroke: rgba(18, 18, 20, 0.22);
+  stroke-width: 1px;
+  vector-effect: non-scaling-stroke;
 }
 
 .kaart-uitgelicht {

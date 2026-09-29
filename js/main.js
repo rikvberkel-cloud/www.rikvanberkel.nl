@@ -21,8 +21,7 @@
 
   // Met "beweging beperken" aan loopt elk blok één keer rond en blijft het
   // weer op de eerste variant staan, zonder vervaging (zie de CSS). Op Home
-  // duurt dat 6 seconden plus de vertraging van het naar-blok, dus ook dan is
-  // er een pauzeknop.
+  // duurt dat 6 seconden, dus ook dan is er een pauzeknop.
   var minderBeweging = window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -35,9 +34,9 @@
   // Een kop kan meer dan één wisselblok hebben, zoals de kernboodschap op
   // Home: een blok met "van" en een blok met "naar". Die delen één pauzeknop
   // en vormen samen een groep. Met data-wissel-vertraging, in milliseconden,
-  // begint een blok later. Op Home stappen beide blokken elke 3000 ms en
-  // wacht het naar-blok 1500 ms, een half interval, zodat van en naar nooit
-  // tegelijk verspringen.
+  // begint een blok later. Op Home stappen beide blokken samen elke 3000 ms,
+  // zonder vertraging, zodat een van-deel en zijn naar-deel altijd samen in
+  // beeld staan.
   function draaiGroep(wissels, knop) {
     var blokken = [];
     wissels.forEach(function (wissel) {
