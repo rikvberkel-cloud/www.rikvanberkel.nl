@@ -257,6 +257,26 @@ a:hover {
   color: var(--wit);
 }
 
+/* Knop op zwart: wit vlak met zwarte letters, 18,71 : 1, want blauw op zwart
+   haalt 2,21 : 1. Keuze van Rik, 29 september 2026. Hover is een zwarte
+   onderstreping, zoals de hover op zwart een onderstreping is. */
+.site-header .knop,
+.sectie-zwart .knop,
+.case-open .knop {
+  background: var(--wit);
+  color: var(--zwart);
+}
+
+.site-header .knop:hover,
+.sectie-zwart .knop:hover,
+.case-open .knop:hover {
+  background: var(--wit);
+  color: var(--zwart);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
 .knop-groot {
   font-size: 17px;
   padding: 18px 28px;
@@ -907,7 +927,7 @@ h2 + .contact-lijst {
 }
 
 /* De vierde tegel op Cases is een uitnodiging: zwart vlak, witte tekst, wit
-   label en focus in wit, blauwe knop. */
+   label, focus in wit en een witte knop. */
 .case-open {
   background: var(--zwart);
   color: var(--wit);
