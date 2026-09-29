@@ -13,15 +13,16 @@
 
   // Wisselende koppen. Elke [data-wissel] bevat twee of meer .wissel-item.
   // De eerste staat in de HTML al op is-actief, dus zonder JavaScript blijft
-  // die staan. De koppen draaien door, elke 2,4 seconden een stap. Beweging
-  // die langer duurt dan vijf seconden moet volgens WCAG 2.2.2 te stoppen
-  // zijn, daarom staat onder elke kop een pauzeknop (.wissel-pauze).
+  // die staan. De koppen draaien door, standaard elke 2,4 seconden een stap.
+  // Met data-wissel-interval, in milliseconden, krijgt een blok een eigen
+  // tempo. Beweging die langer duurt dan vijf seconden moet volgens WCAG 2.2.2
+  // te stoppen zijn, daarom staat onder elke kop een pauzeknop (.wissel-pauze).
   var INTERVAL = 2400;
 
   // Met "beweging beperken" aan loopt elk blok één keer rond en blijft het
-  // weer op de eerste variant staan, zonder vervaging (zie de CSS). Dat duurt
-  // 7,2 seconden bij drie varianten, plus een eventuele vertraging, dus ook
-  // dan is er een pauzeknop.
+  // weer op de eerste variant staan, zonder vervaging (zie de CSS). Op Home
+  // duurt dat 6 seconden plus de vertraging van het naar-blok, dus ook dan is
+  // er een pauzeknop.
   var minderBeweging = window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -34,8 +35,9 @@
   // Een kop kan meer dan één wisselblok hebben, zoals de kernboodschap op
   // Home: een blok met "van" en een blok met "naar". Die delen één pauzeknop
   // en vormen samen een groep. Met data-wissel-vertraging, in milliseconden,
-  // begint een blok later. Het naar-blok wacht 1200 ms, een half interval,
-  // zodat van en naar nooit tegelijk verspringen.
+  // begint een blok later. Op Home stappen beide blokken elke 3000 ms en
+  // wacht het naar-blok 1500 ms, een half interval, zodat van en naar nooit
+  // tegelijk verspringen.
   function draaiGroep(wissels, knop) {
     var blokken = [];
     wissels.forEach(function (wissel) {
@@ -43,6 +45,7 @@
       if (items.length > 1) {
         blokken.push({
           items: items,
+          interval: parseInt(wissel.getAttribute("data-wissel-interval"), 10) || INTERVAL,
           vertraging: parseInt(wissel.getAttribute("data-wissel-vertraging"), 10) || 0,
           i: 0,
           wachter: null,
@@ -79,7 +82,7 @@
     }
 
     // Na starten of hervatten wacht elk blok zijn vertraging af en stapt het
-    // daarna elke 2,4 seconden. Zo blijft de verschuiving ook na een pauze.
+    // daarna elk interval. Zo blijft de verschuiving ook na een pauze.
     function startBlok(blok) {
       if (blok.klaar || blok.wachter || blok.timer) {
         return;
@@ -88,7 +91,7 @@
         blok.wachter = null;
         blok.timer = window.setInterval(function () {
           volgende(blok);
-        }, INTERVAL);
+        }, blok.interval);
       }, blok.vertraging);
     }
 
