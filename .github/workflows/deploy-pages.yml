@@ -31,6 +31,9 @@ jobs:
       - name: Controleer dat elke lokale verwijzing bestaat
         run: ./scripts/check-links.sh _site
 
+      - name: Controleer dat er geen adres op de site staat
+        run: ./scripts/check-adres.sh _site
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
