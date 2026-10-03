@@ -31,6 +31,24 @@
   font-display: swap;
 }
 
+/* Alleen voor de geopende tegel Zijproject op Cases, in de huisstijl van
+   all-electric. De browser haalt deze letters pas op als de tegel open is. */
+@font-face {
+  font-family: Archivo;
+  src: url("../fonts/archivo-800.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../fonts/space-grotesk-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --zwart: #121214;
   --wit: #ffffff;
@@ -972,6 +990,142 @@ h2 + .contact-lijst {
   padding-top: 0;
   border-top: 0;
   margin-top: 6px;
+}
+
+/* Zijproject onder de cases. Dicht: een kader in de eigen huisstijl met een
+   tekstknop. Open: het licht gaat uit en de tegel volgt de huisstijl van
+   all-electric, met de kleuren, letters, gloed en scanlines van
+   late2theparty.nl. Een uitzondering op Niet gebruiken, keuze van Rik. */
+.geheim {
+  position: relative;
+  margin-top: clamp(32px, 4vw, 56px);
+  border: 2px solid currentColor;
+}
+
+.geheim summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  padding: 14px 20px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.geheim summary::-webkit-details-marker {
+  display: none;
+}
+
+.geheim-knop {
+  color: var(--blauw);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color var(--transition);
+}
+
+.geheim summary:hover .geheim-knop {
+  color: var(--zwart);
+}
+
+.geheim-open,
+.geheim[open] .geheim-dicht {
+  display: none;
+}
+
+.geheim[open] .geheim-open {
+  display: inline;
+}
+
+.geheim[open] {
+  --neon-geel: #e1ff00;
+  --neon-cyaan: #00e5ff;
+  background: #08080a;
+  border-color: #08080a;
+  color: #f2f2f3;
+}
+
+/* Scanlines, zoals op late2theparty.nl. */
+.geheim[open]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.03) 0, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 3px);
+}
+
+.geheim[open] .label {
+  background: var(--neon-geel);
+  color: #08080a;
+}
+
+.geheim[open] .geheim-knop {
+  color: var(--neon-cyaan);
+}
+
+.geheim[open] summary:hover .geheim-knop {
+  color: var(--neon-geel);
+}
+
+.geheim[open] :focus-visible {
+  outline-color: var(--neon-geel);
+}
+
+.geheim-inhoud {
+  padding: 12px 20px 28px;
+  font-family: "Space Grotesk", var(--font-body);
+  font-size: clamp(17px, 1.4vw, 19px);
+}
+
+.geheim-inhoud p {
+  margin: 12px 0 0;
+}
+
+.geheim .geheim-naam {
+  margin: 0;
+  font-family: Archivo, var(--font-display);
+  font-weight: 800;
+  font-size: clamp(32px, 9vw, 88px);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--neon-geel);
+  text-shadow: 0 0 18px rgba(225, 255, 0, 0.45), 0 0 44px rgba(225, 255, 0, 0.2);
+  animation: neon-aan 900ms steps(1, end);
+}
+
+.geheim-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.geheim-links a {
+  color: var(--neon-cyaan);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.geheim-links a:hover {
+  color: var(--neon-geel);
+}
+
+/* Het neon springt aan zoals een buis die opwarmt. */
+@keyframes neon-aan {
+  0% { opacity: 0.2; }
+  15% { opacity: 1; }
+  25% { opacity: 0.35; }
+  40% { opacity: 1; }
+  55% { opacity: 0.6; }
+  70% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .geheim .geheim-naam {
+    animation: none;
+  }
 }
 
 /* Tijdlijn op Over mij: een verticale lijn met een vierkantje per stap.
