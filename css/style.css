@@ -1247,30 +1247,6 @@ dd a:not([class]) {
   max-width: min(420px, 100%);
 }
 
-/* Schilderij van Kandinsky op Over mij, onder Waar ik in geloof. Zelfde
-   kolommen als het blok erboven: het werk onder de foto, even breed, met een
-   zwarte lijn van 1 px; het onderschrift cursief in de tekstkolom, op de
-   hoogte van het midden van het werk. */
-.kunstwerk {
-  margin-top: clamp(32px, 4vw, 48px);
-}
-
-.kunstwerk picture {
-  display: block;
-  max-width: min(420px, 100%);
-}
-
-.kunstwerk img {
-  width: 100%;
-  border: 1px solid var(--zwart);
-}
-
-.kunstwerk figcaption {
-  font-style: italic;
-  max-width: min(52ch, 100%);
-  align-self: center;
-}
-
 /* Kader onder de twee bakjes op Home: wat je overhoudt na een opdracht.
    Over de volle breedte, de tekst op leesmaat. */
 .kader {
