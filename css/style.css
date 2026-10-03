@@ -640,20 +640,20 @@ a:hover {
   margin-bottom: 16px;
 }
 
-/* Twee kolommen naast elkaar: nummer, naam, toelichting en de drie alinea's
-   over behoefte, belofte en bewijs delen dezelfde rijen via subgrid. Is een
+/* Twee kolommen naast elkaar: nummer, naam en de drie alinea's over
+   behoefte, belofte en bewijs delen dezelfde rijen via subgrid. Is een
    alinea in de ene kolom langer, dan schuift de rij in beide kolommen mee en
    beginnen de volgende alinea's links en rechts op dezelfde hoogte. Vanaf
    640 px staan de twee bakjes naast elkaar. */
 @media (min-width: 640px) {
   .nummer-grid {
-    grid-template-rows: repeat(6, auto);
+    grid-template-rows: repeat(5, auto);
     row-gap: 0;
   }
 
   .nummer-grid > .dienst {
     display: grid;
-    grid-row: span 6;
+    grid-row: span 5;
     grid-template-rows: subgrid;
     align-content: start;
   }
@@ -671,10 +671,6 @@ a:hover {
 .diensten-intro {
   max-width: min(62ch, 100%);
   margin-bottom: 24px;
-}
-
-.dienst-toelichting {
-  font-weight: var(--weight-body-strong);
 }
 
 /* De alinea over bewijs sluit een bakje af: geen ruimte eronder. */
@@ -1245,23 +1241,6 @@ dd a:not([class]) {
 .portret-vak {
   border: 1px solid currentColor;
   max-width: min(420px, 100%);
-}
-
-/* Kader onder de twee bakjes op Home: wat je overhoudt na een opdracht.
-   Over de volle breedte, de tekst op leesmaat. */
-.kader {
-  border: 2px solid currentColor;
-  padding: clamp(20px, 3vw, 28px);
-  margin-top: clamp(40px, 5vw, 64px);
-}
-
-.kader h3 {
-  margin-bottom: 12px;
-}
-
-.kader p {
-  max-width: min(62ch, 100%);
-  margin-bottom: 0;
 }
 
 .tijdlijn .is-huidig::before {
