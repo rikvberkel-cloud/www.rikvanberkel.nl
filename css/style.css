@@ -1037,12 +1037,19 @@ h2 + .contact-lijst {
   display: inline;
 }
 
-.geheim[open] {
+/* De kleuren van all-electric, alleen voor de tegel en voor Licht uit. */
+:root {
+  --neon-zwart: #08080a;
+  --neon-tekst: #f2f2f3;
+  --neon-lijn: #26262c;
   --neon-geel: #e1ff00;
   --neon-cyaan: #00e5ff;
-  background: #08080a;
-  border-color: #08080a;
-  color: #f2f2f3;
+}
+
+.geheim[open] {
+  background: var(--neon-zwart);
+  border-color: var(--neon-zwart);
+  color: var(--neon-tekst);
 }
 
 /* Scanlines, zoals op late2theparty.nl. */
@@ -1056,7 +1063,7 @@ h2 + .contact-lijst {
 
 .geheim[open] .label {
   background: var(--neon-geel);
-  color: #08080a;
+  color: var(--neon-zwart);
 }
 
 .geheim[open] .geheim-knop {
@@ -1126,6 +1133,72 @@ h2 + .contact-lijst {
   .geheim .geheim-naam {
     animation: none;
   }
+}
+
+/* Licht uit: met de tegel open gaat de hele pagina op zwart, in één klap,
+   zoals een lichtknop. Tekst, lijnen en kaders worden lichtgrijs, labels,
+   knoppen en de focusrand neongeel, links cyaan. Blauw doet niet mee, want
+   blauw op zwart haalt 2,21 : 1. Licht aan zet alles terug. Een browser
+   zonder :has() houdt alleen de tegel donker. */
+:root:has(.geheim[open]) {
+  color-scheme: dark;
+}
+
+body:has(.geheim[open]),
+body:has(.geheim[open]) .site-header,
+body:has(.geheim[open]) .sectie-wit {
+  background: var(--neon-zwart);
+  color: var(--neon-tekst);
+}
+
+body:has(.geheim[open]) .site-header {
+  border-bottom: 1px solid var(--neon-lijn);
+}
+
+body:has(.geheim[open]) .logo,
+body:has(.geheim[open]) .site-nav a,
+body:has(.geheim[open]) .site-footer {
+  color: var(--neon-tekst);
+}
+
+body:has(.geheim[open]) .site-footer {
+  border-top-color: var(--neon-lijn);
+}
+
+body:has(.geheim[open]) .case {
+  border-top-color: var(--neon-tekst);
+}
+
+body:has(.geheim[open]) .case-open {
+  background: none;
+  color: var(--neon-tekst);
+  border: 2px solid var(--neon-tekst);
+  border-top-width: 4px;
+}
+
+body:has(.geheim[open]) .geheim {
+  border-color: var(--neon-tekst);
+}
+
+body:has(.geheim[open]) .label,
+body:has(.geheim[open]) .knop,
+body:has(.geheim[open]) .skip-link {
+  background: var(--neon-geel);
+  color: var(--neon-zwart);
+}
+
+body:has(.geheim[open]) .case a:not(.knop),
+body:has(.geheim[open]) .site-footer a {
+  color: var(--neon-cyaan);
+}
+
+body:has(.geheim[open]) .case a:not(.knop):hover,
+body:has(.geheim[open]) .site-footer a:hover {
+  color: var(--neon-geel);
+}
+
+body:has(.geheim[open]) :focus-visible {
+  outline-color: var(--neon-geel);
 }
 
 /* Tijdlijn op Over mij: een verticale lijn met een vierkantje per stap.
