@@ -400,10 +400,11 @@ a:hover {
   flex: 0 0 auto;
 }
 
-/* Staffel uit Compositie, op de plek van de zware lijn onder de intro van de
-   diensten: drie zware lijnen van 4 px met 10 px ertussen. Lengtes 62, 86 en
-   18 procent, de tweede 14 en de derde 24 procent ingesprongen. Hooguit één
-   per pagina. */
+/* Staffel uit Compositie, bovenaan de sectie met de diensten, op de grens
+   met de hero: drie zware lijnen van 4 px met 10 px ertussen. Lengtes 62, 86
+   en 18 procent, de tweede 14 en de derde 24 procent ingesprongen. Hooguit
+   één per pagina. Onder de intro staat geen lijn meer, want daar markeren
+   de open kaders rond 01 en 02 het begin van de diensten. */
 .staffel {
   display: grid;
   row-gap: 10px;
@@ -755,10 +756,10 @@ a:hover {
   margin-bottom: 20px;
 }
 
-/* De bindende zin staat tussen de kop en de zware regel, boven de bakjes. */
+/* De bindende zin staat tussen de kop en de bakjes. */
 .diensten-intro {
   max-width: min(62ch, 100%);
-  margin-bottom: 24px;
+  margin-bottom: var(--gap-section);
 }
 
 /* De alinea over bewijs sluit een bakje af: geen ruimte eronder. */
