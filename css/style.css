@@ -400,9 +400,33 @@ a:hover {
   flex: 0 0 auto;
 }
 
-.regel-zwaar {
-  border-top: var(--rule-heavy);
+/* Staffel uit Compositie, op de plek van de zware lijn onder de intro van de
+   diensten: drie zware lijnen van 4 px met 10 px ertussen. Lengtes 62, 86 en
+   18 procent, de tweede 14 en de derde 24 procent ingesprongen. Hooguit één
+   per pagina. */
+.staffel {
+  display: grid;
+  row-gap: 10px;
   margin-bottom: var(--gap-section);
+}
+
+.staffel > span {
+  height: 4px;
+  background: var(--zwart);
+}
+
+.staffel > span:nth-child(1) {
+  width: 62%;
+}
+
+.staffel > span:nth-child(2) {
+  width: 86%;
+  margin-left: 14%;
+}
+
+.staffel > span:nth-child(3) {
+  width: 18%;
+  margin-left: 24%;
 }
 
 .regel-haar {
@@ -538,6 +562,31 @@ a:hover {
   display: grid;
 }
 
+/* Wig uit Compositie, achter het van-deel: een smal driehoekig vlak, breed
+   bij de tekst en scherp op de rechterkant van de langste naar-regel. De kop
+   is zo breed als die regel, dus de wig vult de rest van de van-regel. Hoogte
+   0,18em, 0,3em van de tekst, midden op de x-hoogte van Archivo (0,53em).
+   Elke variant heeft een eigen wig. Zo wisselt hij met de tekst mee en
+   beweegt hij zelf niet. */
+.hero h1.kernboodschap {
+  width: fit-content;
+}
+
+.kernboodschap .met-wig {
+  display: flex;
+  align-items: baseline;
+}
+
+.wig {
+  flex: 1 1 0;
+  position: relative;
+  top: -0.175em;
+  height: 0.18em;
+  margin-left: 0.3em;
+  background: var(--zwart);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
 /* Vaste regel onder de kernboodschap: wat en waar. */
 .hero-sub {
   max-width: 40ch;
@@ -648,14 +697,35 @@ a:hover {
   }
 }
 
+/* Open kader uit Compositie: een kader van 2 px zonder onderkant rond het
+   nummer. Het kader houdt rondom 0,14em vrij tot de inkt van de cijfers en
+   stopt halverwege hun hoogte van 0,70em, dus het nummer zakt door de open
+   kant. De padding rekent met de loopruimte van Archivo: de inkt begint
+   0,04em na de linkerkant, eindigt zo'n 0,01em voor de rechterkant en
+   0,045em onder de bovenkant van de regel. Het kader is een pseudo-element,
+   zodat de cijfers gewoon in de tekst blijven staan. */
 .nummer {
+  position: relative;
   display: block;
+  width: fit-content;
+  padding: calc(2px + 0.095em) calc(2px + 0.13em) 0 calc(2px + 0.1em);
   font-family: var(--font-display);
   font-weight: var(--weight-display);
   font-size: var(--size-number);
   line-height: 0.85;
   letter-spacing: -0.03em;
   margin-bottom: 16px;
+}
+
+.nummer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(2px + 0.49em);
+  border: 2px solid currentColor;
+  border-bottom: 0;
 }
 
 /* Twee kolommen naast elkaar: nummer, naam en de drie alinea's over
@@ -804,23 +874,32 @@ h2 + .contact-lijst {
   margin-top: 32px;
 }
 
-/* Zonder pauzeknop onder de kop kreeg de tekst te weinig lucht. */
-.contact-kop {
-  max-width: min(30ch, 100%);
-  margin: 20px 0 clamp(20px, 3vw, 32px);
-}
-
-.contact-grid {
+/* Zwaartepunt uit Compositie, in het slotblok op Home: het zware cluster met
+   kop, tekst, links en knop linksonder, het label als enige lichte element
+   rechtsboven, de rest leeg. */
+.zwaartepunt {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-  gap: clamp(20px, 3vw, 40px);
-  /* Tekst, links en knop beginnen op dezelfde hoogte. Met "end" zakten de
-     links en de knop weg naast de langere tekst. */
-  align-items: start;
+  row-gap: clamp(32px, 6vw, 88px);
 }
 
-.contact-grid > p {
-  margin: 0;
+.zwaartepunt > .label {
+  justify-self: end;
+}
+
+.zwaar {
+  max-width: min(34em, 100%);
+}
+
+.contact-kop {
+  margin: 0 0 clamp(16px, 2vw, 24px);
+}
+
+.zwaar > p {
+  margin: 0 0 20px;
+}
+
+.zwaar > .knop {
+  margin-top: 28px;
 }
 
 .contact-gegevens {
