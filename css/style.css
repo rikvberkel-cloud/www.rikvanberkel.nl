@@ -430,6 +430,33 @@ a:hover {
   margin-left: 24%;
 }
 
+/* Dubbelstreep uit Compositie: twee balkjes van 28 × 4 px met 6 px ertussen,
+   als opsommingsteken voor kernpunten. Op Over mij bij Waar ik in geloof, op
+   Cases bij het resultaat van elke case. Het teken staat midden op de eerste
+   regel, die 1,6em hoog is. */
+.kernpunten {
+  list-style: none;
+  padding-left: 0;
+}
+
+.kernpunten > li,
+.resultaat {
+  position: relative;
+  padding-left: 44px;
+}
+
+.kernpunten > li::before,
+.resultaat::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(0.8em - 7px);
+  width: 28px;
+  height: 14px;
+  border-top: 4px solid currentColor;
+  border-bottom: 4px solid currentColor;
+}
+
 .regel-haar {
   border-top: var(--rule-hairline);
   margin-bottom: var(--gap-section);
@@ -799,12 +826,14 @@ a:hover {
 /* Zin tussen kop en contactlijst op Contact. Onder de wisselende vraag geeft
    de pauzeknop de ruimte erboven al. */
 .over-tekst h1 + p,
-.over-tekst .wissel-pauze + p {
+.over-tekst .wissel-pauze + p,
+.over-tekst .wissel-pauze + .stappen {
   max-width: min(52ch, 100%);
   margin: 16px 0 24px;
 }
 
-.over-tekst .wissel-pauze + p {
+.over-tekst .wissel-pauze + p,
+.over-tekst .wissel-pauze + .stappen {
   margin-top: 0;
 }
 
@@ -843,11 +872,13 @@ h2 + .contact-lijst {
 }
 
 /* Slotblok met kop, lead en knop: zonder deze ruimte stonden ze op elkaar. */
-.binnen > h2 + .lead {
+.binnen > h2 + .lead,
+.zwaar > h2 + .lead {
   margin-top: 16px;
 }
 
-.binnen > .lead + .actie-rij {
+.binnen > .lead + .actie-rij,
+.zwaar > .lead + .actie-rij {
   margin-top: 28px;
 }
 
@@ -875,9 +906,9 @@ h2 + .contact-lijst {
   margin-top: 32px;
 }
 
-/* Zwaartepunt uit Compositie, in het slotblok op Home: het zware cluster met
-   kop, tekst, links en knop linksonder, het label als enige lichte element
-   rechtsboven, de rest leeg. */
+/* Zwaartepunt uit Compositie, in de slotblokken en in de intro van Over mij
+   en Cases: het zware cluster met kop, tekst en knop linksonder, het label
+   als enige lichte element rechtsboven, de rest leeg. */
 .zwaartepunt {
   display: grid;
   row-gap: clamp(32px, 6vw, 88px);
@@ -885,6 +916,7 @@ h2 + .contact-lijst {
 
 .zwaartepunt > .label {
   justify-self: end;
+  margin: 0;
 }
 
 .zwaar {
@@ -976,8 +1008,29 @@ h2 + .contact-lijst {
   margin-bottom: 20px;
 }
 
-.pagina-intro .label {
-  margin-bottom: 16px;
+/* In de intro staat het label rechtsboven, met kop en lead linksonder. De
+   ruimte ertussen is kleiner dan in een slotblok, want de intro opent de
+   pagina en moet de inhoud niet wegduwen. */
+.pagina-intro .zwaartepunt {
+  row-gap: clamp(20px, 3vw, 40px);
+}
+
+.pagina-intro .zwaar {
+  max-width: none;
+}
+
+.pagina-intro .zwaar .lead {
+  max-width: min(62ch, 100%);
+}
+
+.pagina-intro .lead + .linklijst {
+  margin-top: 16px;
+}
+
+/* Op 404 staat het nummer in een open kader en zakt het door de open kant,
+   net als de pagina. De kop eronder heeft wat meer ruimte nodig dan een h3. */
+.pagina-intro .nummer {
+  margin-bottom: 28px;
 }
 
 .tekst {
@@ -1059,17 +1112,13 @@ h2 + .contact-lijst {
   font-size: var(--size-label-sm);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  padding-top: 10px;
-  border-top: 1px solid currentColor;
-  margin: 20px 0 0;
+  margin: 24px 0 0;
 }
 
-/* Een tweede regel onder het resultaat, zoals Wat bleef, hoort bij dezelfde
-   lijn en krijgt geen eigen streep. */
+/* Een tweede regel onder het resultaat, zoals Wat bleef, staat er dicht
+   onder, met een eigen dubbelstreep. */
 .resultaat + .resultaat {
-  padding-top: 0;
-  border-top: 0;
-  margin-top: 6px;
+  margin-top: 10px;
 }
 
 /* Zijproject onder de cases. Dicht: een kader in de eigen huisstijl met een
@@ -1281,49 +1330,75 @@ body:has(.geheim[open]) :focus-visible {
   outline-color: var(--neon-geel);
 }
 
-/* Tijdlijn op Over mij: een verticale lijn met een vierkantje per stap.
-   Vierkant, want de huisstijl heeft geen ronde vormen. De huidige stap is
-   gevuld, de rest open. */
-
-.tijdlijn {
-  position: relative;
+/* Ladderlijn uit Compositie: een lijn van 2 px met een sport van 12 × 2 px
+   per fase en een blauw markeerblok van 10 px op de huidige fase. Blauw is
+   in Compositie alleen voor dit blok. De lijn loopt per fase van de eigen
+   sport tot de sport van de volgende, dus van de eerste tot de laatste fase.
+   --sport is het midden van de eerste regel van een fase. Op Over mij is dat
+   de tijdlijn, op Contact de stappen naar een kennismaking. */
+.ladderlijn {
+  --sport: 10px;
   list-style: none;
   margin: 0;
   padding: 0 0 0 32px;
 }
 
-.tijdlijn::before {
-  content: "";
-  position: absolute;
-  left: 6px;
-  top: 6px;
-  bottom: 6px;
-  width: 2px;
-  background: var(--zwart);
+.ladderlijn > li {
+  position: relative;
 }
 
-.tijdlijn li {
-  position: relative;
+.ladderlijn > li + li {
+  margin-top: 0;
+}
+
+.ladderlijn > li::before {
+  content: "";
+  position: absolute;
+  left: -26px;
+  top: calc(var(--sport) - 1px);
+  width: 12px;
+  height: 2px;
+  background: currentColor;
+}
+
+.ladderlijn > li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: -26px;
+  top: calc(var(--sport) - 1px);
+  bottom: calc(-1 * var(--sport) - 1px);
+  width: 2px;
+  background: currentColor;
+}
+
+.ladderlijn > .is-huidig::before {
+  left: -30px;
+  top: calc(var(--sport) - 5px);
+  width: 10px;
+  height: 10px;
+  background: var(--blauw);
+}
+
+/* Tijdlijn op Over mij. De sport staat op de hoogte van de periode. */
+.tijdlijn > li {
   padding: 0 0 32px;
 }
 
-.tijdlijn li:last-child {
+.tijdlijn > li:last-child {
   padding-bottom: 0;
 }
 
-.tijdlijn li::before {
-  content: "";
-  position: absolute;
-  left: -32px;
-  top: 2px;
-  width: 14px;
-  height: 14px;
-  background: var(--wit);
-  border: 2px solid var(--zwart);
+/* Stappen op Contact, in lopende tekst van 15 px. */
+.stappen {
+  --sport: 12px;
 }
 
-.tijdlijn li + li {
-  margin-top: 0;
+.stappen > li {
+  padding: 0 0 12px;
+}
+
+.stappen > li:last-child {
+  padding-bottom: 0;
 }
 
 .tijdlijn .periode {
@@ -1548,10 +1623,6 @@ dd a:not([class]) {
 .portret-vak {
   border: 1px solid currentColor;
   max-width: min(420px, 100%);
-}
-
-.tijdlijn .is-huidig::before {
-  background: var(--zwart);
 }
 
 @media print {
