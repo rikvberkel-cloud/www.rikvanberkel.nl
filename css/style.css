@@ -411,9 +411,11 @@ a:hover {
   margin-bottom: var(--gap-section);
 }
 
+/* De lijnen zijn randen, zodat ze ook op papier en in een contrastthema
+   zichtbaar blijven. */
 .staffel > span {
-  height: 4px;
-  background: var(--zwart);
+  height: 0;
+  border-top: 4px solid currentColor;
 }
 
 .staffel > span:nth-child(1) {
@@ -678,7 +680,9 @@ a:hover {
 
 /* Pauzeknop onder een wisselende kop. De koppen draaien door, en beweging die
    langer duurt dan vijf seconden moet volgens WCAG 2.2.2 te stoppen zijn.
-   Zonder JavaScript draait er niets en blijft de knop verborgen. */
+   Zonder JavaScript draait er niets en blijft de knop verborgen. Verborgen
+   houdt hij zijn plek, zodat de tekst eronder niet verspringt als main.js
+   hem na één ronde verbergt, en de ruimte zonder JavaScript gelijk is. */
 .wissel-pauze {
   display: inline-block;
   min-height: 24px;
@@ -697,7 +701,7 @@ a:hover {
 }
 
 .wissel-pauze[hidden] {
-  display: none;
+  visibility: hidden;
 }
 
 .lead {
@@ -823,18 +827,11 @@ a:hover {
   font-size: var(--size-display-2);
 }
 
-/* Zin tussen kop en contactlijst op Contact. Onder de wisselende vraag geeft
-   de pauzeknop de ruimte erboven al. */
-.over-tekst h1 + p,
-.over-tekst .wissel-pauze + p,
+/* Stappen tussen de vraag en de contactlijst op Contact. De pauzeknop geeft
+   de ruimte erboven al, ook als hij verborgen is. */
 .over-tekst .wissel-pauze + .stappen {
   max-width: min(52ch, 100%);
-  margin: 16px 0 24px;
-}
-
-.over-tekst .wissel-pauze + p,
-.over-tekst .wissel-pauze + .stappen {
-  margin-top: 0;
+  margin: 0 0 24px;
 }
 
 .contact-lijst {
@@ -872,12 +869,10 @@ h2 + .contact-lijst {
 }
 
 /* Slotblok met kop, lead en knop: zonder deze ruimte stonden ze op elkaar. */
-.binnen > h2 + .lead,
 .zwaar > h2 + .lead {
   margin-top: 16px;
 }
 
-.binnen > .lead + .actie-rij,
 .zwaar > .lead + .actie-rij {
   margin-top: 28px;
 }
@@ -914,12 +909,14 @@ h2 + .contact-lijst {
   row-gap: clamp(32px, 6vw, 88px);
 }
 
+/* Past het label niet op één regel, zoals het sectorlabel op 320 px, dan
+   blijft de tekst rechts staan. */
 .zwaartepunt > .label {
   justify-self: end;
-  margin: 0;
+  text-align: right;
 }
 
-.zwaar {
+.sectie-zwart .zwaar {
   max-width: min(34em, 100%);
 }
 
@@ -927,11 +924,11 @@ h2 + .contact-lijst {
   margin: 0 0 clamp(16px, 2vw, 24px);
 }
 
-.zwaar > p {
+.sectie-zwart .zwaar > p {
   margin: 0 0 20px;
 }
 
-.zwaar > .knop {
+.sectie-zwart .zwaar > .knop {
   margin-top: 28px;
 }
 
@@ -1013,10 +1010,6 @@ h2 + .contact-lijst {
    pagina en moet de inhoud niet wegduwen. */
 .pagina-intro .zwaartepunt {
   row-gap: clamp(20px, 3vw, 40px);
-}
-
-.pagina-intro .zwaar {
-  max-width: none;
 }
 
 .pagina-intro .zwaar .lead {
@@ -1332,12 +1325,20 @@ body:has(.geheim[open]) :focus-visible {
 
 /* Ladderlijn uit Compositie: een lijn van 2 px met een sport van 12 × 2 px
    per fase en een blauw markeerblok van 10 px op de huidige fase. Blauw is
-   in Compositie alleen voor dit blok. De lijn loopt per fase van de eigen
-   sport tot de sport van de volgende, dus van de eerste tot de laatste fase.
-   --sport is het midden van de eerste regel van een fase. Op Over mij is dat
-   de tijdlijn, op Contact de stappen naar een kennismaking. */
+   in Compositie alleen voor dit blok. Op Over mij is dat de tijdlijn, op
+   Contact de stappen naar een kennismaking.
+   - Elke fase tekent met ::after zijn sport, de bovenrand, en het stuk lijn
+     tot de sport van de volgende fase, de linkerrand. Dat sluit alleen aan
+     als de volgende fase direct onder deze begint, dus de ruimte tussen
+     fases is padding: --trede.
+   - Het markeerblok is ::before, gemaakt van randen en boven de lijn
+     getekend.
+   - Randen blijven zichtbaar op papier en in een contrastthema.
+   - --sport is het midden van de eerste regel, in em, zodat de sport
+     meegroeit als iemand alleen de tekst vergroot. */
 .ladderlijn {
-  --sport: 10px;
+  --sport: 0.8em;
+  --trede: 12px;
   list-style: none;
   margin: 0;
   padding: 0 0 0 32px;
@@ -1351,54 +1352,47 @@ body:has(.geheim[open]) :focus-visible {
   margin-top: 0;
 }
 
-.ladderlijn > li::before {
-  content: "";
-  position: absolute;
-  left: -26px;
-  top: calc(var(--sport) - 1px);
-  width: 12px;
-  height: 2px;
-  background: currentColor;
+.ladderlijn > li:not(:last-child) {
+  padding-bottom: var(--trede);
 }
 
-.ladderlijn > li:not(:last-child)::after {
+.ladderlijn > li::after {
   content: "";
   position: absolute;
   left: -26px;
   top: calc(var(--sport) - 1px);
   bottom: calc(-1 * var(--sport) - 1px);
-  width: 2px;
-  background: currentColor;
+  width: 12px;
+  border-top: 2px solid currentColor;
+  border-left: 2px solid currentColor;
+}
+
+.ladderlijn > li:last-child::after {
+  bottom: auto;
+  height: 0;
+  border-left: 0;
 }
 
 .ladderlijn > .is-huidig::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
   left: -30px;
   top: calc(var(--sport) - 5px);
-  width: 10px;
-  height: 10px;
-  background: var(--blauw);
+  border: 5px solid var(--blauw);
 }
 
-/* Tijdlijn op Over mij. De sport staat op de hoogte van de periode. */
-.tijdlijn > li {
-  padding: 0 0 32px;
+/* Tijdlijn op Over mij. De sport staat op het midden van de hoofdletters
+   van de periode, 0,65em onder de bovenkant. */
+.tijdlijn {
+  --sport: 0.65em;
+  --trede: 32px;
 }
 
-.tijdlijn > li:last-child {
-  padding-bottom: 0;
-}
-
-/* Stappen op Contact, in lopende tekst van 15 px. */
-.stappen {
-  --sport: 12px;
-}
-
+/* Stappen op Contact, in lopende tekst van 15 px. Net als een alinea zonder
+   los woord op de laatste regel. */
 .stappen > li {
-  padding: 0 0 12px;
-}
-
-.stappen > li:last-child {
-  padding-bottom: 0;
+  text-wrap: pretty;
 }
 
 .tijdlijn .periode {
