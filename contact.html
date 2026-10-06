@@ -71,7 +71,8 @@
             </span>
           </h2>
           <button class="wissel-pauze" type="button" hidden>Pauzeer</button>
-          <ol class="ladderlijn stappen">
+          <!-- [html-validate-disable-next no-redundant-role, prefer-native-element -- Safari ziet een lijst zonder nummers anders niet als lijst] -->
+          <ol class="ladderlijn stappen" role="list">
             <li class="is-huidig">Mail me.</li>
             <li>Dan plannen we een kennismaking van 30 minuten.</li>
             <li>Daarna weet je of ik de juiste ben, en zo niet dan wijs ik je door.</li>
