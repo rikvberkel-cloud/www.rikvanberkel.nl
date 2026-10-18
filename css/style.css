@@ -1057,12 +1057,16 @@ h2 + .contact-lijst {
   padding-top: 16px;
 }
 
-/* Vier cases staan vanaf 800 px als twee bij twee, zodat de vierde niet
-   alleen op een rij staat. */
+/* De cases staan vanaf 800 px in twee kolommen. Blijft de uitnodiging als
+   laatste alleen op een rij over, dan loopt hij over de hele breedte. */
 @media (min-width: 800px) {
   .case-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     row-gap: clamp(32px, 4vw, 56px);
+  }
+
+  .case-open:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
   }
 }
 
@@ -1407,6 +1411,10 @@ body:has(.geheim[open]) :focus-visible {
 
 .tijdlijn h3 {
   margin-bottom: 8px;
+}
+
+.tijdlijn h3:last-child {
+  margin-bottom: 0;
 }
 
 .tijdlijn p {
