@@ -108,7 +108,12 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* De voet staat altijd onderaan, ook als een pagina korter is dan het
+   scherm. */
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   margin: 0;
   background: var(--wit);
   color: var(--zwart);
@@ -432,19 +437,21 @@ a:hover {
   margin-left: 24%;
 }
 
-/* Dubbelstreep uit Compositie: twee balkjes van 28 × 4 px met 6 px ertussen,
-   als opsommingsteken voor kernpunten. Op Over mij bij Waar ik in geloof, op
-   Cases bij het resultaat van elke case. Het teken staat midden op de eerste
-   regel, die 1,6em hoog is. */
+/* Blokje als opsommingsteken voor kernpunten, keuze van Rik op 22 oktober
+   2026: een vierkant van 10 px in de tekstkleur. Op Over mij bij Waar ik in
+   geloof, op Cases bij het resultaat van elke case. Het blokje staat midden
+   op de eerste regel, die 1,6em hoog is. Het is een rand, zodat het ook op
+   papier en in een contrastthema zichtbaar blijft. */
 .kernpunten {
   list-style: none;
   padding-left: 0;
+  font-size: var(--size-lead);
 }
 
 .kernpunten > li,
 .resultaat {
   position: relative;
-  padding-left: 44px;
+  padding-left: 26px;
 }
 
 .kernpunten > li::before,
@@ -452,11 +459,8 @@ a:hover {
   content: "";
   position: absolute;
   left: 0;
-  top: calc(0.8em - 7px);
-  width: 28px;
-  height: 14px;
-  border-top: 4px solid currentColor;
-  border-bottom: 4px solid currentColor;
+  top: calc(0.8em - 5px);
+  border: 5px solid currentColor;
 }
 
 .regel-haar {
@@ -819,6 +823,7 @@ a:hover {
   margin: clamp(36px, 5vw, 56px) 0 16px;
 }
 
+.over-tekst > h2:first-child,
 .over-tekst .eerste-kop {
   margin-top: 0;
 }
@@ -827,11 +832,13 @@ a:hover {
   font-size: var(--size-display-2);
 }
 
-/* Stappen tussen de vraag en de contactlijst op Contact. De pauzeknop geeft
-   de ruimte erboven al, ook als hij verborgen is. */
-.over-tekst .wissel-pauze + .stappen {
+/* Lopende tekst tussen de vraag en de contactlijst op Contact. De pauzeknop
+   geeft de ruimte erboven al, ook als hij verborgen is. */
+.contact-tekst {
   max-width: min(52ch, 100%);
   margin: 0 0 24px;
+  font-size: var(--size-lead);
+  text-wrap: pretty;
 }
 
 .contact-lijst {
@@ -875,6 +882,10 @@ h2 + .contact-lijst {
 
 .zwaar > .lead + .actie-rij {
   margin-top: 28px;
+}
+
+main {
+  flex: 1 0 auto;
 }
 
 .over-grid {
@@ -962,14 +973,6 @@ h2 + .contact-lijst {
   align-items: baseline;
   justify-content: space-between;
   gap: 12px 32px;
-}
-
-.footer-merk {
-  font-family: var(--font-display);
-  font-weight: var(--weight-display);
-  font-size: 24px;
-  letter-spacing: -0.01em;
-  margin: 0;
 }
 
 .footer-meta {
@@ -1364,37 +1367,9 @@ body:has(.geheim[open]) :focus-visible {
   outline-color: var(--neon-geel);
 }
 
-/* Publicaties en erkenning op Over mij: per regel het jaar als periode,
-   gescheiden door een haarlijn. */
-.bewijs-kop {
-  margin: clamp(40px, 6vw, 72px) 0 var(--gap-section);
-}
-
-.bewijs-lijst {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  max-width: 760px;
-}
-
-.bewijs-lijst li {
-  padding: 12px 0;
-  border-top: var(--rule-hairline);
-}
-
-.bewijs-lijst .periode {
-  display: block;
-  margin-bottom: 4px;
-  font-weight: var(--weight-body-strong);
-  font-size: var(--size-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-}
-
 /* Ladderlijn uit Compositie: een lijn van 2 px met een sport van 12 × 2 px
    per fase en een blauw markeerblok van 10 px op de huidige fase. Blauw is
-   in Compositie alleen voor dit blok. Op Over mij is dat de tijdlijn, op
-   Contact de stappen naar een kennismaking.
+   in Compositie alleen voor dit blok. Op Over mij is dat de tijdlijn.
    - Elke fase tekent met ::after zijn sport, de bovenrand, en het stuk lijn
      tot de sport van de volgende fase, de linkerrand. Dat sluit alleen aan
      als de volgende fase direct onder deze begint, dus de ruimte tussen
@@ -1455,12 +1430,6 @@ body:has(.geheim[open]) :focus-visible {
 .tijdlijn {
   --sport: 0.65em;
   --trede: 32px;
-}
-
-/* Stappen op Contact, in lopende tekst van 15 px. Net als een alinea zonder
-   los woord op de laatste regel. */
-.stappen > li {
-  text-wrap: pretty;
 }
 
 .tijdlijn .periode {
@@ -1619,6 +1588,14 @@ dd a:not([class]) {
    en omgeving in wit, de wijken van Rotterdam in lichtgrijs met een haarlijn
    als grens, Schiebroek in zwart. Geen transparantie, op de haarlijn na,
    volgens 10.1.4. Inline SVG, geen externe kaartdienst. */
+/* Op Contact staat de tekst in de bron eerst, zodat de kop op een telefoon
+   bovenaan staat. Naast elkaar staat de kaart links. */
+@media (min-width: 720px) {
+  .contact-grid .locatie-kaart {
+    order: -1;
+  }
+}
+
 .locatie-kaart {
   margin: 0;
   max-width: min(480px, 100%);
