@@ -1364,6 +1364,33 @@ body:has(.geheim[open]) :focus-visible {
   outline-color: var(--neon-geel);
 }
 
+/* Publicaties en erkenning op Over mij: per regel het jaar als periode,
+   gescheiden door een haarlijn. */
+.bewijs-kop {
+  margin: clamp(40px, 6vw, 72px) 0 var(--gap-section);
+}
+
+.bewijs-lijst {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 760px;
+}
+
+.bewijs-lijst li {
+  padding: 12px 0;
+  border-top: var(--rule-hairline);
+}
+
+.bewijs-lijst .periode {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: var(--weight-body-strong);
+  font-size: var(--size-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
 /* Ladderlijn uit Compositie: een lijn van 2 px met een sport van 12 × 2 px
    per fase en een blauw markeerblok van 10 px op de huidige fase. Blauw is
    in Compositie alleen voor dit blok. Op Over mij is dat de tijdlijn, op
