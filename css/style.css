@@ -667,6 +667,14 @@ a:hover {
   font-weight: var(--weight-body-strong);
 }
 
+/* Bewijsregel onder de vaste regel in de hero: namen van organisaties waarmee
+   ik werkte, klein en zonder logo's. */
+.bewijsregel {
+  max-width: 44ch;
+  margin: 0 0 16px;
+  font-size: var(--size-body-sm);
+}
+
 /* Kop links, foto rechts. Op een smal scherm staat de foto onder de kop. */
 .hero-grid {
   display: grid;
