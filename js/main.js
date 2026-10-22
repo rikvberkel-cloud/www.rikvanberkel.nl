@@ -34,7 +34,7 @@
   // Een kop kan meer dan één wisselblok hebben, zoals de kernboodschap op
   // Home: een blok met "van" en een blok met "naar". Die delen één pauzeknop
   // en vormen samen een groep. Met data-wissel-vertraging, in milliseconden,
-  // begint een blok later. Op Home stappen beide blokken samen elke 3000 ms,
+  // begint een blok later. Op Home stappen beide blokken samen elke 4500 ms,
   // zonder vertraging, zodat een van-deel en zijn naar-deel altijd samen in
   // beeld staan.
   function draaiGroep(wissels, knop) {
