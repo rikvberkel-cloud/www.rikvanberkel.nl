@@ -481,6 +481,20 @@ a:hover {
   outline-color: var(--wit);
 }
 
+/* Op een telefoon en een smalle tablet is de kopbalk compact: alleen naam
+   en menu. Pas vanaf 860 px passen naam, menu en knop op één regel. De knop
+   kennismaken staat onderaan elke pagina, en Contact staat in het menu. */
+@media (max-width: 859px) {
+  .site-header {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .site-header .knop {
+    display: none;
+  }
+}
+
 .header-inner {
   max-width: var(--content-max);
   margin: 0 auto;
@@ -627,6 +641,22 @@ a:hover {
   margin-left: 0.3em;
   background: var(--zwart);
   clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+/* Op een telefoon is de kernboodschap groter en mag een naar-regel over
+   twee regels lopen. De tweede regel springt in tot na "naar", zodat "naar"
+   als kolom blijft lezen. */
+@media (max-width: 599px) {
+  .hero h1.kernboodschap {
+    width: auto;
+    font-size: clamp(32px, 10.5vw, 46px);
+  }
+
+  .kernboodschap > .wissel:last-child > .wissel-item {
+    --naar: 2.34em;
+    padding-left: var(--naar);
+    text-indent: calc(-1 * var(--naar));
+  }
 }
 
 /* Vaste regel onder de kernboodschap: wat en waar. */
