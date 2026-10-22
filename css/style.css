@@ -1177,6 +1177,16 @@ main {
   font-size: var(--size-body-sm);
 }
 
+.publicatie-tekst {
+  margin: 12px 0 0;
+  font-size: var(--size-body-sm);
+}
+
+/* De verwijzing onder de tijdlijn staat los van de laatste fase. */
+.tijdlijn-verder {
+  margin: var(--gap-section) 0 0;
+}
+
 .publicatie-link {
   margin: auto 0 0;
   padding-top: 16px;
