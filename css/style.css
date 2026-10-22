@@ -537,6 +537,14 @@ a:hover {
   margin-top: 0;
 }
 
+/* Vijf woorden passen op een telefoon van 390 px op één regel met iets
+   minder ruimte ertussen. */
+@media (max-width: 420px) {
+  .site-nav ul {
+    gap: 4px 14px;
+  }
+}
+
 /* Afwijking van 5b: de navigatie staat in de tekstletter, niet in mono
    kapitaal. Vijf mono-woorden met letterafstand maakten de kop de drukste
    plek van de pagina, en ze pasten op een telefoon niet op een regel.
@@ -789,6 +797,19 @@ a:hover {
 
 .dienst p {
   margin-bottom: 20px;
+}
+
+/* Per bakje: voor wie, dan drie kernpunten met blokjes. */
+.dienst-voor {
+  font-size: var(--size-body-sm);
+}
+
+.dienst .kernpunten {
+  margin: 0 0 20px;
+}
+
+.dienst .kernpunten > li + li {
+  margin-top: 6px;
 }
 
 /* De bindende zin staat tussen de kop en de bakjes. */
@@ -1088,6 +1109,77 @@ main {
 
 .case-open p:last-child {
   margin: 20px 0 0;
+}
+
+/* Kerncijfers in een case, elk in een open kader uit Compositie: 2 px
+   zonder onderkant, met het cijfer groot in Archivo. */
+.kerncijfers {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(8px, 2vw, 16px);
+  list-style: none;
+  margin: 20px 0;
+  padding: 0;
+}
+
+.kerncijfers > li {
+  border: 2px solid currentColor;
+  border-bottom: 0;
+  padding: 10px clamp(8px, 2vw, 12px) 0;
+  font-size: var(--size-body-sm);
+}
+
+.kerncijfer {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: clamp(36px, 4vw, 56px);
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+}
+
+/* Publicaties: rechthoekige blokken in een kader van 2 px, met de link
+   onderaan. */
+.publicaties {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: clamp(20px, 3vw, 32px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* In een raster geen extra ruimte boven het tweede blok en verder. */
+.kerncijfers > li + li,
+.publicaties > li + li {
+  margin-top: 0;
+}
+
+.publicatie {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 2px solid currentColor;
+  padding: 16px 20px 20px;
+}
+
+.publicatie h2 {
+  font-size: var(--size-display-3);
+  font-weight: var(--weight-display-sub);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 12px 0 8px;
+}
+
+.publicatie-meta {
+  margin: 0;
+  font-size: var(--size-body-sm);
+}
+
+.publicatie-link {
+  margin: auto 0 0;
+  padding-top: 16px;
 }
 
 /* Een quote onder een case: cursief, onder een haarlijn, met naam en rol. */
