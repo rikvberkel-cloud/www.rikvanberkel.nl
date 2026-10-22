@@ -1057,20 +1057,16 @@ h2 + .contact-lijst {
   padding-top: 16px;
 }
 
-/* De cases staan vanaf 800 px in twee kolommen. Blijft de uitnodiging als
-   laatste alleen op een rij over, dan loopt hij over de hele breedte. */
+/* Vanaf 800 px staan de twee cases naast elkaar, met daaronder twee kleine
+   tegels: de uitnodiging en het zijproject. */
 @media (min-width: 800px) {
   .case-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     row-gap: clamp(32px, 4vw, 56px);
   }
-
-  .case-open:last-child:nth-child(odd) {
-    grid-column: 1 / -1;
-  }
 }
 
-/* De vierde tegel op Cases is een uitnodiging: zwart vlak, witte tekst, wit
+/* De derde tegel op Cases is een uitnodiging: zwart vlak, witte tekst, wit
    label, focus in wit en een witte knop. */
 .case-open {
   background: var(--zwart);
@@ -1089,6 +1085,33 @@ h2 + .contact-lijst {
 
 .case-open p:last-child {
   margin: 20px 0 0;
+}
+
+/* Een quote onder een case: cursief, onder een haarlijn, met naam en rol. */
+.citaat {
+  margin: 24px 0 0;
+  padding-top: 16px;
+  border-top: var(--rule-hairline);
+}
+
+.citaat blockquote {
+  margin: 0;
+  font-style: italic;
+  font-size: var(--size-lead);
+}
+
+.citaat blockquote p {
+  margin: 0;
+}
+
+.citaat figcaption {
+  margin-top: 12px;
+  font-size: var(--size-body-sm);
+}
+
+.citaat figcaption strong {
+  display: block;
+  font-weight: var(--weight-body-strong);
 }
 
 .sectie-zwart .case {
@@ -1124,18 +1147,28 @@ h2 + .contact-lijst {
    late2theparty.nl. Een uitzondering op Niet gebruiken, keuze van Rik. */
 .geheim {
   position: relative;
-  margin-top: clamp(32px, 4vw, 56px);
+  container-type: inline-size;
   border: 2px solid currentColor;
 }
 
+/* Dicht staat de tegel opgebouwd als de uitnodiging ernaast: label, een
+   regel op koptekstmaat en de tekstknop. */
 .geheim summary {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 16px;
-  padding: 14px 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px 24px;
   cursor: pointer;
   list-style: none;
+}
+
+.geheim-tekst {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display-sub);
+  font-size: var(--size-display-3);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
 .geheim summary::-webkit-details-marker {
@@ -1218,7 +1251,7 @@ h2 + .contact-lijst {
   margin: 0;
   font-family: Archivo, var(--font-display);
   font-weight: 800;
-  font-size: clamp(32px, 9vw, 88px);
+  font-size: clamp(28px, 13cqi, 88px);
   line-height: 0.92;
   letter-spacing: -0.02em;
   text-transform: uppercase;
@@ -1306,6 +1339,10 @@ body:has(.geheim[open]) .geheim {
   border-color: var(--neon-tekst);
 }
 
+body:has(.geheim[open]) .citaat {
+  border-top-color: rgba(242, 242, 243, 0.22);
+}
+
 body:has(.geheim[open]) .label,
 body:has(.geheim[open]) .knop,
 body:has(.geheim[open]) .skip-link {
@@ -1325,6 +1362,33 @@ body:has(.geheim[open]) .site-footer a:hover {
 
 body:has(.geheim[open]) :focus-visible {
   outline-color: var(--neon-geel);
+}
+
+/* Publicaties en erkenning op Over mij: per regel het jaar als periode,
+   gescheiden door een haarlijn. */
+.bewijs-kop {
+  margin: clamp(40px, 6vw, 72px) 0 var(--gap-section);
+}
+
+.bewijs-lijst {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 760px;
+}
+
+.bewijs-lijst li {
+  padding: 12px 0;
+  border-top: var(--rule-hairline);
+}
+
+.bewijs-lijst .periode {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: var(--weight-body-strong);
+  font-size: var(--size-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
 }
 
 /* Ladderlijn uit Compositie: een lijn van 2 px met een sport van 12 × 2 px
