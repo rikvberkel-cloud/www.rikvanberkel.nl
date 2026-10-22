@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Controleert dat elke lokale href en src in de HTML bestaat.
+# Controleert dat elke lokale href en src in de HTML bestaat. Een versie
+# achter het adres, zoals ?v=20261022, en een anker tellen niet mee.
 # Gebruik: ./scripts/check-links.sh [map]   (standaard de projectmap)
 set -euo pipefail
 
@@ -14,7 +15,7 @@ for page in *.html; do
   grep -oE '(href|src)="[^"]+"' "$page" \
     | sed -E 's/^(href|src)="//; s/"$//' \
     | grep -vE '^(https?:|mailto:|tel:|data:|#)' \
-    | sed 's/#.*//' \
+    | sed 's/[?#].*//' \
     | sed "s|^|$page |" >> "$refs" || true
 done
 
