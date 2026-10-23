@@ -14,6 +14,12 @@ for f in *.html sitemap.xml robots.txt js/*.js; do
   [ -e "$f" ] && bestanden+=("$f")
 done
 
+# Niets te controleren betekent een verkeerde map, geen schone site.
+if [ "${#bestanden[@]}" -eq 0 ]; then
+  echo "Geen sitebestanden gevonden in $ROOT. Klopt de map?" >&2
+  exit 2
+fi
+
 # Postcode, zoals 1234 AB, ook met een harde spatie ertussen.
 postcode='\b[1-9][0-9]{3}([[:space:]]|&nbsp;|&#160;)?[A-Z]{2}\b'
 # Straat met huisnummer, zoals Voorbeeldlaan 12.
@@ -23,9 +29,15 @@ jsonld='"(streetAddress|postalCode)"'
 
 status=0
 for patroon in "$postcode" "$straat" "$jsonld"; do
-  if grep -n -E "$patroon" "${bestanden[@]}"; then
-    status=1
-  fi
+  # grep geeft 0 bij een treffer, 1 bij geen treffer en meer bij een fout.
+  # Een fout mag niet doorgaan als "geen adres gevonden".
+  rc=0
+  grep -n -E "$patroon" "${bestanden[@]}" || rc=$?
+  case "$rc" in
+    0) status=1 ;;
+    1) ;;
+    *) echo "grep faalde (exit $rc) bij patroon: $patroon" >&2; exit 2 ;;
+  esac
 done
 
 if [ "$status" -ne 0 ]; then

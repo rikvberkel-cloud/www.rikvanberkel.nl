@@ -6,28 +6,32 @@ on:
   pull_request:
   workflow_dispatch:
 
+# Alleen lezen voor de hele workflow. De deploy-job krijgt hieronder zelf de
+# twee rechten die GitHub Pages nodig heeft, de check-job niet.
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: false
 
 jobs:
+  # Bouwt het artefact en controleert het, ook op een pull request. Zo valt een
+  # ontbrekend bestand op voor de merge in plaats van erna.
   check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Het token hoeft niet in .git/config te blijven voor de stappen erna.
+          persist-credentials: false
 
       - name: Bouw het artefact
         run: |
           mkdir -p _site
           cp *.html favicon.ico robots.txt sitemap.xml CNAME _site/
           cp -r css js img fonts _site/
+          echo "Gepubliceerd:"
           find _site -type f | sort
 
+      # Vangt de fout die dit bestand eerder had: pagina's die op de site staan
+      # maar niet in het artefact, zodat hun links een 404 geven.
       - name: Controleer dat elke lokale verwijzing bestaat
         run: ./scripts/check-links.sh _site
 
@@ -40,8 +44,18 @@ jobs:
 
   deploy:
     needs: check
-    if: github.event_name != 'pull_request'
+    # Alleen op main van de publieke repo. In de privé werkrepo bestaat geen
+    # GitHub Pages, daar wordt deze job overgeslagen in plaats van rood.
+    if: github.event_name != 'pull_request' && github.repository == 'rikvberkel-cloud/www.rikvanberkel.nl'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    # Nooit twee deploys tegelijk. Controles op pull requests lopen vrij.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
