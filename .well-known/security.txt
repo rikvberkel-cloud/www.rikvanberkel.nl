@@ -1,0 +1,4 @@
+Contact: mailto:contact@rikvanberkel.nl
+Expires: 2027-10-28T23:00:00.000Z
+Preferred-Languages: nl, en
+Canonical: https://www.rikvanberkel.nl/.well-known/security.txt

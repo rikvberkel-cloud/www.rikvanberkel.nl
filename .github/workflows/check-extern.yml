@@ -1,0 +1,25 @@
+name: Controleer externe links
+
+# Elke maand, en met de hand te starten. Links naar media en profielen
+# verdwijnen zonder dat iets aan de site verandert, dus dit draait los van
+# de deploy. Bij rood stuurt GitHub een mail.
+on:
+  schedule:
+    - cron: '17 6 3 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  extern:
+    # Alleen in de publieke repo, die heeft de site die live staat.
+    if: github.repository == 'rikvberkel-cloud/www.rikvanberkel.nl'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Controleer de externe links
+        run: ./scripts/check-extern.sh .

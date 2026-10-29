@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://gc.zgo.at; style-src 'self'; font-src 'self'; img-src 'self' https://rvb.goatcounter.com; connect-src https://rvb.goatcounter.com; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' https://rvb.goatcounter.com; connect-src https://rvb.goatcounter.com; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Over Rik van Berkel, tender- en programmamanager</title>
   <meta name="description" content="Rik van Berkel, tender- en programmamanager in de energietransitie, met een achtergrond in bouwkunde en planologie. Loopbaan sinds 2015, van NAM en FME tot de directie van REL.">
@@ -24,7 +24,7 @@
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=20261029">
+  <link rel="stylesheet" href="css/style.css?v=20261029b">
 </head>
 <body>
   <a class="skip-link" href="#main">Naar inhoud</a>
@@ -54,6 +54,14 @@
         <div class="zwaar">
           <h1>Over mij</h1>
           <p class="lead">Ruim 10 jaar actief in de gebouwde omgeving en energietransitie, op verschillende niveaus: van zelf projecten uitvoeren en aanbestedingstrajecten trekken tot strategievorming en realisatie vanuit een directierol.</p>
+          <nav aria-label="Op deze pagina">
+            <ul class="linklijst ankerlinks">
+              <li><a href="#geloof">Waar ik in geloof</a></li>
+              <li><a href="#naast-werk">Naast mijn werk</a></li>
+              <li><a href="#ai">Hoe ik met AI werk</a></li>
+              <li><a href="#tijdlijn">Tijdlijn</a></li>
+            </ul>
+          </nav>
         </div>
       </div>
     </section>
@@ -61,7 +69,7 @@
     <section class="sectie sectie-wit">
       <div class="binnen over-grid">
         <div class="over-tekst">
-          <h2>Waar ik in geloof</h2>
+          <h2 id="geloof">Waar ik in geloof</h2>
           <!-- [html-validate-disable-next no-redundant-role -- Safari ziet een lijst zonder opsommingstekens anders niet als lijst] -->
           <ul class="kernpunten" role="list">
             <li><strong>Oprechtheid</strong> boven het wenselijke antwoord</li>
@@ -70,7 +78,7 @@
             <li><strong>Humor en relativering</strong> boven alles zwaar maken</li>
           </ul>
 
-          <h2>Naast mijn werk</h2>
+          <h2 id="naast-werk">Naast mijn werk</h2>
           <!-- [html-validate-disable-next no-redundant-role -- Safari ziet een lijst zonder opsommingstekens anders niet als lijst] -->
           <ul class="kernpunten" role="list">
             <li><strong>Docent en gastdocent:</strong> van 2023 tot 2024 docent duurzaamheid en procesmanagement in deeltijd bij de opleiding Planologie van de Hogeschool Rotterdam, sinds 2024 gastdocent over duurzaamheidscriteria in aanbesteden, klimaatadaptatie en de energietransitie, aan de Hogeschool Rotterdam en de UvA</li>
@@ -79,7 +87,7 @@
           </ul>
         </div>
         <div class="over-tekst">
-          <h2 class="eerste-kop">Hoe ik met AI werk</h2>
+          <h2 class="eerste-kop" id="ai">Hoe ik met AI werk</h2>
           <p><strong>AI vergroot altijd je output. Dat maakt je nog niet per se productiever.</strong></p>
           <p>AI ontwikkelt zich razendsnel. Om goed te snappen wat het wel en niet kan, en wat het betekent voor kenniswerk, experimenteer ik veel.</p>
           <p>Een van de belangrijkste inzichten: laat je één stap door AI doen, kijk dan naar het hele proces. En de kwaliteit van de output hangt steeds meer af van de kwaliteit van de context, de input die je meegeeft.</p>
@@ -92,7 +100,7 @@
     <section class="sectie sectie-wit">
       <div class="binnen">
         <p class="label">Loopbaan</p>
-        <h2>Tijdlijn</h2>
+        <h2 id="tijdlijn">Tijdlijn</h2>
         <!-- [html-validate-disable-next no-redundant-role, prefer-native-element -- Safari ziet een lijst zonder nummers anders niet als lijst] -->
         <ol class="tijdlijn ladderlijn" role="list">
           <li class="is-huidig">
@@ -126,7 +134,7 @@
             <p>Afgestudeerd in Bouwkunde (BBE) aan de Hanzehogeschool Groningen, en in Sociale Planologie (MSc) en Culturele Geografie (MSc) aan de Rijksuniversiteit Groningen. Afstudeerprijs Bouwkunde, 1e plaats, 2013.</p>
           </li>
         </ol>
-        <p class="tijdlijn-verder">Interviews en publicaties over mijn werk staan op <a href="publicaties.html">Publicaties</a>.</p>
+        <p class="tijdlijn-verder">Interviews en publicaties over mijn werk staan op <a href="publicaties.html">Publicaties</a>. Mijn volledige loopbaan staat op <a href="https://www.linkedin.com/in/rikvberkel" rel="noopener noreferrer">LinkedIn</a>.</p>
       </div>
     </section>
 
@@ -137,7 +145,7 @@
           <h2>Liever even spreken?</h2>
           <p class="lead">Ik ben benieuwd naar je situatie, je drijfveren en je uitdaging.</p>
           <div class="actie-rij">
-            <a class="knop" data-cta href="mailto:contact@rikvanberkel.nl?subject=Kennismaking">Kom in contact</a>
+            <a class="knop" data-cta data-goatcounter-click="kom-in-contact-over-mij" href="mailto:contact@rikvanberkel.nl?subject=Kennismaking">Kom in contact</a>
           </div>
         </div>
       </div>
@@ -156,6 +164,6 @@
   </footer>
 
   <script src="js/main.js?v=20261022"></script>
-  <script data-goatcounter="https://rvb.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  <script data-goatcounter="https://rvb.goatcounter.com/count" async src="js/goatcounter-count.js?v=2.7.0"></script>
 </body>
 </html>
