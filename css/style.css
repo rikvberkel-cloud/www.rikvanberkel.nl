@@ -686,6 +686,10 @@ a:hover {
 .hero-portret {
   margin: 0;
   max-width: min(340px, 100%);
+}
+
+/* De lijn staat om de foto zelf, zodat het onderschrift eronder valt. */
+.hero-portret img {
   border: var(--rule-hairline);
 }
 
