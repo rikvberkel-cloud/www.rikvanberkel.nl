@@ -1645,6 +1645,19 @@ body:has(.geheim[open]) :focus-visible {
   padding: 2px 0;
 }
 
+/* Ankerlinks onder de lead van een lange pagina, zoals Over mij: naast
+   elkaar zolang ze passen, anders op een volgende regel. */
+.ankerlinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+  margin: 16px 0 0;
+}
+
+.ankerlinks li + li {
+  margin-top: 0;
+}
+
 /* Een link midden in een zin mag niet alleen aan kleur te herkennen zijn:
    blauw tegen zwart is 2,2 : 1 en de norm is 3 : 1. Onderstreping lost dat op. */
 p a:not([class]),
