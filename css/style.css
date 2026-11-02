@@ -1019,7 +1019,9 @@ main {
   max-width: min(34em, 100%);
 }
 
-.contact-kop {
+/* Elk slotblok op zwart: dezelfde ruimte onder de kop. */
+.contact-kop,
+.sectie-zwart .zwaar > h2 {
   margin: 0 0 clamp(16px, 2vw, 24px);
 }
 
