@@ -361,7 +361,8 @@ a:hover {
   color: var(--zwart);
 }
 
-.sectie-zwart .accent {
+.sectie-zwart .accent,
+body:has(.geheim[open]) .accent {
   color: inherit;
 }
 
