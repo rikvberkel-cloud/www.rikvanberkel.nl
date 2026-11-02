@@ -31,7 +31,7 @@
   font-display: swap;
 }
 
-/* Alleen voor de geopende tegel Zijproject op Cases, in de huisstijl van
+/* Alleen voor de geopende tegel Zijproject op Over mij, in de huisstijl van
    all-electric. De browser haalt deze letters pas op als de tegel open is. */
 @font-face {
   font-family: Archivo;
@@ -481,9 +481,10 @@ a:hover {
   outline-color: var(--wit);
 }
 
-/* Op een telefoon en een smalle tablet is de kopbalk compact: alleen naam
-   en menu. Pas vanaf 860 px passen naam, menu en knop op één regel. De knop
-   kennismaken staat onderaan elke pagina, en Contact staat in het menu. */
+/* Op een telefoon en een smalle tablet is de kopbalk compact. Pas vanaf
+   860 px passen naam, menu en knop op één regel. Daaronder staat de knop
+   kennismaken kleiner op een eigen regel onder het menu. Keuze van Rik,
+   2 november 2026. */
 @media (max-width: 859px) {
   .site-header {
     padding-top: 16px;
@@ -491,7 +492,9 @@ a:hover {
   }
 
   .site-header .knop {
-    display: none;
+    min-height: 40px;
+    padding: 8px 16px;
+    font-size: 15px;
   }
 }
 
@@ -552,10 +555,16 @@ a:hover {
 }
 
 /* Vijf woorden passen op een telefoon van 390 px op één regel met iets
-   minder ruimte ertussen. */
+   minder ruimte ertussen, en vanaf 360 px met nog iets minder. */
 @media (max-width: 420px) {
   .site-nav ul {
     gap: 4px 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  .site-nav ul {
+    gap: 4px 10px;
   }
 }
 
@@ -691,6 +700,14 @@ a:hover {
 /* De lijn staat om de foto zelf, zodat het onderschrift eronder valt. */
 .hero-portret img {
   border: var(--rule-hairline);
+}
+
+/* Op een telefoon is de foto hooguit 45 procent van de schermhoogte hoog,
+   zodat de diensten eerder in beeld komen. De foto is 3 bij 4. */
+@media (max-width: 899px) {
+  .hero-portret {
+    max-width: min(340px, 100%, calc(45svh * 3 / 4));
+  }
 }
 
 @media (min-width: 900px) {
@@ -1288,7 +1305,7 @@ main {
   margin-top: 10px;
 }
 
-/* Zijproject onder de cases. Dicht: een kader in de eigen huisstijl met een
+/* Zijproject op Over mij, onder Naast mijn werk. Dicht: een kader in de eigen huisstijl met een
    tekstknop. Open: het licht gaat uit en de tegel volgt de huisstijl van
    all-electric, met de kleuren, letters, gloed en scanlines van
    late2theparty.nl. Een uitzondering op Niet gebruiken, keuze van Rik. */
@@ -1296,6 +1313,10 @@ main {
   position: relative;
   container-type: inline-size;
   border: 2px solid currentColor;
+}
+
+.over-tekst .geheim {
+  margin-top: 32px;
 }
 
 /* Dicht staat de tegel opgebouwd als de uitnodiging ernaast: label, een
@@ -1497,14 +1518,20 @@ body:has(.geheim[open]) .skip-link {
   color: var(--neon-zwart);
 }
 
-body:has(.geheim[open]) .case a:not(.knop),
+body:has(.geheim[open]) main a:not(.knop),
 body:has(.geheim[open]) .site-footer a {
   color: var(--neon-cyaan);
 }
 
-body:has(.geheim[open]) .case a:not(.knop):hover,
+body:has(.geheim[open]) main a:not(.knop):hover,
 body:has(.geheim[open]) .site-footer a:hover {
   color: var(--neon-geel);
+}
+
+/* Het blauwe markeerblok op de tijdlijn van Over mij wordt neongeel, want
+   blauw op zwart haalt 2,21 : 1. */
+body:has(.geheim[open]) .ladderlijn > .is-huidig::before {
+  border-color: var(--neon-geel);
 }
 
 body:has(.geheim[open]) :focus-visible {
