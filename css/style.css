@@ -1060,6 +1060,14 @@ main {
   margin: 0;
 }
 
+.footer-sep {
+  display: inline-block;
+  margin: 0 0.35em;
+  font-size: 1.6em;
+  line-height: 0;
+  vertical-align: -0.12em;
+}
+
 .footer-links {
   display: flex;
   flex-wrap: wrap;
