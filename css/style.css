@@ -864,6 +864,13 @@ body:has(.geheim[open]) .accent {
   font-size: var(--size-body-sm);
 }
 
+/* Ondertitel onder de wervende kop van een case: wat het was. */
+.case-ondertitel {
+  font-size: var(--size-body-sm);
+  font-weight: 600;
+  margin: 8px 0 16px;
+}
+
 .dienst .kernpunten {
   margin: 0 0 20px;
 }
