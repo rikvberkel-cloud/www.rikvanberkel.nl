@@ -361,7 +361,8 @@ a:hover {
   color: var(--zwart);
 }
 
-.sectie-zwart .accent {
+.sectie-zwart .accent,
+body:has(.geheim[open]) .accent {
   color: inherit;
 }
 
@@ -1058,6 +1059,14 @@ main {
 .footer-meta {
   font-size: var(--size-body-sm);
   margin: 0;
+}
+
+.footer-sep {
+  display: inline-block;
+  margin: 0 0.35em;
+  font-size: 1.6em;
+  line-height: 0;
+  vertical-align: -0.12em;
 }
 
 .footer-links {
