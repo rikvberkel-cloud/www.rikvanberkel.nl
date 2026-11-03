@@ -155,6 +155,11 @@ h2 {
   line-height: var(--leading-heading);
 }
 
+/* Sectiekop binnen een pagina, zoals op Over mij: iets kleiner dan h2. */
+h2.kop-sectie {
+  font-size: clamp(26px, 1.6vw + 18px, 38px);
+}
+
 h3 {
   font-size: var(--size-display-3);
   font-weight: var(--weight-display-sub);
