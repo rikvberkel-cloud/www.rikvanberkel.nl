@@ -12,7 +12,7 @@ cd "$ROOT"
 refs="$(mktemp)"
 trap 'rm -f "$refs"' EXIT
 
-for page in *.html; do
+for page in *.html o/*.html; do
   [ -e "$page" ] || continue
   {
     grep -oE '(href|src)="[^"]+"' "$page" | sed -E 's/^(href|src)="//; s/"$//' || true

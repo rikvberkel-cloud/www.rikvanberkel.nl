@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /o/
 
 Sitemap: https://www.rikvanberkel.nl/sitemap.xml
