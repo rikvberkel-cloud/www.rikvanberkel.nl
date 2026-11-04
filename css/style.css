@@ -777,6 +777,11 @@ body:has(.geheim[open]) .accent {
   cursor: pointer;
 }
 
+/* Een knop met hidden blijft verborgen, ook al is .knop inline-flex. */
+.knop[hidden] {
+  display: none;
+}
+
 .wissel-pauze[hidden] {
   visibility: hidden;
 }

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' https://rvb.goatcounter.com; connect-src https://rvb.goatcounter.com; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <title>Note openen in Obsidian</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="stylesheet" href="/css/style.css?v=20261104a">
+  <!-- Doorstuurpagina naar een note in de Obsidian-app. Het pad staat achter
+       de #, zodat het nooit naar de server gaat. Geen GoatCounter, geen
+       sitemap, geen links hierheen. -->
+  <script src="/js/o.js?v=20261104" defer></script>
+</head>
+<body>
+  <main id="main">
+    <section class="sectie sectie-wit">
+      <div class="binnen">
+        <p id="o-bericht" aria-live="polite"></p>
+        <a id="o-knop" class="knop" href="#" hidden>Open in Obsidian</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
