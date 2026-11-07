@@ -1141,6 +1141,40 @@ main {
   max-width: min(62ch, 100%);
 }
 
+/* Juridische tekst (AV en privacy): links uitgelijnd met de kop erboven, in een
+   leesbare kolom. De sectie volgt direct op de kop, zonder extra witruimte. */
+.binnen.tekst {
+  max-width: var(--content-max);
+}
+
+.binnen.tekst > * {
+  max-width: min(62ch, 100%);
+}
+
+.pagina-intro + .sectie:has(> .binnen.tekst) {
+  padding-top: clamp(8px, 2vw, 24px);
+}
+
+/* Inhoudsopgave onder elkaar. Op AV een genummerde lijst, zodat de nummers
+   uitlijnen zoals de leden in de artikelen. */
+.inhoudslijst {
+  margin: 24px 0 0;
+}
+
+.linklijst.inhoudslijst li + li,
+ol.inhoudslijst li + li {
+  margin-top: 2px;
+}
+
+ol.inhoudslijst a {
+  display: inline-block;
+  padding: 2px 0;
+}
+
+.geen-afbreking {
+  white-space: nowrap;
+}
+
 .tekst h2 {
   font-size: clamp(24px, 3vw, 34px);
   margin: clamp(32px, 4vw, 52px) 0 16px;
@@ -1911,6 +1945,10 @@ dd a:not([class]) {
   }
 
   .tekst {
+    max-width: none;
+  }
+
+  .binnen.tekst > * {
     max-width: none;
   }
 }
