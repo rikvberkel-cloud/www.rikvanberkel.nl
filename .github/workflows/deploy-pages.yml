@@ -15,7 +15,8 @@ jobs:
   # Bouwt het artefact en controleert het, ook op een pull request. Zo valt een
   # ontbrekend bestand op voor de merge in plaats van erna.
   check:
-    runs-on: ubuntu-latest
+    # Vaste versie: Playwright moet de runner kennen om Chromium te installeren.
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
         with:
@@ -42,7 +43,7 @@ jobs:
       # playwright en axe-core staan alleen op de runner, niet op de site.
       - name: Controleer toegankelijkheid en ankers
         run: |
-          npm install --no-save --no-audit --no-fund playwright@1.56.1 axe-core@4.10.2
+          npm install --no-save --no-audit --no-fund playwright@1.63.0 axe-core@4.10.2
           npx playwright install --with-deps chromium
           python3 -m http.server 8765 --directory _site >/dev/null 2>&1 &
           sleep 2
