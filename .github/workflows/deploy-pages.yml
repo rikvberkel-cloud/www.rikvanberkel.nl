@@ -17,7 +17,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           # Het token hoeft niet in .git/config te blijven voor de stappen erna.
           persist-credentials: false
@@ -37,6 +37,16 @@ jobs:
 
       - name: Controleer dat er geen adres op de site staat
         run: ./scripts/check-adres.sh _site
+
+      # Toegankelijkheid en ankers in een echte browser, op het artefact zelf.
+      # playwright en axe-core staan alleen op de runner, niet op de site.
+      - name: Controleer toegankelijkheid en ankers
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.56.1 axe-core@4.10.2
+          npx playwright install --with-deps chromium
+          python3 -m http.server 8765 --directory _site >/dev/null 2>&1 &
+          sleep 2
+          node scripts/check-axe.mjs http://localhost:8765
 
       - uses: actions/upload-pages-artifact@v3
         with:
