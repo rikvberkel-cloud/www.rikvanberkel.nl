@@ -310,16 +310,6 @@ a:hover {
   padding: 18px 28px;
 }
 
-/* Tweede actie, geen tweede knop: een onderstreepte link. */
-.knop-tekst {
-  display: inline-block;
-  font-family: var(--font-body);
-  font-weight: var(--weight-body-strong);
-  font-size: var(--size-body);
-  border-bottom: 1px solid currentColor;
-  padding: 3px 0;
-}
-
 .actie-rij {
   display: flex;
   flex-wrap: wrap;
@@ -369,10 +359,6 @@ a:hover {
 .sectie-zwart .accent,
 body:has(.geheim[open]) .accent {
   color: inherit;
-}
-
-.sectie-zwart .regel-haar {
-  border-top: var(--rule-hairline-wit);
 }
 
 /* Twee witte secties achter elkaar: de tweede krijgt geen eigen
@@ -467,11 +453,6 @@ body:has(.geheim[open]) .accent {
   left: 0;
   top: calc(0.8em - 5px);
   border: 5px solid currentColor;
-}
-
-.regel-haar {
-  border-top: var(--rule-hairline);
-  margin-bottom: var(--gap-section);
 }
 
 /* Header, als zwarte balk. Samen met het zwarte slotblok onderaan omlijst
@@ -900,21 +881,6 @@ body:has(.geheim[open]) .accent {
   margin-bottom: 0;
 }
 
-.dienst-meta {
-  font-family: var(--font-label);
-  font-weight: var(--weight-body-strong);
-  font-size: var(--size-label-sm);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--zwart);
-  margin: 0;
-}
-
-.sectie-zwart .dienst-meta {
-  border-bottom-color: rgba(255, 255, 255, 0.22);
-}
-
 /* Over Rik, twee kolommen met portret. */
 
 .over-tekst h2 {
@@ -991,17 +957,6 @@ main {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: clamp(24px, 4vw, 56px);
   align-items: start;
-}
-
-.portret {
-  max-width: min(420px, 100%);
-  border: 1px solid var(--zwart);
-}
-
-.onderschrift {
-  font-style: italic;
-  font-size: 13px;
-  margin: 12px 0 0;
 }
 
 /* Contact. */
@@ -1260,6 +1215,28 @@ ol.inhoudslijst a {
   letter-spacing: -0.03em;
 }
 
+/* Klein woord voor een kerncijfer, zoals "bijna". Het staat boven het cijfer,
+   in een vaste strook die elk kader heeft, zodat de cijfers op één lijn
+   blijven. */
+.kerncijfers > li {
+  position: relative;
+  padding-top: 32px;
+}
+
+.kerncijfer-voor {
+  position: absolute;
+  top: 8px;
+  font-family: var(--font-body);
+  font-weight: var(--weight-body-strong);
+  font-size: var(--size-body-sm);
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+
+.contact-actie {
+  margin: 0 0 28px;
+}
+
 /* Publicaties: rechthoekige blokken in een kader van 2 px, met de link
    onderaan. */
 .publicaties {
@@ -1310,7 +1287,13 @@ ol.inhoudslijst a {
 
 .publicatie-link {
   margin: auto 0 0;
-  padding-top: 16px;
+  padding-top: 13px;
+}
+
+/* Losse link onder een blok: minstens 24 px hoog als tikdoel. */
+.publicatie-link a {
+  display: inline-block;
+  padding: 3px 0;
 }
 
 /* Een quote onder een case: cursief, onder een haarlijn, met naam en rol. */
@@ -1352,12 +1335,8 @@ ol.inhoudslijst a {
   margin: 12px 0;
 }
 
+/* Resultaat van een case: gewone leestekst, alleen het woord Resultaat vet. */
 .resultaat {
-  font-family: var(--font-label);
-  font-weight: var(--weight-body-strong);
-  font-size: var(--size-label-sm);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
   margin: 24px 0 0;
 }
 
@@ -1766,70 +1745,6 @@ dd a:not([class]) {
   text-decoration: none;
 }
 
-.dienst-lang {
-  border-top: var(--rule-hairline);
-  padding: clamp(28px, 4vw, 44px) 0 0;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-}
-
-/* Vanaf 640 px staat het nummer naast de kop in plaats van erboven. Dat
-   scheelt een regel per dienst en je ziet nummer en dienst in een oogopslag. */
-@media (min-width: 640px) {
-  .dienst-lang {
-    grid-template-columns: auto minmax(0, 1fr);
-    column-gap: clamp(20px, 3vw, 40px);
-    align-items: start;
-  }
-
-  .dienst-lang > .nummer {
-    margin-bottom: 0;
-  }
-}
-
-.dienst-lang h2 {
-  font-size: clamp(26px, 3vw, 38px);
-  margin-bottom: 20px;
-}
-
-.dienst-lang p,
-.dienst-lang ul {
-  max-width: min(62ch, 100%);
-}
-
-/* De voorwaardenregel is kort en in mono, dus die mag breder dan de leesmaat.
-   Op 62ch brak hij in drie regels. */
-.dienst-lang .meta-lijst {
-  max-width: min(860px, 100%);
-}
-
-.dienst-lang:first-of-type {
-  border-top: 0;
-  padding-top: 0;
-}
-
-.sectie-zwart .dienst-lang {
-  border-top: var(--rule-hairline-wit);
-}
-
-.meta-lijst {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 24px;
-  list-style: none;
-  margin: 16px 0 0;
-  padding: 0;
-  font-family: var(--font-label);
-  font-weight: var(--weight-body-strong);
-  font-size: var(--size-label-sm);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-}
-
-.meta-lijst li + li {
-  margin-top: 0;
-}
-
 /* Kaart op Contact: wijkkaart van Rotterdam met Schiebroek uitgelicht. Water
    en omgeving in wit, de wijken van Rotterdam in lichtgrijs met een haarlijn
    als grens, Schiebroek in zwart. Geen transparantie, op de haarlijn na,
@@ -1909,17 +1824,11 @@ dd a:not([class]) {
   font-size: var(--size-label);
 }
 
-.portret-vak {
-  border: 1px solid currentColor;
-  max-width: min(420px, 100%);
-}
-
 @media print {
   .site-header,
   .actie-rij,
   .knop,
   .skip-link,
-  .portret,
   .footer-links {
     display: none !important;
   }
