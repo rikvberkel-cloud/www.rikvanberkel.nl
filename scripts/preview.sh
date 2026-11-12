@@ -90,7 +90,7 @@ cd "$ROOT"
 # bereikbaar, ook niet via de tunnel. Bewerken blijft live werken, want de
 # koppelingen wijzen naar de echte bestanden.
 SITE="$(mktemp -d)"
-for f in *.html favicon.ico robots.txt sitemap.xml css js img fonts o .well-known; do
+for f in *.html favicon.ico robots.txt sitemap.xml llms.txt css js img fonts o .well-known; do
   [ -e "$f" ] && ln -s "$ROOT/$f" "$SITE/$f"
 done
 
