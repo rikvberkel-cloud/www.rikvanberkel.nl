@@ -72,8 +72,8 @@
   --size-display-3: 22px;
   --size-number: clamp(48px, 5vw, 68px);
 
-  --size-lead: clamp(15px, 1.3vw, 18px);
-  --size-body: 15px;
+  --size-lead: clamp(17px, 1.4vw, 19px);
+  --size-body: 16px;
   --size-body-sm: 14px;
   --size-label: 12px;
   --size-label-sm: 11px;
@@ -401,7 +401,7 @@ body:has(.geheim[open]) .accent {
    met de hero: drie zware lijnen van 4 px met 10 px ertussen. Lengtes 62, 86
    en 18 procent, de tweede 14 en de derde 24 procent ingesprongen. Hooguit
    één per pagina. Onder de intro staat geen lijn meer, want daar markeren
-   de open kaders rond 01 en 02 het begin van de diensten. */
+   de open kaders rond 01, 02 en 03 het begin van de diensten. */
 .staffel {
   display: grid;
   row-gap: 10px;
@@ -470,7 +470,7 @@ body:has(.geheim[open]) .accent {
 
 /* Op een telefoon en een smalle tablet is de kopbalk compact. Pas vanaf
    860 px passen naam, menu en knop op één regel. Daaronder staat de knop
-   kennismaken kleiner op een eigen regel onder het menu. Keuze van Rik,
+   "Kom in contact" kleiner op een eigen regel onder het menu. Keuze van Rik,
    2 november 2026. */
 @media (max-width: 859px) {
   .site-header {
@@ -594,6 +594,12 @@ body:has(.geheim[open]) .accent {
     padding: 8px 10px;
     font-size: 14px;
   }
+
+  /* Het menu blijft hier 15 px, zodat de vijf woorden vanaf 360 px op één
+     regel passen. */
+  .site-header .site-nav a {
+    font-size: 15px;
+  }
 }
 
 @media (max-width: 369px) {
@@ -664,7 +670,7 @@ body:has(.geheim[open]) .accent {
 /* Wig uit Compositie, achter het van-deel: een smal driehoekig vlak, breed
    bij de tekst en scherp op de rechterkant van de langste naar-regel. De kop
    is zo breed als die regel, dus de wig vult de rest van de van-regel. Hoogte
-   0,18em, 0,3em van de tekst, midden op de x-hoogte van Archivo (0,53em).
+   0,28em, 0,3em van de tekst, midden op de x-hoogte van Archivo (0,53em).
    Elke variant heeft een eigen wig. Zo wisselt hij met de tekst mee en
    beweegt hij zelf niet. */
 .hero h1.kernboodschap {
@@ -679,8 +685,8 @@ body:has(.geheim[open]) .accent {
 .wig {
   flex: 1 1 0;
   position: relative;
-  top: -0.175em;
-  height: 0.18em;
+  top: -0.125em;
+  height: 0.28em;
   margin-left: 0.3em;
   background: var(--zwart);
   clip-path: polygon(0 0, 100% 50%, 0 100%);
@@ -835,15 +841,20 @@ body:has(.geheim[open]) .accent {
 
 .nummer-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(20px, 3vw, 40px);
 }
 
-/* Op een telefoon staan de bakjes onder elkaar. Zonder extra ruimte plakte
+/* Tot 900 px staan de bakjes onder elkaar. Zonder extra ruimte plakte
    het nummer 02 tegen de laatste regel van bakje 01. */
-@media (max-width: 639px) {
+@media (max-width: 899px) {
   .nummer-grid {
     row-gap: 48px;
+  }
+
+  /* Op een tablet blijft de regel leesbaar kort. */
+  .nummer-grid > .dienst {
+    max-width: 40rem;
   }
 }
 
@@ -878,13 +889,14 @@ body:has(.geheim[open]) .accent {
   border-bottom: 0;
 }
 
-/* Twee kolommen naast elkaar: nummer, naam en de drie alinea's over
+/* Drie kolommen naast elkaar: nummer, naam en de drie alinea's over
    behoefte, belofte en bewijs delen dezelfde rijen via subgrid. Is een
    alinea in de ene kolom langer, dan schuift de rij in beide kolommen mee en
    beginnen de volgende alinea's links en rechts op dezelfde hoogte. Vanaf
-   640 px staan de twee bakjes naast elkaar. */
-@media (min-width: 640px) {
+   900 px staan de drie bakjes naast elkaar. */
+@media (min-width: 900px) {
   .nummer-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-rows: repeat(5, auto);
     row-gap: 0;
   }
@@ -1155,6 +1167,10 @@ main {
    leesbare kolom. De sectie volgt direct op de kop, zonder extra witruimte. */
 .binnen.tekst {
   max-width: var(--content-max);
+  /* Een lang woord als beroepsaansprakelijkheidsverzekering breekt af op een
+     smalle telefoon, zodat de pagina niet zijwaarts schuift. */
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .binnen.tekst > * {
