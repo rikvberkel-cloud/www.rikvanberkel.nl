@@ -10,7 +10,7 @@ ROOT="${1:-$(cd "$(dirname "$0")/.." && pwd)}"
 cd "$ROOT"
 
 bestanden=()
-for f in *.html o/*.html sitemap.xml robots.txt js/*.js; do
+for f in *.html o/*.html sitemap.xml robots.txt llms.txt js/*.js; do
   [ -e "$f" ] && bestanden+=("$f")
 done
 
