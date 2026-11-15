@@ -937,9 +937,8 @@ body:has(.geheim[open]) .accent {
   margin-top: 6px;
 }
 
-/* De bindende zin staat tussen de kop en de bakjes. */
-.diensten-intro {
-  max-width: min(62ch, 100%);
+/* De kop staat direct boven de bakjes, zonder bindende zin ertussen. */
+.diensten-kop {
   margin-bottom: var(--gap-section);
 }
 
@@ -1334,6 +1333,8 @@ ol.inhoudslijst a {
 }
 
 .publicatie h2 {
+  /* Een titel breekt alleen af waar een woord niet op de regel past. */
+  hyphens: manual;
   font-size: var(--size-display-3);
   font-weight: var(--weight-display-sub);
   letter-spacing: -0.02em;
@@ -1348,7 +1349,6 @@ ol.inhoudslijst a {
 
 .publicatie-tekst {
   margin: 12px 0 0;
-  font-size: var(--size-body-sm);
 }
 
 /* De verwijzing onder de tijdlijn staat los van de laatste fase. */
@@ -1735,7 +1735,7 @@ body:has(.geheim[open]) :focus-visible {
 
 .tijdlijn p {
   margin: 0;
-  font-size: var(--size-body-sm);
+  max-width: 70ch;
 }
 
 /* Tabel op de privacypagina. De tabel schuift horizontaal, dus het vak krijgt
