@@ -61,7 +61,13 @@
         </div>
       </div>
       <div class="hero-rechts">
-        <img class="hero-compositie" src="img/proef/proefbeeld-1.svg" alt="" width="600" height="600">
+        <figure class="hero-foto">
+          <picture>
+            <source type="image/avif" srcset="img/rik-bank-640.avif 640w, img/rik-bank-1000.avif 1000w" sizes="(min-width: 900px) 50vw, 100vw">
+            <source type="image/webp" srcset="img/rik-bank-640.webp 640w, img/rik-bank-1000.webp 1000w" sizes="(min-width: 900px) 50vw, 100vw">
+            <img src="img/rik-bank-640.jpg" srcset="img/rik-bank-640.jpg 640w, img/rik-bank-1000.jpg 1000w" sizes="(min-width: 900px) 50vw, 100vw" alt="Rik van Berkel zit op een blauwe bank voor een schilderij en kijkt in de camera" width="1200" height="1600" fetchpriority="high">
+          </picture>
+        </figure>
       </div>
     </section>
 
@@ -118,12 +124,15 @@
             <p class="dienst-link"><a href="wat-ik-doe.html#strategie">Wat ik doe<span class="visueel-verborgen">: strategie en leiding</span></a></p>
           </article>
         </div>
-        <p class="ruimte-regel"><strong>Ruimte vanaf [tekst volgt]</strong> <a href="werk.html">Werk</a></p>
+        <div class="ruimte-rij">
+          <p class="ruimte-regel"><strong>Ruimte vanaf [tekst volgt]</strong> <a href="werk.html">Werk</a></p>
+          <div class="uitsnede uitsnede-a"><img src="img/proef/proefbeeld-1.svg" alt="" width="600" height="600" loading="lazy"></div>
+        </div>
       </div>
     </section>
 
     <section class="sectie sectie-zwart" id="contact">
-      <div class="binnen zwaartepunt met-portret">
+      <div class="binnen zwaartepunt">
         <p class="label label-wit">Contact</p>
         <div class="zwaar">
           <h2 class="contact-kop">Kennismaken?</h2>
@@ -134,13 +143,6 @@
           </div>
           <a class="knop knop-groot" data-cta data-goatcounter-click="kom-in-contact-home" href="mailto:contact@rikvanberkel.nl?subject=Kennismaking">Kom in contact</a>
         </div>
-        <figure class="slot-portret">
-          <picture>
-            <source type="image/avif" srcset="img/rik-bank-640.avif 640w, img/rik-bank-1000.avif 1000w" sizes="(min-width: 800px) 300px, 60vw">
-            <source type="image/webp" srcset="img/rik-bank-640.webp 640w, img/rik-bank-1000.webp 1000w" sizes="(min-width: 800px) 300px, 60vw">
-            <img src="img/rik-bank-640.jpg" srcset="img/rik-bank-640.jpg 640w, img/rik-bank-1000.jpg 1000w" sizes="(min-width: 800px) 300px, 60vw" alt="Rik van Berkel zit op een blauwe bank voor een schilderij en kijkt in de camera" width="1200" height="1600" loading="lazy">
-          </picture>
-        </figure>
       </div>
     </section>
   </main>
