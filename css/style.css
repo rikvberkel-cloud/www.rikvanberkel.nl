@@ -1903,7 +1903,7 @@ dd a:not([class]) {
    minder ruimte ertussen, zodat het op 390 px op één regel past. */
 @media (max-width: 430px) {
   .site-header .site-nav ul {
-    gap: 4px 9px;
+    gap: 4px 6px;
   }
 
   .site-header .site-nav a {
