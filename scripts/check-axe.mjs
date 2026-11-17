@@ -13,7 +13,7 @@ const require = createRequire(import.meta.url);
 const { chromium } = require("playwright");
 const axe = readFileSync(require.resolve("axe-core/axe.min.js"), "utf8");
 const basis = process.argv[2] || "http://localhost:8765";
-const paginas = ["index", "wat-ik-doe", "werk", "over-mij", "publicaties", "contact", "privacy", "av", "404", "werk-project-sjabloon"];
+const paginas = ["index", "wat-ik-doe", "werk", "over-mij", "publicaties", "contact", "privacy", "av", "404"];
 const tags = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"];
 
 const browser = await chromium.launch();

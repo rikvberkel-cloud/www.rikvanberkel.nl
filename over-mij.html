@@ -24,7 +24,7 @@
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=20261117e">
+  <link rel="stylesheet" href="css/style.css?v=20261117f">
 </head>
 <body>
   <a class="skip-link" href="#main">Naar inhoud</a>
@@ -48,37 +48,19 @@
 
   <main id="main">
     <section class="pagina-intro">
-      <div class="binnen">
-        <h1>Over mij</h1>
-        <div class="team-grid">
-          <article class="teamlid">
-            <div class="teamlid-beeld">
-            <picture>
-              <source type="image/avif" srcset="img/rik-bank-640.avif 640w, img/rik-bank-1000.avif 1000w" sizes="(min-width: 800px) 580px, 100vw">
-              <source type="image/webp" srcset="img/rik-bank-640.webp 640w, img/rik-bank-1000.webp 1000w" sizes="(min-width: 800px) 580px, 100vw">
-              <img src="img/rik-bank-640.jpg" srcset="img/rik-bank-640.jpg 640w, img/rik-bank-1000.jpg 1000w" sizes="(min-width: 800px) 580px, 100vw" alt="Rik van Berkel zit op een blauwe bank voor een schilderij en kijkt in de camera" width="1200" height="1600">
-            </picture>
-            </div>
-            <div class="teamlid-kaart">
-              <h2>Rik van Berkel</h2>
-              <p>Ruim 10 jaar actief in de gebouwde omgeving en energietransitie, op verschillende niveaus: van zelf projecten uitvoeren en aanbestedingstrajecten trekken tot strategievorming en realisatie vanuit een directierol. Ik laat een werkwijze achter waar je team zelf mee verder kan.</p>
-            </div>
-          </article>
-          <div class="teamlid-beeld team-compositie"><img src="img/compositie/compositie.svg" alt="" width="600" height="600"></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="sectie sectie-wit team-verhaal">
-      <div class="binnen">
+      <div class="binnen zwaartepunt">
         <p class="label">Loopbaan</p>
-        <nav aria-label="Op deze pagina">
-          <ul class="linklijst ankerlinks">
-            <li><a href="#geloof">Waar ik in geloof</a></li>
-            <li><a href="#naast-werk">Naast mijn werk</a></li>
-            <li><a href="#tijdlijn">Tijdlijn</a></li>
-          </ul>
-        </nav>
+        <div class="zwaar">
+          <h1>Over mij</h1>
+          <p class="lead">Ruim 10 jaar actief in de gebouwde omgeving en energietransitie, op verschillende niveaus: van zelf projecten uitvoeren en aanbestedingstrajecten trekken tot strategievorming en realisatie vanuit een directierol. Ik laat een werkwijze achter waar je team zelf mee verder kan.</p>
+          <nav aria-label="Op deze pagina">
+            <ul class="linklijst ankerlinks">
+              <li><a href="#geloof">Waar ik in geloof</a></li>
+              <li><a href="#naast-werk">Naast mijn werk</a></li>
+              <li><a href="#tijdlijn">Tijdlijn</a></li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </section>
 
@@ -121,39 +103,42 @@
     <section class="sectie sectie-wit">
       <div class="binnen">
         <h2 class="kop-sectie" id="tijdlijn">Tijdlijn</h2>
-        <!-- [html-validate-disable-next no-redundant-role, prefer-native-element -- Safari ziet een lijst zonder nummers anders niet als lijst] -->
-        <ol class="tijdlijn ladderlijn" role="list">
-          <li class="is-huidig">
-            <span class="periode">Vanaf januari 2027</span>
-            <h3>Zelfstandige</h3>
-            <p>Eigen praktijk in tendermanagement en subsidiebegeleiding, en in project- en programmamanagement, interim en advisering.</p>
-          </li>
-          <li>
-            <span class="periode">2024 tot 2027</span>
-            <h3>Lid directieteam, REL</h3>
-            <p>Een van drie directieleden, verantwoordelijk voor personeel, juridische zaken, risico&#8217;s en de inrichting van de organisatie, naast strategische projecten.</p>
-          </li>
-          <li>
-            <span class="periode">2020 tot 2024</span>
-            <h3>Sr. adviseur energietransitie, REL</h3>
-            <p>Programmamanager van de DoeTank Publieke Ontzorging, met vier gemeenten en REL als penvoerder. Tenderteam en -proces opgezet en overgedragen. Een onderzoekssamenwerking met de Vrije Universiteit Amsterdam opgezet.</p>
-          </li>
-          <li>
-            <span class="periode">2016 tot 2020</span>
-            <h3>Programma&shy;manager gebouwde omgeving, FME</h3>
-            <p>Vernieuwingstrajecten met technologieleveranciers en overheden, van pilot naar opschaling, en belangenbehartiging voor lidbedrijven in de gebouwde omgeving.</p>
-          </li>
-          <li>
-            <span class="periode">2015 tot 2016</span>
-            <h3>Project&shy;adviseur, NAM</h3>
-            <p>Opdrachtgevers en aannemers begeleid naar aardbevingsbestendige nieuwbouw in Groningen, volgens de richtlijn NPR 9998.</p>
-          </li>
-          <li>
-            <span class="periode">2008 tot 2015</span>
-            <h3>Bouwkunde, Sociale Planologie en Culturele Geografie</h3>
-            <p>Afgestudeerd in Bouwkunde (BBE) aan de Hanzehogeschool Groningen, en in Sociale Planologie (MSc) en Culturele Geografie (MSc) aan de Rijksuniversiteit Groningen. Afstudeerprijs Bouwkunde, 1e plaats, 2013.</p>
-          </li>
-        </ol>
+        <div class="tijdlijn-grid">
+          <!-- [html-validate-disable-next no-redundant-role, prefer-native-element -- Safari ziet een lijst zonder nummers anders niet als lijst] -->
+          <ol class="tijdlijn ladderlijn" role="list">
+            <li class="is-huidig">
+              <span class="periode">Vanaf januari 2027</span>
+              <h3>Zelfstandige</h3>
+              <p>Eigen praktijk in tendermanagement en subsidiebegeleiding, en in project- en programmamanagement, interim en advisering.</p>
+            </li>
+            <li>
+              <span class="periode">2024 tot 2027</span>
+              <h3>Lid directieteam, REL</h3>
+              <p>Een van drie directieleden, verantwoordelijk voor personeel, juridische zaken, risico&#8217;s en de inrichting van de organisatie, naast strategische projecten.</p>
+            </li>
+            <li>
+              <span class="periode">2020 tot 2024</span>
+              <h3>Sr. adviseur energietransitie, REL</h3>
+              <p>Programmamanager van de DoeTank Publieke Ontzorging, met vier gemeenten en REL als penvoerder. Tenderteam en -proces opgezet en overgedragen. Een onderzoekssamenwerking met de Vrije Universiteit Amsterdam opgezet.</p>
+            </li>
+            <li>
+              <span class="periode">2016 tot 2020</span>
+              <h3>Programma&shy;manager gebouwde omgeving, FME</h3>
+              <p>Vernieuwingstrajecten met technologieleveranciers en overheden, van pilot naar opschaling, en belangenbehartiging voor lidbedrijven in de gebouwde omgeving.</p>
+            </li>
+            <li>
+              <span class="periode">2015 tot 2016</span>
+              <h3>Project&shy;adviseur, NAM</h3>
+              <p>Opdrachtgevers en aannemers begeleid naar aardbevingsbestendige nieuwbouw in Groningen, volgens de richtlijn NPR 9998.</p>
+            </li>
+            <li>
+              <span class="periode">2008 tot 2015</span>
+              <h3>Bouwkunde, Sociale Planologie en Culturele Geografie</h3>
+              <p>Afgestudeerd in Bouwkunde (BBE) aan de Hanzehogeschool Groningen, en in Sociale Planologie (MSc) en Culturele Geografie (MSc) aan de Rijksuniversiteit Groningen. Afstudeerprijs Bouwkunde, 1e plaats, 2013.</p>
+            </li>
+          </ol>
+          <div class="tijdlijn-beeld"><img src="img/compositie/compositie.svg" alt="" width="600" height="600" loading="lazy"></div>
+        </div>
         <p class="tijdlijn-verder">Interviews en publicaties over mijn werk staan op <a href="publicaties.html">Publicaties</a>. Mijn volledige loopbaan staat op <a href="https://www.linkedin.com/in/rikvberkel" rel="noopener noreferrer">LinkedIn</a>.</p>
       </div>
     </section>

@@ -1,7 +1,7 @@
 # rikvanberkel.nl
 
-Publieke kopie van de website www.rikvanberkel.nl. Hier staan alleen de bestanden die online komen.
+De website www.rikvanberkel.nl. Dit is de enige plek waar de sitebestanden staan: pas de site hier aan, op een eigen branch, en open een pull request naar `main`.
 
-De bron en de werkafspraken staan in een aparte privé repo. Pas de site daar aan en zet de sitebestanden daarna hierheen over. Zet hier nooit interne documenten, tarieven of adresgegevens neer.
+De werkafspraken en de technische documentatie staan in een aparte privé repo. Zet hier nooit interne documenten, tarieven of adresgegevens neer.
 
 Publiceren gaat via GitHub Actions bij elke push naar `main`.
