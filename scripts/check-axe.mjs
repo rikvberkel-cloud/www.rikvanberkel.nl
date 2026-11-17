@@ -1,5 +1,5 @@
 // Toegankelijkheid en ankers, in een echte browser.
-// - axe (WCAG 2.2 AA) op elke pagina, op 390 en 1280 px, en op Team ook
+// - axe (WCAG 2.2 AA) op elke pagina, op 390 en 1280 px, en op Over mij ook
 //   met Licht uit. Nul overtredingen is de eis.
 // - Elke link naar een anker op dezelfde pagina moet een doel hebben.
 // De wisselkop staat stil tijdens de meting ("beweging beperken"), anders
@@ -13,7 +13,7 @@ const require = createRequire(import.meta.url);
 const { chromium } = require("playwright");
 const axe = readFileSync(require.resolve("axe-core/axe.min.js"), "utf8");
 const basis = process.argv[2] || "http://localhost:8765";
-const paginas = ["index", "wat-ik-doe", "werk", "team", "publicaties", "contact", "privacy", "av", "404", "werk-project-sjabloon"];
+const paginas = ["index", "wat-ik-doe", "werk", "over-mij", "publicaties", "contact", "privacy", "av", "404", "werk-project-sjabloon"];
 const tags = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"];
 
 const browser = await chromium.launch();
@@ -22,7 +22,7 @@ let metingen = 0;
 
 for (const breedte of [390, 1280]) {
   for (const pagina of paginas) {
-    for (const lichtUit of pagina === "team" ? [false, true] : [false]) {
+    for (const lichtUit of pagina === "over-mij" ? [false, true] : [false]) {
       const context = await browser.newContext({
         viewport: { width: breedte, height: 900 },
         bypassCSP: true,
