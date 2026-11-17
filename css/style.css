@@ -1985,12 +1985,13 @@ dd a:not([class]) {
   margin: 0;
 }
 
-/* De rechterhelft is een vierkant, zodat het raster van de compositie precies
-   past. De foto is onderdeel van de compositie: twee rastervakken breed, met
-   de onderkant op de grondlijn. De vormen blijven er vrij omheen staan. */
+/* De rechterhelft draagt alleen de compositie. Vanaf 900 px is het een
+   vierkant, zodat het raster precies past. Op een telefoon is het een
+   liggende uitsnede, zodat de diensten eerder in beeld komen. De foto staat
+   niet in de hero: twee beeldtalen in één vlak zitten elkaar in de weg. */
 .hero-rechts {
   position: relative;
-  aspect-ratio: 1;
+  aspect-ratio: 3 / 2;
   overflow: hidden;
 }
 
@@ -1999,14 +2000,40 @@ dd a:not([class]) {
   inset: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
-.hero-rechts .hero-portret {
-  position: absolute;
-  left: 50%;
-  top: 38.89%;
-  width: 33.33%;
-  max-width: none;
+@media (min-width: 900px) {
+  .hero-rechts {
+    aspect-ratio: 1;
+  }
+}
+
+/* De foto staat in het slotblok, naast de uitnodiging om kennis te maken:
+   daar hoort het gezicht bij. Op zwart een witte haarlijn. */
+.slot-portret {
+  margin: 0;
+  width: min(60%, 260px);
+}
+
+.slot-portret img {
+  border: var(--rule-hairline-wit);
+}
+
+@media (min-width: 800px) {
+  .zwaartepunt.met-portret {
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: clamp(32px, 6vw, 88px);
+    align-items: end;
+  }
+
+  .zwaartepunt.met-portret > .label {
+    grid-column: 1 / -1;
+  }
+
+  .slot-portret {
+    width: clamp(220px, 24vw, 300px);
+  }
 }
 
 @media (min-width: 900px) {
