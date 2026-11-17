@@ -8,13 +8,14 @@ Ik help met aanbestedingen en subsidies, project- en programmamanagement, en int
 
 - Aanbestedingen en subsidies: voor bedrijven en organisaties die inschrijven op aanbestedingen en gebruikmaken van subsidies.
 - Project- en programmamanagement: voor publieke en semipublieke organisaties, zoals gemeenten, provincies, woningcorporaties en netbeheerders.
-- Interim en advisering: voor directie en bestuur van bedrijven, gemeenten, provincies en netbeheerders, als een traject regie mist of een keuze onderbouwing nodig heeft.
+- Strategie en leiding: voor directie en bestuur van bedrijven, gemeenten, provincies en netbeheerders, als een traject regie mist of een keuze onderbouwing nodig heeft.
 
 ## Pagina's
 
 - [Home](https://www.rikvanberkel.nl/)
-- [Over mij](https://www.rikvanberkel.nl/over-mij.html)
-- [Cases](https://www.rikvanberkel.nl/werk.html): Wat zet bewoners aan om hun woning te verduurzamen? En: Lessen uit vier wijken, voor elke gemeente.
+- [Wat ik doe](https://www.rikvanberkel.nl/wat-ik-doe.html)
+- [Werk](https://www.rikvanberkel.nl/werk.html): Wat zet bewoners aan om hun woning te verduurzamen? En: Lessen uit vier wijken, voor elke gemeente.
+- [Team](https://www.rikvanberkel.nl/team.html)
 - [Publicaties](https://www.rikvanberkel.nl/publicaties.html)
 - [Contact](https://www.rikvanberkel.nl/contact.html): contact@rikvanberkel.nl
 
