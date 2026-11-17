@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Abstracte compositie met hoeken en een halve cirkel">
+  <rect width="600" height="600" fill="#eef1f5"/>
+  <line x1="100.0" y1="0" x2="100.0" y2="600" stroke="#121214" stroke-opacity="0.22" stroke-width="1"/>
+  <line x1="0" y1="100.0" x2="600" y2="100.0" stroke="#121214" stroke-opacity="0.22" stroke-width="1"/>
+  <line x1="200.0" y1="0" x2="200.0" y2="600" stroke="#121214" stroke-opacity="0.22" stroke-width="1"/>
+  <line x1="0" y1="200.0" x2="600" y2="200.0" stroke="#121214" stroke-opacity="0.22" stroke-width="1"/>
+  <line x1="300.0" y1="0" x2="300.0" y2="600" stroke="#121214" stroke-opacity="0.22" stroke-width="1"/>
+  <line x1="0" y1="300.0" x2="600" y2="300.0" stroke="#121214" stroke-opacity="0.22" stroke-width="1"/>
+  <line x1="400.0" y1="0" x2="400.0" y2="600" stroke="#121214" stroke-opacity="0.22" stroke-width="1"/>
+  <line x1="0" y1="400.0" x2="600" y2="400.0" stroke="#121214" stroke-opacity="0.22" stroke-width="1"/>
+  <line x1="500.0" y1="0" x2="500.0" y2="600" stroke="#121214" stroke-opacity="0.22" stroke-width="1"/>
+  <line x1="0" y1="500.0" x2="600" y2="500.0" stroke="#121214" stroke-opacity="0.22" stroke-width="1"/>
+  <path d="M100 400 A150 150 0 0 1 400 400 Z" fill="#121214"/>
+  <path d="M50 100 H250 V200" fill="none" stroke="#121214" stroke-width="4"/>
+  <path d="M550 150 V500 H450" fill="none" stroke="#121214" stroke-width="4"/>
+  <rect x="300" y="100" width="150" height="100" fill="#ffffff" stroke="#121214" stroke-width="2"/>
+  <circle cx="450" cy="300" r="50" fill="none" stroke="#121214" stroke-width="2"/>
+  <circle cx="450" cy="300" r="8" fill="#121214"/>
+  <line x1="50" y1="400" x2="550" y2="400" stroke="#121214" stroke-width="2"/>
+  <line x1="150" y1="450" x2="350" y2="450" stroke="#121214" stroke-width="1"/>
+  <line x1="150" y1="500" x2="250" y2="500" stroke="#121214" stroke-width="1"/>
+  <rect x="90" y="290" width="20" height="20" fill="#1b4e85"/>
+</svg>

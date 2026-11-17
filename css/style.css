@@ -1895,6 +1895,534 @@ dd a:not([class]) {
   font-size: var(--size-label);
 }
 
+/* Proef Buro van Berkel, 17 november 2026. Alles hieronder tot aan de
+   printregels hoort bij de proef en gebruikt alleen de bestaande tokens. */
+
+/* Zes woorden in het menu. Tot 430 px breed staat het menu op 14 px met
+   minder ruimte ertussen, zodat het op 390 px op één regel past. */
+@media (max-width: 430px) {
+  .site-header .site-nav ul {
+    gap: 4px 9px;
+  }
+
+  .site-header .site-nav a {
+    font-size: 14px;
+  }
+}
+
+/* Hero in twee helften. Links de kop, rechts lichtgrijs met de compositie en
+   de foto. Op een smal scherm staan ze onder elkaar. */
+.hero.hero-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  padding: 0;
+}
+
+.hero-links {
+  display: grid;
+  align-content: space-between;
+  justify-items: start;
+  row-gap: clamp(28px, 5vw, 64px);
+  padding: clamp(32px, 5vw, 64px) clamp(20px, 4vw, 56px) clamp(36px, 5vw, 60px);
+}
+
+.hero-links .hero-kop {
+  width: 100%;
+}
+
+/* Het zwarte vlak volgt de regels van het slotblok: tekst, links, knop,
+   label en focusrand wit, en "van" en "naar" zonder blauw, want blauw op
+   zwart haalt 2,21 : 1. De wig is wit. */
+.hero-zwart .hero-links {
+  background: var(--zwart);
+  color: var(--wit);
+}
+
+.hero-zwart .hero-links .accent {
+  color: inherit;
+}
+
+.hero-zwart .hero-links .wig {
+  background: var(--wit);
+}
+
+.hero-zwart .hero-links a:not(.knop) {
+  color: var(--wit);
+}
+
+.hero-zwart .hero-links .knop {
+  background: var(--wit);
+  color: var(--zwart);
+}
+
+.hero-zwart .hero-links .knop:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.hero-zwart .hero-links :focus-visible {
+  outline-color: var(--wit);
+}
+
+.hero-zwart .label-wit {
+  background: var(--wit);
+  color: var(--zwart);
+}
+
+.hero-links .wissel-pauze {
+  margin-bottom: 20px;
+}
+
+.hero-actie {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 28px;
+}
+
+.hero-actie .bewijsregel {
+  margin: 0;
+}
+
+.hero-rechts {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: clamp(24px, 5vw, 56px) clamp(20px, 4vw, 56px);
+  overflow: hidden;
+}
+
+.hero-compositie {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-rechts .hero-portret {
+  position: relative;
+}
+
+@media (min-width: 900px) {
+  .hero.hero-split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  /* De kop begint op de linkerrand van de inhoud, ook op een breed scherm. */
+  .hero-links {
+    padding-left: max(clamp(20px, 4vw, 56px), calc(50vw - var(--content-max) / 2));
+  }
+
+  .hero-rechts {
+    min-height: 560px;
+  }
+}
+
+/* Bewijsstrook onder de hero, over de volle breedte: links de zin, rechts
+   de namen als tekst. Geen logo's. */
+.bewijsstrook {
+  padding: clamp(20px, 3vw, 32px) clamp(20px, 4vw, 56px);
+  border-bottom: var(--rule-hairline);
+}
+
+.bewijs-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px 40px;
+}
+
+.bewijs-zin {
+  margin: 0;
+  font-size: var(--size-body-sm);
+  font-weight: var(--weight-body-strong);
+}
+
+.bewijs-namen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px clamp(20px, 3vw, 44px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-display);
+  font-weight: var(--weight-display-sub);
+  font-size: clamp(17px, 1.5vw, 21px);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.bewijs-namen li + li {
+  margin-top: 0;
+}
+
+/* Bakje op Home: voor wie, een uitkomst en een link naar Wat ik doe. */
+.uitkomst {
+  margin-bottom: 20px;
+  padding-top: 14px;
+  border-top: var(--rule-hairline);
+}
+
+.dienst .uitkomst p:last-child {
+  margin: 10px 0 0;
+  font-size: var(--size-lead);
+}
+
+.dienst-link a {
+  display: inline-block;
+  padding: 3px 0;
+}
+
+/* Regel over ruimte, op Home onder de bakjes en op Werk bovenaan. */
+.ruimte-regel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 24px;
+  margin: var(--gap-section) 0 0;
+  padding-top: 16px;
+  border-top: var(--rule-heavy);
+  font-size: var(--size-lead);
+}
+
+.ruimte-regel-boven {
+  margin-top: 0;
+}
+
+.ruimte-regel a {
+  display: inline-block;
+  padding: 3px 0;
+}
+
+/* Wat ik doe: per dienst links het nummer met een klein beeld en de naam,
+   rechts de kernpunten en de ervaring. */
+.dienst-breed-lijst {
+  display: grid;
+  row-gap: clamp(40px, 6vw, 72px);
+}
+
+.dienst-breed {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px clamp(24px, 5vw, 72px);
+  scroll-margin-top: 16px;
+}
+
+.dienst-breed + .dienst-breed {
+  padding-top: clamp(40px, 6vw, 72px);
+  border-top: var(--rule-hairline);
+}
+
+@media (min-width: 900px) {
+  .dienst-breed {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+}
+
+.nummer-met-beeld {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.dienst-breed-kop h2 {
+  margin-bottom: 12px;
+}
+
+.dienst-breed-kop .dienst-voor {
+  max-width: 44ch;
+  margin: 0;
+}
+
+.dienst-breed-tekst .kernpunten {
+  margin: 0 0 20px;
+}
+
+.dienst-breed-tekst p {
+  max-width: 62ch;
+  margin: 0;
+}
+
+/* Klein beeld naast een nummer: een uitsnede van het proefbeeld, per dienst
+   een ander deel. */
+.uitsnede {
+  flex: 0 0 auto;
+  width: clamp(88px, 12vw, 132px);
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: var(--rule-hairline);
+}
+
+.uitsnede img {
+  width: 250%;
+  max-width: none;
+}
+
+.uitsnede-a img {
+  margin: -12% 0 0 -8%;
+}
+
+.uitsnede-b img {
+  margin: -40% 0 0 -150%;
+}
+
+.uitsnede-c img {
+  margin: -150% 0 0 -85%;
+}
+
+/* Tekstkaart over een beeld: een witte kaart in een kader van 2 px die half
+   over het beeld valt. Op Werk bovenaan en per teamlid op Team. */
+.fotokaart {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.fotokaart-beeld,
+.teamlid-beeld,
+.werkblok-beeld,
+.project-beeld {
+  overflow: hidden;
+  border: var(--rule-hairline);
+}
+
+.fotokaart-beeld img,
+.teamlid-beeld img,
+.werkblok-beeld img,
+.project-beeld img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fotokaart-beeld {
+  aspect-ratio: 16 / 9;
+}
+
+.fotokaart-kaart,
+.teamlid-kaart {
+  position: relative;
+  background: var(--wit);
+  border: 2px solid currentColor;
+  padding: clamp(16px, 2.5vw, 28px) clamp(18px, 3vw, 32px) clamp(20px, 3vw, 32px);
+}
+
+.fotokaart-kaart {
+  margin: -56px 16px 0;
+}
+
+.fotokaart-kaart h1 {
+  margin: 14px 0 16px;
+}
+
+@media (min-width: 800px) {
+  .fotokaart {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: end;
+  }
+
+  .fotokaart-beeld {
+    grid-column: 1 / 9;
+    grid-row: 1;
+    aspect-ratio: 2 / 1;
+  }
+
+  .fotokaart-kaart {
+    grid-column: 7 / 13;
+    grid-row: 1;
+    margin: 0 0 -32px;
+  }
+
+  .pagina-intro:has(.fotokaart) {
+    padding-bottom: clamp(56px, 6vw, 80px);
+  }
+}
+
+/* Team: twee blokken naast elkaar, op een telefoon onder elkaar. */
+.team-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(32px, 4vw, 56px);
+  margin-top: clamp(24px, 4vw, 40px);
+}
+
+@media (min-width: 800px) {
+  .team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.teamlid-beeld {
+  aspect-ratio: 4 / 3;
+}
+
+.teamlid-beeld img {
+  object-position: 50% 22%;
+}
+
+.teamlid-kaart {
+  margin: -72px clamp(12px, 3vw, 32px) 0;
+}
+
+.teamlid-kaart h2 {
+  font-size: var(--size-display-3);
+  font-weight: var(--weight-display-sub);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 4px;
+}
+
+.teamlid-rol {
+  font-size: var(--size-body-sm);
+  font-weight: var(--weight-body-strong);
+  margin: 0 0 12px;
+}
+
+.teamlid-kaart p:last-child {
+  margin: 0;
+}
+
+.team-verhaal .ankerlinks {
+  margin-bottom: clamp(24px, 3vw, 40px);
+}
+
+body:has(.geheim[open]) .pagina-intro,
+body:has(.geheim[open]) .teamlid-kaart {
+  background: var(--neon-zwart);
+  color: var(--neon-tekst);
+}
+
+/* Werk: blokken met een balk bovenaan, de zware lijn. Een lopend blok krijgt
+   het blauwe markeerblok op het begin van de balk, zoals de huidige fase op
+   de ladderlijn. */
+.werk-kop {
+  margin: clamp(36px, 5vw, 56px) 0 20px;
+  scroll-margin-top: 16px;
+}
+
+.werkblok {
+  position: relative;
+  scroll-margin-top: 16px;
+}
+
+.werkblok h3 {
+  hyphens: manual;
+  letter-spacing: -0.02em;
+  margin: 12px 0;
+}
+
+.werkblok-lopend::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -7px;
+  border: 5px solid var(--blauw);
+  outline: 4px solid var(--wit);
+}
+
+.werkblok-lopend {
+  padding-left: 0;
+}
+
+.werkblok-beeld {
+  aspect-ratio: 16 / 9;
+  margin-bottom: 16px;
+}
+
+.werkblok-beeld-a img {
+  object-position: 50% 15%;
+}
+
+.werkblok-beeld-b img {
+  object-position: 50% 80%;
+}
+
+/* Onder het blok: de toelichting, de kerncijfers en het citaat. */
+.werkblok-meer {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: var(--rule-hairline);
+}
+
+.werkblok-meer > p:last-child {
+  margin-bottom: 0;
+}
+
+.werk-slot {
+  margin-top: clamp(36px, 5vw, 56px);
+}
+
+.werk-slot h2 {
+  margin: 12px 0;
+}
+
+/* Sjabloon projectpagina: vaste velden onder elkaar, met een beeld ernaast. */
+.project-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: start;
+}
+
+@media (min-width: 800px) {
+  .project-grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+}
+
+.project-velden {
+  margin: 0;
+}
+
+.project-velden > div {
+  display: grid;
+  grid-template-columns: 8em minmax(0, 1fr);
+  gap: 4px 16px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-top: var(--rule-hairline);
+}
+
+.project-velden > div:last-child {
+  border-bottom: var(--rule-hairline);
+}
+
+.project-velden dt {
+  justify-self: start;
+}
+
+.project-velden dd {
+  margin: 0;
+}
+
+.project-beeld {
+  aspect-ratio: 4 / 3;
+}
+
+/* Proefbeelden naast elkaar. */
+.proef-rij {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: clamp(20px, 3vw, 32px);
+}
+
+.proef-figuur {
+  margin: 0;
+}
+
+.proef-figuur img {
+  width: 100%;
+  border: var(--rule-hairline);
+}
+
+.proef-figuur figcaption {
+  margin-top: 12px;
+}
+
 @media print {
   .site-header,
   .actie-rij,
