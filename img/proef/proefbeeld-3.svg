@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="Proefbeeld 3">
+  <!-- Eigen abstracte compositie in de kleuren van de huisstijl. Proef. -->
+  <g stroke="#121214" stroke-width="4">
+    <line x1="60" y1="90" x2="380" y2="90"/>
+    <line x1="130" y1="110" x2="460" y2="110"/>
+    <line x1="180" y1="130" x2="270" y2="130"/>
+  </g>
+  <path d="M90 450 A160 160 0 0 1 410 450 Z" fill="#121214"/>
+  <polygon points="250,220 560,262 250,304" fill="#1b4e85"/>
+  <g fill="none" stroke="#121214" stroke-width="2">
+    <circle cx="460" cy="450" r="90"/>
+    <line x1="500" y1="60" x2="500" y2="200"/>
+    <line x1="520" y1="60" x2="520" y2="200"/>
+    <line x1="540" y1="60" x2="540" y2="200"/>
+    <line x1="60" y1="540" x2="540" y2="540"/>
+  </g>
+  <rect x="450" y="440" width="20" height="20" fill="#1b4e85"/>
+</svg>

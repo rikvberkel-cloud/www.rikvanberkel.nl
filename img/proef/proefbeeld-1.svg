@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="Proefbeeld 1">
+  <!-- Eigen abstracte compositie in de kleuren van de huisstijl. Proef. -->
+  <g fill="none" stroke="#121214" stroke-width="2">
+    <circle cx="250" cy="270" r="190"/>
+    <line x1="40" y1="560" x2="560" y2="60"/>
+    <line x1="60" y1="120" x2="300" y2="120"/>
+    <line x1="60" y1="134" x2="220" y2="134"/>
+  </g>
+  <rect x="60" y="400" width="220" height="110" fill="#121214"/>
+  <circle cx="130" cy="455" r="28" fill="#ffffff"/>
+  <circle cx="410" cy="150" r="46" fill="#1b4e85"/>
+  <polyline points="330,330 520,330 520,500" fill="none" stroke="#121214" stroke-width="4"/>
+  <circle cx="470" cy="470" r="70" fill="none" stroke="#1b4e85" stroke-width="2"/>
+  <g fill="#121214">
+    <rect x="330" y="520" width="10" height="10"/>
+    <rect x="350" y="520" width="10" height="10"/>
+    <rect x="370" y="520" width="10" height="10"/>
+  </g>
+</svg>

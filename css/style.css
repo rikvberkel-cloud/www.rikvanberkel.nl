@@ -1932,3 +1932,433 @@ dd a:not([class]) {
     max-width: none;
   }
 }
+
+/* ==========================================================================
+   Proef Buro van Berkel, 17 november 2026. Alleen op de branch proef-buro.
+   Dit blok wijkt bewust af van de huisstijl in CLAUDE.md, keuze van Rik voor
+   de proef: een zwarte hero-helft, abstract beeld, een dun raster, een
+   tekstkaart over beeld en een balk in blauw. Kleuren, letters en hoeken
+   komen uit de tokens hierboven. Keurt Rik de proef af, dan kan dit blok weg.
+   ========================================================================== */
+
+/* Hero in twee helften: links zwart met label, kop, lead en knop, rechts
+   lichtgrijs met een dun raster, het proefbeeld en de foto. Tot 900 px staat
+   het zwarte vlak boven en het beeld eronder. */
+.hero.hero-duo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  padding: 0;
+  background: none;
+}
+
+.hero-zwart {
+  display: grid;
+  align-content: space-between;
+  row-gap: clamp(24px, 4vw, 56px);
+  padding: clamp(32px, 6vw, 72px) clamp(20px, 4vw, 56px) clamp(28px, 4vw, 48px);
+}
+
+.hero-zwart .hero-kop > .label {
+  margin-bottom: 20px;
+}
+
+/* Op zwart is de wig wit, net als "van" en "naar": blauw op zwart haalt
+   2,21 : 1. */
+.hero-zwart .wig {
+  background: var(--wit);
+}
+
+.hero-zwart .hero-sub {
+  margin-bottom: 0;
+}
+
+.hero-zwart .wissel-pauze {
+  margin: 12px 0 0;
+}
+
+.hero-acties {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+}
+
+.hero-acties .bewijsregel {
+  margin: 0;
+}
+
+.raster {
+  background-color: var(--lichtgrijs);
+  background-image:
+    linear-gradient(to right, rgba(18, 18, 20, 0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(18, 18, 20, 0.22) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.hero-licht {
+  display: grid;
+  min-height: 300px;
+  padding: clamp(20px, 4vw, 56px);
+  overflow: hidden;
+}
+
+.hero-beeld {
+  grid-area: 1 / 1;
+  align-self: start;
+  justify-self: start;
+  width: min(78%, 460px);
+}
+
+.hero-licht .hero-portret {
+  grid-area: 1 / 1;
+  align-self: end;
+  justify-self: end;
+  max-width: min(240px, 42%);
+  background: var(--wit);
+}
+
+@media (min-width: 900px) {
+  .hero.hero-duo {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+  .hero-zwart {
+    padding-left: max(clamp(20px, 4vw, 56px), calc((100vw - var(--content-max)) / 2));
+  }
+  .hero-licht {
+    padding-right: max(clamp(20px, 4vw, 56px), calc((100vw - var(--content-max)) / 2));
+  }
+}
+
+/* Bewijsstrook over de volle breedte, direct onder de hero: links de zin,
+   rechts de namen als tekst. Geen logo's. */
+.bewijsstrook {
+  padding: 18px clamp(20px, 4vw, 56px);
+  border-bottom: var(--rule-hairline);
+}
+
+.bewijsstrook .binnen {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 40px;
+}
+
+.bewijs-zin {
+  margin: 0;
+  font-size: var(--size-body-sm);
+  font-weight: var(--weight-body-strong);
+}
+
+.bewijs-namen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-display);
+  font-weight: var(--weight-display-sub);
+  font-size: 17px;
+}
+
+.bewijs-namen li + li {
+  margin-top: 0;
+}
+
+/* Rij kaarten met een balk bovenaan. Zwart is de standaard, een lopend blok
+   op Werk krijgt de balk in blauw. Het open kader rond het nummer blijft. */
+.kaart-rij {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(28px, 3vw, 40px);
+}
+
+@media (min-width: 900px) {
+  .kaart-rij.drie {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .kaart-rij.twee {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.kaart {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-top: 8px solid var(--zwart);
+  padding-top: 20px;
+}
+
+.kaart-lopend {
+  border-top-color: var(--blauw);
+}
+
+.kaart h3 {
+  margin: 12px 0;
+}
+
+.kaart .nummer + h3 {
+  margin-top: 0;
+}
+
+.kaart > p {
+  margin-bottom: 16px;
+}
+
+.kaart > p:last-child {
+  margin-bottom: 0;
+}
+
+/* Op Home staan de drie links op dezelfde hoogte. */
+.kaart-rij.drie > .kaart > p:last-child {
+  margin-top: auto;
+}
+
+.kaart-uitkomst {
+  font-size: var(--size-lead);
+  font-weight: var(--weight-body-strong);
+}
+
+.kaart .resultaat {
+  margin-top: 0;
+}
+
+/* Abstract vlak op de plek van een projectfoto, zonder lege fotolijst. */
+.kaart-beeld {
+  width: 100%;
+  height: 150px;
+  margin-bottom: 16px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+/* Onder een afgerond blok: de toelichting, de kerncijfers en het citaat. */
+.kaart-onder {
+  width: 100%;
+  margin-top: 24px;
+}
+
+/* Blauw op nummers en kerncijfers, 7,49 : 1 op wit. */
+.kaart .nummer,
+.dienst-rij .nummer,
+.kaart-onder .kerncijfer {
+  color: var(--blauw);
+}
+
+.kop-lopend {
+  margin-bottom: var(--gap-section);
+}
+
+.kaart-rij + .kop-lopend {
+  margin-top: clamp(40px, 6vw, 72px);
+}
+
+/* Regel over ruimte, op Home onder de kaarten en op Werk bovenaan. */
+.ruimte-regel {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: var(--weight-display-sub);
+  font-size: var(--size-display-3);
+  line-height: 1.15;
+}
+
+.kaart-rij + .ruimte-regel {
+  margin-top: var(--gap-section);
+  padding-top: 20px;
+  border-top: var(--rule-hairline);
+}
+
+.ruimte-strook {
+  padding: 14px clamp(20px, 4vw, 56px);
+  border-bottom: var(--rule-hairline);
+}
+
+/* Wat ik doe: per dienst een rij met nummer en klein beeld, voor wie en
+   kernpunten, en de ervaring. */
+.dienst-rij {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px clamp(24px, 4vw, 56px);
+  padding: clamp(28px, 4vw, 48px) 0;
+  border-top: var(--rule-heavy);
+}
+
+.dienst-rij:last-child {
+  padding-bottom: 0;
+}
+
+@media (min-width: 900px) {
+  .dienst-rij {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 4fr) minmax(0, 4fr);
+  }
+}
+
+.dienst-kop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.dienst-kop h2 {
+  flex: 1 0 100%;
+}
+
+.dienst-beeld {
+  width: 88px;
+  height: 88px;
+  object-fit: cover;
+}
+
+.dienst-rij p:last-child,
+.dienst-rij .kernpunten:last-child {
+  margin-bottom: 0;
+}
+
+/* Tekstkaart over beeld: een lichte kaart met kop en tekst die half over
+   een foto of een abstract vlak valt. Op Team en bovenaan Werk. */
+.beeldkaart-beeld {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center top;
+  border: var(--rule-hairline);
+}
+
+.beeldkaart-breed .beeldkaart-beeld {
+  aspect-ratio: 16 / 9;
+  object-position: left center;
+  object-fit: contain;
+}
+
+.beeldkaart-tekst {
+  position: relative;
+  width: min(34em, calc(100% - 20px));
+  margin-top: -72px;
+  padding: 20px 24px 24px;
+  background: var(--wit);
+  border: 2px solid currentColor;
+}
+
+.beeldkaart-tekst h1,
+.beeldkaart-tekst h2 {
+  font-size: clamp(26px, 1.6vw + 18px, 38px);
+  margin-bottom: 8px;
+}
+
+.beeldkaart-tekst p:last-child {
+  margin-bottom: 0;
+}
+
+.beeldkaart-rol {
+  font-size: var(--size-body-sm);
+  font-weight: var(--weight-body-strong);
+}
+
+@media (min-width: 900px) {
+  .beeldkaart-breed .beeldkaart-beeld {
+    aspect-ratio: 4 / 1;
+  }
+  .beeldkaart-breed .beeldkaart-tekst {
+    margin-left: auto;
+    margin-top: -140px;
+  }
+}
+
+body:has(.geheim[open]) .beeldkaart-tekst {
+  background: var(--neon-zwart);
+}
+
+.team-rij {
+  margin-top: var(--gap-section);
+}
+
+.team-verhaal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px 32px;
+  margin-bottom: var(--gap-section);
+  padding-top: 20px;
+  border-top: var(--rule-heavy);
+}
+
+.team-verhaal .ankerlinks {
+  margin: 0;
+}
+
+/* Sjabloon projectpagina: vaste velden onder elkaar. */
+.project-velden {
+  margin: 0;
+  max-width: 46rem;
+}
+
+.project-velden > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 4px 24px;
+  padding: 16px 0;
+  border-top: var(--rule-hairline);
+}
+
+.project-velden dt {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display-sub);
+}
+
+.project-velden dd {
+  margin: 0;
+}
+
+@media (min-width: 600px) {
+  .project-velden > div {
+    grid-template-columns: 10rem minmax(0, 1fr);
+  }
+}
+
+/* Proefpagina met de drie beelden naast elkaar. */
+.proef-rij {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: clamp(20px, 3vw, 40px);
+}
+
+.proef-rij figure {
+  margin: 0;
+}
+
+.proef-rij img {
+  width: 100%;
+  border: var(--rule-hairline);
+}
+
+.proef-rij figcaption {
+  margin-top: 8px;
+  font-size: var(--size-body-sm);
+  font-weight: var(--weight-body-strong);
+}
+
+/* Zes woorden in het menu: op een telefoon iets kleiner en dichter op
+   elkaar, zodat ze vanaf 360 px op een regel passen. */
+@media (max-width: 420px) {
+  .site-header .site-nav ul {
+    gap: 4px 9px;
+  }
+  .site-header .site-nav a {
+    font-size: 14px;
+  }
+}
+
+/* Het oude anker #interim wijst naar Strategie en leiding en neemt geen
+   plek in. */
+.anker {
+  position: absolute;
+}
+
+.dienst-rij {
+  position: relative;
+}
