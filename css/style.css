@@ -919,7 +919,7 @@ body:has(.geheim[open]) .accent {
 
 /* Per bakje: voor wie, dan drie kernpunten met blokjes. */
 .dienst-voor {
-  font-size: var(--size-body-sm);
+  font-size: var(--size-body);
 }
 
 /* Ondertitel onder de wervende kop van een case: wat het was. */
@@ -2082,9 +2082,9 @@ dd a:not([class]) {
   border-top: var(--rule-hairline);
 }
 
-.dienst .uitkomst p:last-child {
-  margin: 10px 0 0;
-  font-size: var(--size-lead);
+.dienst .uitkomst .kernpunten {
+  margin: 14px 0 0;
+  font-size: var(--size-body);
 }
 
 .dienst-link a {
