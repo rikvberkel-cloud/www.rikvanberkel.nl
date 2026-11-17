@@ -2406,47 +2406,43 @@ body:has(.geheim[open]) .teamlid-kaart {
   margin: 12px 0;
 }
 
-/* Sjabloon projectpagina: vaste velden onder elkaar, met een beeld ernaast. */
-.project-grid {
+/* Over mij: de compositie staat naast de tijdlijn, vanaf 900 px. Op een
+   smaller scherm staat alleen de tijdlijn. */
+.tijdlijn-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: clamp(24px, 4vw, 56px);
+  gap: clamp(24px, 5vw, 72px);
   align-items: start;
+  margin-top: 24px;
 }
 
-@media (min-width: 800px) {
-  .project-grid {
+.tijdlijn-beeld {
+  display: none;
+  overflow: hidden;
+  border: var(--rule-hairline);
+  aspect-ratio: 4 / 5;
+}
+
+.tijdlijn-beeld img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 900px) {
+  .tijdlijn-grid {
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+
+  .tijdlijn-beeld {
+    display: block;
   }
 }
 
-.project-velden {
-  margin: 0;
-}
-
-.project-velden > div {
-  display: grid;
-  grid-template-columns: 8em minmax(0, 1fr);
-  gap: 4px 16px;
-  align-items: baseline;
-  padding: 14px 0;
-  border-top: var(--rule-hairline);
-}
-
-.project-velden > div:last-child {
-  border-bottom: var(--rule-hairline);
-}
-
-.project-velden dt {
-  justify-self: start;
-}
-
-.project-velden dd {
-  margin: 0;
-}
-
-.project-beeld {
-  aspect-ratio: 4 / 3;
+/* Werk: de cases staan direct onder de regel over ruimte. */
+.werk-cases {
+  margin-top: clamp(28px, 4vw, 48px);
+  scroll-margin-top: 16px;
 }
 
 @media print {
