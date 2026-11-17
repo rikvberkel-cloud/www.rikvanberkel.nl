@@ -2185,9 +2185,16 @@ dd a:not([class]) {
   margin-bottom: 12px;
 }
 
+/* Op Wat ik doe staat alle tekst van een dienst op de maat van de lopende
+   tekst: voor wie, de kernpunten en de ervaring. */
 .dienst-breed-kop .dienst-voor {
   max-width: 44ch;
   margin: 0;
+  font-size: var(--size-body);
+}
+
+.dienst-breed-tekst .kernpunten {
+  font-size: var(--size-body);
 }
 
 .dienst-breed-tekst .kernpunten {
