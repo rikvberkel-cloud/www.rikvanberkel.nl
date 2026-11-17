@@ -1895,8 +1895,9 @@ dd a:not([class]) {
   font-size: var(--size-label);
 }
 
-/* Proef Buro van Berkel, 17 november 2026. Alles hieronder tot aan de
-   printregels hoort bij de proef en gebruikt alleen de bestaande tokens. */
+/* Nieuwe opbouw, 17 november 2026: hero in twee helften, bewijsstrook, Wat
+   ik doe, Werk met Lopend en Afgerond, Team en de compositie als beeld. Alles
+   hieronder tot aan de printregels gebruikt alleen de bestaande tokens. */
 
 /* Zes woorden in het menu. Tot 430 px breed staat het menu op 14 px met
    minder ruimte ertussen, zodat het op 390 px op één regel past. */
@@ -1920,7 +1921,7 @@ dd a:not([class]) {
 
 .hero-links {
   display: grid;
-  align-content: space-between;
+  align-content: end;
   justify-items: start;
   row-gap: clamp(28px, 5vw, 64px);
   padding: clamp(32px, 5vw, 64px) clamp(20px, 4vw, 56px) clamp(36px, 5vw, 60px);
@@ -2175,7 +2176,7 @@ dd a:not([class]) {
   margin: 0;
 }
 
-/* Klein beeld naast een nummer: een uitsnede van het proefbeeld, per dienst
+/* Klein beeld naast een nummer: een uitsnede van de compositie, per dienst
    een ander deel. */
 .uitsnede {
   flex: 0 0 auto;
@@ -2428,26 +2429,6 @@ body:has(.geheim[open]) .teamlid-kaart {
 
 .project-beeld {
   aspect-ratio: 4 / 3;
-}
-
-/* Proefbeelden naast elkaar. */
-.proef-rij {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-  gap: clamp(20px, 3vw, 32px);
-}
-
-.proef-figuur {
-  margin: 0;
-}
-
-.proef-figuur img {
-  width: 100%;
-  border: var(--rule-hairline);
-}
-
-.proef-figuur figcaption {
-  margin-top: 12px;
 }
 
 @media print {
