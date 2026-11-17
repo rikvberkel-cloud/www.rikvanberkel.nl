@@ -2104,6 +2104,29 @@ dd a:not([class]) {
   padding: 3px 0;
 }
 
+/* Op Home staat de compositie alleen klein, als uitsnede onder het label
+   van de diensten. */
+.kop-rechts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.kop-rechts .uitsnede {
+  width: clamp(72px, 9vw, 112px);
+}
+
+.werk-kop-eerste {
+  margin-top: 0;
+}
+
+@media (max-width: 799px) {
+  .team-compositie {
+    display: none;
+  }
+}
+
 /* Regel over ruimte, op Home onder de bakjes en op Werk bovenaan. */
 .ruimte-regel {
   display: flex;
