@@ -1930,6 +1930,7 @@ dd a:not([class]) {
 
 .hero-actie .bewijsregel {
   margin: 0;
+  font-size: var(--size-body);
 }
 
 /* De rechterhelft is de foto, groot en tot aan de rand. Vanaf 900 px een
@@ -1990,7 +1991,7 @@ dd a:not([class]) {
 
 .bewijs-zin {
   margin: 0;
-  font-size: var(--size-body-sm);
+  font-size: var(--size-body);
   font-weight: var(--weight-body-strong);
 }
 
@@ -2003,7 +2004,7 @@ dd a:not([class]) {
   padding: 0;
   font-family: var(--font-display);
   font-weight: var(--weight-display-sub);
-  font-size: clamp(17px, 1.5vw, 21px);
+  font-size: var(--size-lead);
   letter-spacing: -0.01em;
   line-height: 1.2;
 }
