@@ -2207,7 +2207,7 @@ body:has(.geheim[open]) .pagina-intro {
   scroll-margin-top: 16px;
 }
 
-.werkblok h3 {
+.werkblok h2 {
   hyphens: manual;
   letter-spacing: -0.02em;
   margin: 12px 0;
