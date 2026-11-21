@@ -2271,6 +2271,63 @@ body:has(.geheim[open]) .pagina-intro {
   scroll-margin-top: 16px;
 }
 
+/* Foto uit de beeldbank: zuiver zwart-wit, in een haarlijn, met de
+   naamsvermelding cursief eronder. Het bestand zelf is al zwart-wit. */
+.foto {
+  margin: 28px 0 0;
+}
+
+.foto img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: var(--rule-hairline);
+}
+
+.foto figcaption {
+  margin-top: 8px;
+  font-style: italic;
+  font-size: var(--size-body-sm);
+}
+
+.foto figcaption a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+body:has(.geheim[open]) .foto img {
+  border-color: rgba(242, 242, 243, 0.22);
+}
+
+/* Klein beeld naast een nummer op Diensten. */
+.foto-klein {
+  flex: 0 0 auto;
+  width: clamp(120px, 18vw, 220px);
+  margin: 0;
+}
+
+.foto-klein figcaption {
+  font-size: var(--size-label);
+}
+
+/* 404: links de tekst, rechts de foto, vanaf 900 px naast elkaar. */
+.fout-grid {
+  display: grid;
+  gap: 32px;
+}
+
+.fout-grid .foto {
+  margin: 0;
+}
+
+@media (min-width: 900px) {
+  .fout-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
 @media print {
   .site-header,
   .actie-rij,
