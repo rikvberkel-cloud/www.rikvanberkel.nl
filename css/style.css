@@ -1494,7 +1494,7 @@ ol.inhoudslijst a {
   margin: 0;
   font-family: Archivo, var(--font-display);
   font-weight: 800;
-  font-size: clamp(28px, 13cqi, 88px);
+  font-size: clamp(22px, 10cqi, 72px);
   line-height: 0.92;
   letter-spacing: -0.02em;
   text-transform: uppercase;
@@ -1502,6 +1502,27 @@ ol.inhoudslijst a {
   color: var(--neon-geel);
   text-shadow: 0 0 18px rgba(225, 255, 0, 0.45), 0 0 44px rgba(225, 255, 0, 0.2);
   animation: neon-aan 900ms steps(1, end);
+}
+
+/* Direct onder de naam: de boekingsvraag, als link naar Boeken op
+   late2theparty.nl. Een mailknop doet niets zonder mailprogramma. */
+.geheim .geheim-boek {
+  margin-top: 16px;
+  font-family: Archivo, var(--font-display);
+  font-weight: 700;
+  font-size: clamp(20px, 2vw, 26px);
+  line-height: 1.15;
+}
+
+.geheim-boek a {
+  color: var(--neon-cyaan);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+.geheim-boek a:hover {
+  color: var(--neon-geel);
 }
 
 .geheim-links {
